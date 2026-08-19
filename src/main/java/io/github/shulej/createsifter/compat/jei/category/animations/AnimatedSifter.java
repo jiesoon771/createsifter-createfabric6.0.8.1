@@ -1,6 +1,6 @@
 package io.github.shulej.createsifter.compat.jei.category.animations;
 
-import com.jozufozu.flywheel.core.PartialModel;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 

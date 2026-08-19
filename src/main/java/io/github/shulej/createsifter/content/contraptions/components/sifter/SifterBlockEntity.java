@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.item.ItemHelper;
 
 import com.simibubi.create.foundation.sound.SoundScapes;
 
-import com.simibubi.create.foundation.utility.VecHelper;
+import net.createmod.catnip.math.VecHelper;
 
 import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.ViewOnlyWrappedStorageView;

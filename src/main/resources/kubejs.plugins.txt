@@ -1,1 +1,0 @@
-io.github.shulej.createsifter.compat.kubejs.KubeJSCreatesifterPlugin

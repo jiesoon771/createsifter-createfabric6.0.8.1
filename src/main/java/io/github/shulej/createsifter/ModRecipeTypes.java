@@ -1,6 +1,6 @@
 package io.github.shulej.createsifter;
 
-import com.simibubi.create.foundation.utility.Lang;
+import net.createmod.catnip.lang.Lang;
 
 import io.github.fabricators_of_create.porting_lib.util.ShapedRecipeUtil;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SiftingRecipeSerializer;

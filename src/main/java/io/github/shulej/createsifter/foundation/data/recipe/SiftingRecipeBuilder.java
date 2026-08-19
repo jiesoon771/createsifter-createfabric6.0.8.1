@@ -2,7 +2,6 @@ package io.github.shulej.createsifter.foundation.data.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.jozufozu.flywheel.core.instancing.ConditionalInstance;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 
@@ -10,7 +9,7 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.data.SimpleDatagenIngredient;
 import com.simibubi.create.foundation.data.recipe.Mods;
 
-import com.simibubi.create.foundation.utility.Pair;
+import net.createmod.catnip.data.Pair;
 import com.tterrag.registrate.util.DataIngredient;
 
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SiftingRecipe;

@@ -1,6 +1,6 @@
 package io.github.shulej.createsifter.register;
 
-import com.jozufozu.flywheel.core.PartialModel;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 import io.github.shulej.createsifter.CreateSifter;
 
@@ -12,10 +12,10 @@ public class ModPartials {
 	public static final PartialModel BRASS_SIFTER_COG = block("brass_sifter/inner");
 
 	private static PartialModel block(String path) {
-		return new PartialModel(CreateSifter.asResource("block/" + path));
+		return PartialModel.of(CreateSifter.asResource("block/" + path));
 	}
 	private static PartialModel item(String path) {
-		return new PartialModel(CreateSifter.asResource("item/" + path));
+		return PartialModel.of(CreateSifter.asResource("item/" + path));
 	}
 
 	public static void init() {

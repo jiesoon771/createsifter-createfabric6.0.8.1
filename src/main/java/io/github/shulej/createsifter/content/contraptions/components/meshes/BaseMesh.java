@@ -4,11 +4,12 @@ import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.foundation.item.CustomUseEffectsItem;
 
 import com.simibubi.create.foundation.mixin.accessor.LivingEntityAccessor;
-import com.simibubi.create.foundation.utility.VecHelper;
+import net.createmod.catnip.math.VecHelper;
 
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import io.github.shulej.createsifter.CreateSifterClient;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SiftingRecipe;
+import net.createmod.catnip.data.TriState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -167,9 +168,9 @@ public class BaseMesh extends Item implements CustomUseEffectsItem {
 	}
 
 	@Override
-	public Boolean shouldTriggerUseEffects(ItemStack stack, LivingEntity entity) {
+	public TriState shouldTriggerUseEffects(ItemStack stack, LivingEntity entity) {
 		// Trigger every tick so that we have more fine grain control over the animation
-		return true;
+		return TriState.TRUE;
 	}
 
 	@Override

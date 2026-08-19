@@ -1,16 +1,16 @@
 package io.github.shulej.createsifter.compat.jei.category.animations;
 
-import com.jozufozu.flywheel.core.PartialModel;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 
-import com.simibubi.create.foundation.gui.UIRenderHelper;
+import net.createmod.catnip.gui.UIRenderHelper;
+import net.createmod.catnip.platform.CatnipServices;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 
@@ -71,7 +71,10 @@ public abstract class BaseAnimatedSifter<SIFTER extends KineticBlock> extends An
 		float to = 18f / 16f;
 		matrixStack.mulPose(Axis.XP.rotationDegrees(22.5f));
 		matrixStack.mulPose(Axis.YP.rotationDegrees(22.5f));
-		FluidRenderer.renderFluidBox(new FluidStack(Fluids.WATER.getSource(),1000), from, from, from, to, to, to, buffer, matrixStack, LightTexture.FULL_BRIGHT, true);
+		@SuppressWarnings("unchecked")
+		net.createmod.catnip.render.FluidRenderHelper<FluidStack> renderer =
+				(net.createmod.catnip.render.FluidRenderHelper<FluidStack>) (Object) CatnipServices.FLUID_RENDERER;
+		renderer.renderFluidBox(new FluidStack(Fluids.WATER.getSource(),1000), from, from, from, to, to, to, buffer, matrixStack, LightTexture.FULL_BRIGHT, false, true);
 		matrixStack.popPose();
 		buffer.endBatch();
 		Lighting.setupFor3DItems();

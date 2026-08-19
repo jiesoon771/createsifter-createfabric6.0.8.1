@@ -1,12 +1,12 @@
 package io.github.shulej.createsifter.content.contraptions.components.brass_sifter;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterBlockEntity;
 import io.github.shulej.createsifter.register.ModPartials;
@@ -39,14 +39,14 @@ public class BrassSifterRenderer extends KineticBlockEntityRenderer<BrassSifterB
 
 		if (!meshItemStack.isEmpty()) {
 			ms.pushPose();
-			TransformStack.cast(ms).translate(new Vec3( 0.5 - xPos, 1.51, 0.5 ));
+			TransformStack.of(ms).translate(new Vec3( 0.5 - xPos, 1.51, 0.5 ));
 			renderStaticBlock(ms, buffer, light, overlay, meshItemStack, be);
 			ms.popPose();
 
 			ItemStack inProcessItemStack = be.getInputItemStack();
 			if (!inProcessItemStack.equals(ItemStack.EMPTY) && BrassSifterConfig.BRASS_SIFTER_RENDER_SIFTED_BLOCK.get()) {
 				ms.pushPose();
-				TransformStack.cast(ms)
+				TransformStack.of(ms)
 						.scale((float) .9, be.getProcessingRemainingPercent(), (float) .9)
 						.translate(new Vec3(-xPos + 0.05, 1.05 / be.getProcessingRemainingPercent(), 0.05));
 				renderBlockFromItemStack(be.getInputItemStack(), ms, buffer, light, overlay);
@@ -59,7 +59,7 @@ public class BrassSifterRenderer extends KineticBlockEntityRenderer<BrassSifterB
 
 	@Override
 	protected SuperByteBuffer getRotatedModel(BrassSifterBlockEntity blockEntity, BlockState state) {
-		return CachedBufferer.partial(ModPartials.BRASS_SIFTER_COG, state);
+		return CachedBuffers.partial(ModPartials.BRASS_SIFTER_COG, state);
 	}
 
 	protected void renderStaticBlock(PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack, BrassSifterBlockEntity blockEntity) {

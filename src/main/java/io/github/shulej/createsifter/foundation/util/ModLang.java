@@ -1,7 +1,7 @@
 package io.github.shulej.createsifter.foundation.util;
 
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.LangBuilder;
+import net.createmod.catnip.lang.Lang;
+import net.createmod.catnip.lang.LangBuilder;
 
 import io.github.shulej.createsifter.CreateSifter;
 

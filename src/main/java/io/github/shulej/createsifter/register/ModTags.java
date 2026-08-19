@@ -4,7 +4,7 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
 
 import com.simibubi.create.foundation.data.recipe.Mods;
-import com.simibubi.create.foundation.utility.Lang;
+import net.createmod.catnip.lang.Lang;
 
 import com.tterrag.registrate.providers.ProviderType;
 

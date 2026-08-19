@@ -17,9 +17,6 @@
     "client": [
       "io.github.shulej.createsifter.CreateSifterClient"
     ],
-    "fabric-datagen": [
-      "io.github.shulej.createsifter.ModDataGen"
-    ],
     "jei_mod_plugin": [
       "io.github.shulej.createsifter.compat.jei.CreateSifterJEI"
     ]

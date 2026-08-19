@@ -1,21 +1,36 @@
 package io.github.shulej.createsifter.register;
 
-import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
-
-import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 
 import io.github.shulej.createsifter.CreateSifter;
 import io.github.shulej.createsifter.ponders.PonderScenes;
+import net.createmod.ponder.api.registration.PonderPlugin;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.minecraft.resources.ResourceLocation;
 
-public class ModPonders {
-	static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(CreateSifter.MODID);
+public class ModPonders implements PonderPlugin {
 
-	public static void register() {
-		HELPER.addStoryBoard(ModBlocks.SIFTER_BLOCK, "sifter", PonderScenes::sifter, AllPonderTags.KINETIC_APPLIANCES);
-		HELPER.addStoryBoard(ModBlocks.BRASS_SIFTER_BLOCK, "sifter", PonderScenes::sifter, AllPonderTags.KINETIC_APPLIANCES);
+	@Override
+	public String getModId() {
+		return CreateSifter.MODID;
+	}
 
-		PonderRegistry.TAGS.forTag(AllPonderTags.KINETIC_APPLIANCES).add(ModBlocks.SIFTER_BLOCK);
-		PonderRegistry.TAGS.forTag(AllPonderTags.KINETIC_APPLIANCES).add(ModBlocks.BRASS_SIFTER_BLOCK);
+	@Override
+	public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
+		PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+
+		HELPER.forComponents(ModBlocks.SIFTER_BLOCK, ModBlocks.BRASS_SIFTER_BLOCK)
+			.addStoryBoard("sifter", PonderScenes::sifter, AllCreatePonderTags.KINETIC_APPLIANCES);
+	}
+
+	@Override
+	public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
+		PonderTagRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+
+		HELPER.addTagToComponent(ModBlocks.SIFTER_BLOCK, AllCreatePonderTags.KINETIC_APPLIANCES);
+		HELPER.addTagToComponent(ModBlocks.BRASS_SIFTER_BLOCK, AllCreatePonderTags.KINETIC_APPLIANCES);
 	}
 }

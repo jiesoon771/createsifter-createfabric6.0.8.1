@@ -2,7 +2,7 @@ package io.github.shulej.createsifter.content.contraptions.components.brass_sift
 
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 
-import com.simibubi.create.foundation.utility.VecHelper;
+import net.createmod.catnip.math.VecHelper;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;

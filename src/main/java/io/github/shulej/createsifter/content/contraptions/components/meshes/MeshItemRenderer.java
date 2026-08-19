@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRendere
 
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import net.createmod.catnip.animation.AnimationTickHolder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;

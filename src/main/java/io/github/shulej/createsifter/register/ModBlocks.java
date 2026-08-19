@@ -1,6 +1,5 @@
 package io.github.shulej.createsifter.register;
 
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -27,7 +26,6 @@ public class ModBlocks {
 			.properties(p -> p.mapColor(MapColor.METAL))
 			.transform(pickaxeOnly())
 			.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
-			.transform(BlockStressDefaults.setImpact(SifterConfig.SIFTER_STRESS_IMPACT.get()))
 			.item()
 			.transform(customItemModel())
 			.register();
@@ -39,7 +37,6 @@ public class ModBlocks {
 			.properties(p -> p.isRedstoneConductor((level, pos, state) -> false))
 			.transform(pickaxeOnly())
 			.blockstate((c, p) -> BlockStateGen.simpleBlock(c, p, AssetLookup.forPowered(c, p)))
-			.transform(BlockStressDefaults.setImpact(BrassSifterConfig.BRASS_SIFTER_STRESS_IMPACT.get()))
 			.item()
 			.transform(customItemModel())
 			.register();

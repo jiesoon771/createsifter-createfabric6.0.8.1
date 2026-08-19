@@ -6,11 +6,11 @@ import com.simibubi.create.compat.jei.EmptyBackground;
 import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 
-import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
+import net.createmod.catnip.config.ConfigBase;
 
 import io.github.shulej.createsifter.compat.jei.category.SiftingCategory;
 import io.github.shulej.createsifter.CreateSifter;
@@ -248,7 +248,7 @@ public class CreateSifterJEI implements IModPlugin {
 
 			CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
 					new mezz.jei.api.recipe.RecipeType<>(CreateSifter.asResource(name), recipeClass),
-					Lang.translateDirect("recipe." + name), background, icon, recipesSupplier, catalysts);
+					CreateLang.translateDirect("recipe." + name), background, icon, recipesSupplier, catalysts);
 			CreateRecipeCategory<T> category = factory.create(info);
 			modCategories.add(category);
 			return category;

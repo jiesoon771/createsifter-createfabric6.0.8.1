@@ -1,11 +1,11 @@
 package io.github.shulej.createsifter.content.contraptions.components.sifter;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 
 import io.github.shulej.createsifter.register.ModPartials;
 import net.minecraft.client.Minecraft;
@@ -40,7 +40,7 @@ public class SifterRenderer extends KineticBlockEntityRenderer<SifterBlockEntity
 
 		if (!meshItemStack.isEmpty()) {
 			ms.pushPose();
-			TransformStack.cast(ms).translate(new Vec3(0.5 - xPos, 1.51, 0.5));
+			TransformStack.of(ms).translate(new Vec3(0.5 - xPos, 1.51, 0.5));
 			renderStaticBlock(ms, buffer, light, overlay, meshItemStack, blockEntity);
 			ms.popPose();
 
@@ -48,7 +48,7 @@ public class SifterRenderer extends KineticBlockEntityRenderer<SifterBlockEntity
 			if (!inProcessItemStack.equals(ItemStack.EMPTY) && SifterConfig.SIFTER_RENDER_SIFTED_BLOCK.get()) {
 				float progress = blockEntity.getProcessingRemainingPercent();
 				ms.pushPose();
-				TransformStack.cast(ms)
+				TransformStack.of(ms)
 						.scale((float) .9, progress, (float) .9)
 						.translate(new Vec3(-xPos + 0.05, 1.05 / progress, 0.05));
 				renderBlockFromItemStack(inProcessItemStack, ms, buffer, light, overlay);
@@ -64,7 +64,7 @@ public class SifterRenderer extends KineticBlockEntityRenderer<SifterBlockEntity
 
 	@Override
 	protected SuperByteBuffer getRotatedModel(SifterBlockEntity blockEntity, BlockState state) {
-		return CachedBufferer.partial(ModPartials.SIFTER_COG, state);
+		return CachedBuffers.partial(ModPartials.SIFTER_COG, state);
 	}
 
 	protected void renderBlockFromItemStack(ItemStack itemStack,PoseStack ms, MultiBufferSource buffer, int light, int overlay) {

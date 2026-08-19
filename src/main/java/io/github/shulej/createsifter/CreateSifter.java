@@ -2,9 +2,9 @@ package io.github.shulej.createsifter;
 
 import com.simibubi.create.Create;
 
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 
-import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import io.github.shulej.createsifter.content.contraptions.components.brass_sifter.BrassSifterConfig;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterConfig;
 import io.github.shulej.createsifter.register.ModBlockEntities;
@@ -16,8 +16,6 @@ import io.github.shulej.createsifter.register.ModTags;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.ResourceLocation;
-
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +38,15 @@ public class CreateSifter implements ModInitializer {
 		ModCreativeTabs.register();
 		ModRecipeTypes.register();
 		REGISTRATE.register();
+
+		// Create 6: addon stress values must be registered through BlockStressValues
+		BlockStressValues.IMPACTS.registerProvider(block -> {
+			if (block == ModBlocks.SIFTER_BLOCK.get())
+				return () -> SifterConfig.SIFTER_STRESS_IMPACT.get();
+			if (block == ModBlocks.BRASS_SIFTER_BLOCK.get())
+				return () -> BrassSifterConfig.BRASS_SIFTER_STRESS_IMPACT.get();
+			return null;
+		});
 	}
 
 	public static ResourceLocation asResource(String path) {
