@@ -1,7 +1,7 @@
 # J-Space Workspace Ledger
 
 ## Goal
-port createsifter to Create 6.0.8.1: compile clean -> build jar -> install in CS instance (backup first) -> launch test
+DONE: createsifter ported to Create 6.0.8.1, installed in CS instance, client+server launch verified
 
 ## Core
 
@@ -10,4 +10,4 @@ port createsifter to Create 6.0.8.1: compile clean -> build jar -> install in CS
 ## Open
 
 ## Next
-fix remaining compile errors; then build + install + launch test
+report to user
