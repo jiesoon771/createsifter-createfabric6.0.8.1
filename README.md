@@ -4,7 +4,7 @@
 
 > **ENGLISH** · [中文](#中文说明)
 
-An updated, community-maintained build of **Create Sifting** for the **Create 6** port on **Minecraft 1.20.1** (Fabric / Quilt).
+An updated, community-maintained build of **Create Sifting** for the **Create 6** port on **Minecraft 1.20.1** (Fabric).
 
 ---
 
@@ -54,7 +54,7 @@ Output: `build/libs/createsifter-<version>.jar`. See `移植说明.md` for the e
 - Upstream code is by **oierbravo**, released under the **MIT License**; Shulej's Fabric port is likewise **MIT**. See [`LICENSE.txt`](LICENSE.txt).
 - The code added or modified by **this port** is provided freely: use, modify, and redistribute it as you like — you do **not** need to credit the porter.
 - **One obligation survives**: if a file contains upstream code, keep the MIT notice in `LICENSE.txt` when redistributing.
-- Provided **"AS IS", without warranty** of any kind. The porter is **not actively maintaining** this build.
+- Provided **"AS IS", without warranty** of any kind. The porter (**jiesoon771**) provides **no** guarantee of future updates, bug fixes, or ongoing maintenance. This build is essentially final: if you hit a bug, you will most likely need to fix it yourself or switch to another mod.
 
 ### Acknowledgements
 
@@ -108,7 +108,7 @@ gradlew.bat build
 - 上游代码归 **oierbravo** 所有，依 **MIT 许可**发布；Shulej 的 Fabric 移植版同样为 **MIT**。完整文本见 [`LICENSE.txt`](LICENSE.txt)。
 - 本移植**新增或修改**的代码可自由使用：你可以随意使用、修改、再分发，**不必向移植者署名**。
 - 但有**一条必须遵守**：只要文件里包含上游代码，再分发时就必须保留 `LICENSE.txt` 中的 MIT 版权声明——这是上游的要求，移植者无法替你免除。
-- 本版本按**"现状"提供，不作任何担保**；移植作者**不再主动维护**。
+- 本版本按**"原样（AS-IS）"提供，不作任何担保**。作者（**jiesoon771**）**不保证**未来的更新、缺陷修复或长期维护：本版本基本就此定型，若遇缺陷，多半需要你自己解决，或改用其他模组。
 
 ### 致谢
 
