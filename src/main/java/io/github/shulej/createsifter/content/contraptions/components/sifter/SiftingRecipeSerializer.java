@@ -32,7 +32,9 @@ public class SiftingRecipeSerializer implements RecipeSerializer<SiftingRecipe> 
 		json.add("ingredients", jsonIngredients);
 		json.add("results", jsonOutputs);
 
-		int processingDuration = recipe.getProcessingDuration();
+		// Serialize the base duration: the difficulty time multiplier is applied at
+		// runtime only, otherwise clients would apply it a second time.
+		int processingDuration = recipe.getBaseProcessingDuration();
 		if (processingDuration > 0)
 			json.addProperty("processingTime", processingDuration);
 
@@ -74,7 +76,7 @@ public class SiftingRecipeSerializer implements RecipeSerializer<SiftingRecipe> 
 		buffer.writeVarInt(outputs.size());
 		outputs.forEach(o -> o.write(buffer));
 
-		buffer.writeVarInt(recipe.getProcessingDuration());
+		buffer.writeVarInt(recipe.getBaseProcessingDuration());
 
 		recipe.writeAdditional(buffer);
 	}

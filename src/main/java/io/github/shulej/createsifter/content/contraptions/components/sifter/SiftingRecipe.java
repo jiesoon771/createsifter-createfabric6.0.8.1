@@ -15,20 +15,27 @@ import io.github.shulej.createsifter.ModRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class SiftingRecipe extends AbstractCrushingRecipe {
+	/** Shared RNG: rollResults only ever runs on the game thread (server). */
+	private static final RandomSource ROLL_RANDOM = RandomSource.create();
+
 	public NonNullList<ProcessingOutput> results;
-	ItemStack meshStack;
-	ItemStack siftableIngredientStack;
+	private Ingredient siftableIngredient = Ingredient.EMPTY;
+	private Ingredient meshIngredient = Ingredient.EMPTY;
+	private ItemStack meshStack = ItemStack.EMPTY;
+	private ItemStack siftableIngredientStack = ItemStack.EMPTY;
 	private boolean waterlogged;
 	private float minimumSpeed;
 	private boolean advanced;
@@ -39,11 +46,9 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 		this.ingredients = params.ingredients;
 		this.results = params.results;
 		this.id = params.id;
-		this.meshStack = getMeshItemStack();
-		this.advanced = isAdvancedMesh(this.meshStack);
-		this.siftableIngredientStack = getSiftableItemStack();
 		this.waterlogged = params.waterlogged;
 		this.minimumSpeed = params.minimumSpeed;
+		classifyIngredients();
 	}
 
 	@Override
@@ -51,14 +56,14 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 		return ModRecipeTypes.SIFTING.getSerializer();
 	}
 
-	public boolean matches(Container inv, Level worldIn, boolean waterlogged, float speed, boolean advanced) {
+	public boolean matches(Container inv, Level worldIn, boolean waterlogged, float speed, boolean advancedMesh) {
 		if (inv.isEmpty())
 			return false;
 		if(isWaterlogged() != waterlogged)
 			return false;
 		if(hasSpeedRequirement() && speed < minimumSpeed)
 			return false;
-		if(advanced && meshStack.getItem() instanceof BaseMesh){
+		if(advancedMesh && meshStack.getItem() instanceof BaseMesh){
 			return false;
 		}
 		return getSiftableIngredient().test(inv.getItem(0)) && getMeshIngredient().test(inv.getItem(1));
@@ -83,41 +88,45 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 		return matches(inv, worldIn, false, 0, false);
 	}
 
-	public Ingredient getSiftableIngredient(){
-		for(int i = 0; i < ingredients.size();i++){
-			ItemStack itemStack = ingredients.get(i).getItems()[0];
-			if(!SiftingRecipe.isMeshItemStack(itemStack))
-				return ingredients.get(i);
+	/**
+	 * Resolve both sides of the recipe once. Ingredients without any matching
+	 * item (empty or unresolved tags) are skipped instead of crashing, and the
+	 * resolved values are cached so matches() does not re-resolve tags every tick.
+	 */
+	private void classifyIngredients() {
+		for (Ingredient ingredient : ingredients) {
+			if (ingredient == null || ingredient.isEmpty())
+				continue;
+			ItemStack[] stacks = ingredient.getItems();
+			if (stacks.length == 0)
+				continue;
+			if (isMeshItemStack(stacks[0])) {
+				if (meshIngredient == Ingredient.EMPTY) {
+					meshIngredient = ingredient;
+					meshStack = stacks[0];
+				}
+			} else if (siftableIngredient == Ingredient.EMPTY) {
+				siftableIngredient = ingredient;
+				siftableIngredientStack = stacks[0];
+			}
 		}
-		return Ingredient.EMPTY;
-
+		this.advanced = isAdvancedMesh(meshStack);
 	}
+
+	public Ingredient getSiftableIngredient(){
+		return siftableIngredient;
+	}
+
 	public Ingredient getMeshIngredient(){
-		for(int i = 0; i < ingredients.size();i++){
-			ItemStack itemStack = ingredients.get(i).getItems()[0];
-			if(SiftingRecipe.isMeshItemStack(itemStack))
-				return ingredients.get(i);
-		}
-		return Ingredient.EMPTY;
+		return meshIngredient;
 	}
 
 	public ItemStack getMeshItemStack() {
-		for (int i = 0; i < ingredients.size(); i++) {
-			ItemStack itemStack = ingredients.get(i).getItems()[0];
-			if (SiftingRecipe.isMeshItemStack(itemStack)) {
-				return itemStack;
-			}
-		}
-		return ItemStack.EMPTY;
+		return meshStack;
 	}
 
 	public ItemStack getSiftableItemStack(){
-		for(int i = 0; i < ingredients.size();i++){
-			ItemStack itemStack = ingredients.get(i).getItems()[0];
-			if(!SiftingRecipe.isMeshItemStack(itemStack))
-				return itemStack;
-		}
-		return ItemStack.EMPTY;
+		return siftableIngredientStack;
 	}
 
 	public static boolean isMeshItemStack(ItemStack itemStack){
@@ -125,8 +134,9 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 			return true;
 		return false;
 	}
-	private boolean isAdvancedMesh(ItemStack meshStack){
-		return this.meshStack.getItem() instanceof AdvancedBaseMesh;
+
+	private static boolean isAdvancedMesh(ItemStack meshStack){
+		return meshStack.getItem() instanceof AdvancedBaseMesh;
 	}
 
 	public boolean isWaterlogged() {
@@ -134,10 +144,7 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 	}
 
 	public boolean hasSpeedRequirement(){
-		if(this.minimumSpeed > SifterBlockEntity.DEFAULT_MINIMUM_SPEED){
-			return true;
-		}
-		return false;
+		return minimumSpeed > SifterConfig.SIFTER_MINIMUM_SPEED.get().floatValue();
 	}
 
 	public boolean requiresAdvancedMesh(){
@@ -181,9 +188,45 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 	public List<ProcessingOutput> getRollableResults() {
 		return results;
 	}
-	public List<ItemStack> rollResults(List<ProcessingOutput> rollableResults) {
-		return super.rollResults(rollableResults);
+
+	@Override
+	public int getProcessingDuration() {
+		float multiplier = Difficulty.effectiveTimeMultiplier();
+		return Math.max(1, (int) (this.processingDuration * multiplier));
 	}
+
+	/** Base duration from the recipe file, without the difficulty time multiplier. */
+	public int getBaseProcessingDuration() {
+		return this.processingDuration;
+	}
+
+	@Override
+	public List<ItemStack> rollResults(List<ProcessingOutput> rollableResults) {
+		float chanceMultiplier = Math.max(0f, Difficulty.effectiveChanceMultiplier());
+		RandomSource random = ROLL_RANDOM;
+		List<ItemStack> rolled = new ArrayList<>();
+		for (int i = 0; i < rollableResults.size(); i++) {
+			ProcessingOutput output = rollableResults.get(i);
+			float chance = Math.min(1f, output.getChance() * chanceMultiplier);
+			int baseCount = output.getStack().getCount();
+
+			// Per-recipe override (chance % and count) wins over the global multiplier.
+			int[] override = SifterConfig.getOverride(this.id.toString(), i);
+			int count = baseCount;
+			if (override != null) {
+				chance = Math.min(1f, override[0] / 100f);
+				count = Math.min(output.getStack().getMaxStackSize(), Math.max(1, override[1]));
+			}
+
+			if (random.nextFloat() < chance) {
+				ItemStack stack = output.getStack().copy();
+				stack.setCount(count);
+				rolled.add(stack);
+			}
+		}
+		return rolled;
+	}
+
 	public List<ItemStack> rollResults() {
 		return rollResults(this.getRollableResults());
 	}
@@ -196,7 +239,7 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 		ItemStackHandlerContainer tester = new ItemStackHandlerContainer(2);
 		tester.setStackInSlot(0, stack);
 		tester.setStackInSlot(1, mesh);
-		Optional<SiftingRecipe> recipe = ModRecipeTypes.SIFTING.find(tester, world, waterlogged, 0);
+		Optional<SiftingRecipe> recipe = ModRecipeTypes.SIFTING.find(tester, world, waterlogged, 0, isAdvancedMeshItem(mesh));
 
 		if (recipe.isPresent())
 			return recipe.get().rollResults();
@@ -208,7 +251,11 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 		tester.setStackInSlot(0, stack);
 		tester.setStackInSlot(1, mesh);
 
-		return ModRecipeTypes.SIFTING.find( tester, world, waterlogged, speed).isPresent();
+		return ModRecipeTypes.SIFTING.find(tester, world, waterlogged, speed, isAdvancedMeshItem(mesh)).isPresent();
+	}
+
+	private static boolean isAdvancedMeshItem(ItemStack mesh) {
+		return mesh.getItem() instanceof AdvancedBaseMesh;
 	}
 
 	public float getMinimumSpeed() {

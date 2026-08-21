@@ -1,0 +1,14 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "minecraft:netherrack"
+    }
+  ],
+  "processingTime": 500,
+  "results": [
+    {
+      "item": "createsifter:crushed_netherrack"
+    }
+  ]
+}

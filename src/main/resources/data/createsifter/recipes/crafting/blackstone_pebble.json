@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createsifter:blackstone_pebble"
+    },
+    {
+      "item": "createsifter:blackstone_pebble"
+    },
+    {
+      "item": "createsifter:blackstone_pebble"
+    },
+    {
+      "item": "createsifter:blackstone_pebble"
+    }
+  ],
+  "result": {
+    "item": "minecraft:blackstone"
+  }
+}

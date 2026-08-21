@@ -101,8 +101,11 @@ public class BaseMesh extends Item implements CustomUseEffectsItem {
 
 		playerIn.startUsingItem(handIn);
 
+		// Write the tag on both sides: the client needs it immediately for the
+		// hold-out animation and particles (see MeshItemRenderer), the server needs
+		// it to roll the recipe at finishUsingItem time.
+		itemStack.getOrCreateTag().put("Sifting", toSift.serializeNBT());
 		if (!worldIn.isClientSide) {
-			itemStack.getOrCreateTag().put("Sifting", toSift.serializeNBT());
 			if (item.isEmpty())
 				pickUp.discard();
 			else

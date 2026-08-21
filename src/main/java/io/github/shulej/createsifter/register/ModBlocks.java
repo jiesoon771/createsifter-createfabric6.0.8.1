@@ -10,6 +10,7 @@ import io.github.shulej.createsifter.content.contraptions.components.brass_sifte
 import io.github.shulej.createsifter.content.contraptions.components.brass_sifter.BrassSifterConfig;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterBlock;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterConfig;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
@@ -37,6 +38,30 @@ public class ModBlocks {
 			.properties(p -> p.isRedstoneConductor((level, pos, state) -> false))
 			.transform(pickaxeOnly())
 			.blockstate((c, p) -> BlockStateGen.simpleBlock(c, p, AssetLookup.forPowered(c, p)))
+			.item()
+			.transform(customItemModel())
+			.register();
+
+	public static final BlockEntry<Block> CRUSHED_NETHERRACK = CreateSifter.REGISTRATE.block("crushed_netherrack", Block::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.mapColor(MapColor.NETHER))
+			.blockstate((c, p) -> p.simpleBlock(c.getEntry()))
+			.item()
+			.transform(customItemModel())
+			.register();
+
+	public static final BlockEntry<Block> CRUSHED_END_STONE = CreateSifter.REGISTRATE.block("crushed_end_stone", Block::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.mapColor(MapColor.SAND))
+			.blockstate((c, p) -> p.simpleBlock(c.getEntry()))
+			.item()
+			.transform(customItemModel())
+			.register();
+
+	public static final BlockEntry<Block> DUST = CreateSifter.REGISTRATE.block("dust", Block::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.mapColor(MapColor.SAND))
+			.blockstate((c, p) -> p.simpleBlock(c.getEntry()))
 			.item()
 			.transform(customItemModel())
 			.register();
