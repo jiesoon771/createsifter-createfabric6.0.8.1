@@ -92,7 +92,7 @@ This project is provided AS-IS, without warranty of any kind. It has been verifi
 
 Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
-> tip / 提示:
+> tip:
 > If there's a bug, don't find me 😭😭😭 I just updated the mod to work with the latest Create version. I'm a total newbie – I can't fix mod bugs, sorry!!!
 
 ---
