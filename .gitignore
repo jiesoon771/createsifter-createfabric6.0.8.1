@@ -31,3 +31,9 @@ bin/
 # fabric
 
 run/
+
+# local build dependencies (Create 6.0.8.1 jar + its nested jars)
+libs/
+
+# j-space ledger
+.jspace/

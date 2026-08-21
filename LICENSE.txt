@@ -1,3 +1,5 @@
+MIT License
+
 Copyright 2022 oierbravo
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -5,3 +7,47 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+NOTE TO USERS — 致使用者（中英对照）
+
+本仓库是 Shulej 的 "Create Sifting (Fabric Port)" 针对 Create 6（6.0.8.1+，Minecraft 1.20.1）的社区适配更新版。
+This repository is a community adaptation of Shulej's "Create Sifting (Fabric Port)" to work with Create 6 (6.0.8.1+, Minecraft 1.20.1).
+
+上游版权 — Upstream copyright:
+- 本项目的前身源码由 oierbravo 以 MIT 许可发布，版权归其所有；Shulej 的 Fabric 移植版同样采用 MIT。
+- The original source was released by oierbravo under the MIT License; Shulej's Fabric port also uses MIT.
+- 上方即该 MIT 许可全文。任何再分发都必须连带保留上述版权与许可声明。
+- The MIT license text above is authoritative. Any redistribution must retain the copyright and license notice above.
+
+移植作者 / Porter: **jiesoon771**
+
+移植者的授权意愿 — The porter's intent (applies to the portion this port added or modified):
+- 对本移植新增或修改的代码部分，移植作者（jiesoon771）授予任何人永久、免费、不可撤销、可再许可的许可（to the extent permitted by law）：可自由使用、修改、复制、再分发及商用，且无需向移植者署名。
+- For the code added or modified by this port, the porter (jiesoon771) grants any person a perpetual, royalty-free, irrevocable, sublicensable license (to the fullest extent permitted by law) to use, copy, modify, publish, redistribute, and sell that portion, with or without attribution to the porter.
+- 请注意：即便您无需向移植者署名，只要文件中包含上游（oierbravo 或 Shulej）的代码，再分发时仍必须保留上方 MIT 的版权声明与许可文本——这一义务属于上游，不归移植者豁免。
+- Note: even where your copy need not credit the porter, so long as it contains upstream (oierbravo or Shulej) code, the MIT copyright notice and license text above must be preserved on redistribution — that obligation rests with the upstream authors and is beyond the porter's ability to waive.
+
+适配作者的声明 — The porter's declaration（中英对照）:
+
+本适配版是基于 Shulej 的 MIT 许可 Fabric 移植版（create-sifting-fabric）的社区适配更新。
+This port is a community adaptation based on Shulej's MIT-licensed Fabric port (create-sifting-fabric).
+
+- 上游代码（oierbravo 及 Shulej 的贡献）：继续遵循其原有的 MIT 许可，相关版权与许可声明已随附本文件上方。
+- Upstream code (contributions by oierbravo and Shulej): remains under its original MIT license; the relevant copyright and license notices are included above.
+
+- 本适配版新增的代码（由 jiesoon771 撰写）：为与上游许可保持一致，并尊重原项目的授权方式，本人同样以 MIT 协议授予。
+- Code newly written by this port (by jiesoon771): to remain consistent with the upstream license and out of respect for the original project's licensing, it is likewise released under the MIT License.
+
+- 注意：虽然本适配版整体以 MIT 协议发布，但鉴于其上游源头可能涉及 LGPL-3.0 的历史，任何再分发者应自行评估相关风险。本人作为适配作者，已尽最大努力保留所有上游声明。
+- Note: although this port is published as a whole under the MIT License, because its upstream history may touch LGPL-3.0, redistributors should evaluate the relevant risks themselves. As the porter, I have made my best effort to preserve all upstream notices.
+
+维护状态 — Maintenance:
+- 本仓库主要供他人使用、接续维护；移植作者不再主动更新。
+- Provided mainly for others to use and maintain; the porter is not actively updating it.
+- 软件按"现状"提供，作者不对其适用性、可用性或安全性作任何明示或默示担保，亦不对因使用它而产生的任何损失承担责任。
+- The software is provided "AS IS" without warranty of any kind, express or implied; the author assumes no liability for any loss arising from its use.
+
+Note: This Fabric port is based on Shulej's MIT-licensed repo. The original Forge version by oierbravo uses LGPL-3.0; this adaptation follows the direct upstream (Fabric port) license.
+备注：本 Fabric 移植版基于 Shulej 的 MIT 许可仓库；oierbravo 的原始 Forge 版采用 LGPL-3.0；本适配版遵循其直接上游（Fabric 移植版）的许可。

@@ -5,9 +5,10 @@
   "name": "Create Sifter",
   "description": "A simple sifter for the amazing create mod",
   "authors": [
-    "Shulej"
+    "Shulej",
+    "jiesoon771"
   ],
-  "license": "CC0",
+  "license": "MIT",
   "icon": "assets/createsifter/icon.png",
   "environment": "*",
   "entrypoints": {
