@@ -1,4 +1,4 @@
-# Create Sifting (Fabric Port) — Create 6 Update
+# 机械动力：筛子（fabric移植版） —— 适配最新Create 6.0.8.1
 
 **Create 6 社区适配版 / A community adaptation for Create 6**
 
