@@ -45,10 +45,11 @@ public class BrassSifterRenderer extends KineticBlockEntityRenderer<BrassSifterB
 
 			ItemStack inProcessItemStack = be.getInputItemStack();
 			if (!inProcessItemStack.equals(ItemStack.EMPTY) && BrassSifterConfig.BRASS_SIFTER_RENDER_SIFTED_BLOCK.get()) {
+				float remaining = be.getProcessingRemainingPercent();
 				ms.pushPose();
 				TransformStack.of(ms)
-						.scale((float) .9, be.getProcessingRemainingPercent(), (float) .9)
-						.translate(new Vec3(-xPos + 0.05, 1.05 / be.getProcessingRemainingPercent(), 0.05));
+						.scale((float) .9, remaining, (float) .9)
+						.translate(new Vec3(-xPos + 0.05, 1.05 / remaining, 0.05));
 				renderBlockFromItemStack(be.getInputItemStack(), ms, buffer, light, overlay);
 				ms.popPose();
 			}

@@ -20,6 +20,9 @@
     ],
     "jei_mod_plugin": [
       "io.github.shulej.createsifter.compat.jei.CreateSifterJEI"
+    ],
+    "modmenu": [
+      "io.github.shulej.createsifter.compat.modmenu.ModMenuIntegration"
     ]
   },
   "mixins": [

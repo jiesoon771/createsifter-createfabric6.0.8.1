@@ -1,6 +1,5 @@
 package io.github.shulej.createsifter.content.contraptions.components.sifter;
 
-import com.google.gson.Gson;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 
 import com.simibubi.create.foundation.item.ItemHelper;
@@ -31,6 +30,7 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -41,16 +41,13 @@ import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 public class SifterBlockEntity extends KineticBlockEntity implements SidedStorageBlockEntity {
-	private static final Logger log = LoggerFactory.getLogger(SifterBlockEntity.class);
-	public static float DEFAULT_MINIMUM_SPEED = SifterConfig.SIFTER_MINIMUM_SPEED.get().floatValue();
 
 	public ItemStackHandler inputInv;
 	public ItemStackHandler outputInv;
@@ -112,9 +109,17 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		if (getSpeed() == 0) return;
 		if (!isSpeedRequirementFulfilled()) return;
 
+		// Only idle when no output slot can take anything anymore; partial fits are
+		// handled by dropping the overflow in process() instead of voiding it.
+		boolean outputFull = true;
 		for (int i = 0; i < outputInv.getSlotCount(); i++) {
-			if (outputInv.getStackInSlot(i).getCount() == outputInv.getSlotLimit(i)) return;
+			ItemStack inSlot = outputInv.getStackInSlot(i);
+			if (inSlot.getCount() < Math.min(outputInv.getSlotLimit(i), inSlot.getMaxStackSize())) {
+				outputFull = false;
+				break;
+			}
 		}
+		if (outputFull) return;
 
 		if (timer > 0) {
 			timer -= getProcessingSpeed();
@@ -129,6 +134,10 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 			return;
 		}
 
+		// The server drives recipe selection and syncs Timer/TotalTime; the client
+		// must not fall back to the 100-tick placeholder loop and desync its progress.
+		if (level.isClientSide) return;
+
 		ItemStackHandlerContainer inventoryIn = new ItemStackHandlerContainer(2);
 		inventoryIn.setStackInSlot(0, this.inputInv.getStackInSlot(0));
 		inventoryIn.setStackInSlot(1, this.meshInv.getStackInSlot(0));
@@ -136,7 +145,7 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		if (inputInv.getStackInSlot(0).isEmpty()) return;
 
 		if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh())) {
-			Optional<SiftingRecipe> recipe = ModRecipeTypes.SIFTING.find(inventoryIn, level, this.isWaterLogged(), getAbsSpeed());
+			Optional<SiftingRecipe> recipe = ModRecipeTypes.SIFTING.find(inventoryIn, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh());
 			if (!recipe.isPresent()) {
 				timer = 100;
 				totalTime = 100;
@@ -179,11 +188,12 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		inventoryIn.setStackInSlot(0, this.inputInv.getStackInSlot(0));
 		inventoryIn.setStackInSlot(1, this.meshInv.getStackInSlot(0));
 		if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh())) {
-			Optional<SiftingRecipe> recipe = ModRecipeTypes.SIFTING.find(inventoryIn, level, this.isWaterLogged(), getAbsSpeed());
+			Optional<SiftingRecipe> recipe = ModRecipeTypes.SIFTING.find(inventoryIn, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh());
 			if (!recipe.isPresent())
 				return;
 			lastRecipe = recipe.get();
 		}
+		List<ItemStack> overflow = new ArrayList<>();
 		for (int i = 0; i < getItemsProcessedPerCycle(); i++) {
 			try (Transaction t = TransferUtil.getTransaction()) {
 				ItemStackHandlerSlot slot = inputInv.getSlot(0);
@@ -191,17 +201,30 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 					break;
 				slot.extract(slot.getResource(), 1, t);
 
-				lastRecipe.rollResults().forEach(stack -> tryToInsertOutputItem(outputInv, stack, t));
+				for (ItemStack stack : lastRecipe.rollResults())
+					overflow.add(tryToInsertOutputItem(outputInv, stack, t));
 				t.commit();
 			}
 		}
+		// Anything that did not fit is dropped above the sifter instead of being deleted.
+		for (ItemStack leftover : overflow)
+			if (!leftover.isEmpty())
+				Containers.dropItemStack(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1.0,
+						worldPosition.getZ() + 0.5, leftover);
 
 		sendData();
 		setChanged();
 	}
 
-	protected void tryToInsertOutputItem(ItemStackHandler inv, ItemStack stack, Transaction t) {
-		inv.insert(ItemVariant.of(stack), stack.getCount(), t);
+	/** @return the part of the stack that did not fit (dropped by the caller); EMPTY when fully stored. */
+	protected ItemStack tryToInsertOutputItem(ItemStackHandler inv, ItemStack stack, Transaction t) {
+		long inserted = inv.insert(ItemVariant.of(stack), stack.getCount(), t);
+		long leftover = stack.getCount() - inserted;
+		if (leftover <= 0)
+			return ItemStack.EMPTY;
+		ItemStack rest = stack.copy();
+		rest.setCount((int) leftover);
+		return rest;
 	}
 
 	@Override
@@ -276,12 +299,11 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		return this.inputInv.getStackInSlot(0);
 	}
 
+	/** Remaining fraction of the current cycle, from 1 down to 0; never 0/NaN so renderers can divide by it. */
 	public float getProcessingRemainingPercent() {
-		float timer = this.timer;
-		float total = this.totalTime;
-		float remaining = total - timer;
-		float result = remaining/total;
-		return 1 - result;
+		if (totalTime <= 0)
+			return 1;
+		return Mth.clamp(timer / (float) totalTime, 0.05f, 1f);
 	}
 
 	private boolean canProcess(ItemStack stack) {
@@ -292,7 +314,7 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		if (lastRecipe != null && lastRecipe.matches(tester, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh())) {
 			return true;
 		}
-		return ModRecipeTypes.SIFTING.find(tester, level, this.isWaterLogged(), getAbsSpeed()).isPresent();
+		return ModRecipeTypes.SIFTING.find(tester, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh()).isPresent();
 	}
 
 	public boolean isWaterLogged() {
@@ -376,6 +398,6 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 	}
 
 	protected float getDefaultMinimumSpeed() {
-		return DEFAULT_MINIMUM_SPEED;
+		return SifterConfig.SIFTER_MINIMUM_SPEED.get().floatValue();
 	}
 }

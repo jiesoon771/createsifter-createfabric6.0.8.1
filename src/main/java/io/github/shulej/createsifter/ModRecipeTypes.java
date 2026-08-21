@@ -26,7 +26,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public enum ModRecipeTypes implements IRecipeTypeInfo {
 	SIFTING(SiftingRecipe::new);
@@ -99,19 +98,21 @@ public enum ModRecipeTypes implements IRecipeTypeInfo {
 	}
 
 	public Optional<SiftingRecipe> find(Container inv, Level world, boolean waterlogged, float speed) {
-		if (world.isClientSide)
-			return Optional.empty();
-		List<SiftingRecipe> siftingRecipes = world.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SIFTING.getType());
-		Stream<SiftingRecipe> siftingRecipesFiltered = siftingRecipes.stream().filter(siftingRecipe -> siftingRecipe.matches(inv, world, waterlogged, speed, false));
-		return siftingRecipesFiltered.findAny();
+		return find(inv, world, waterlogged, speed, false);
 	}
 
-	public Optional<SiftingRecipe> findAdvanced(Container inv, Level world, boolean waterlogged, float speed) {
+	/**
+	 * @param advanced whether the sifter holds an advanced mesh; recipes whose mesh
+	 *                 ingredient is a plain mesh must not match for advanced sifters
+	 *                 (and vice versa), keeping search and cached-match checks consistent.
+	 */
+	public Optional<SiftingRecipe> find(Container inv, Level world, boolean waterlogged, float speed, boolean advanced) {
 		if (world.isClientSide)
 			return Optional.empty();
 		List<SiftingRecipe> siftingRecipes = world.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SIFTING.getType());
-		Stream<SiftingRecipe> siftingRecipesFiltered = siftingRecipes.stream().filter(siftingRecipe -> siftingRecipe.matches(inv, world, waterlogged, speed, true));
-		return siftingRecipesFiltered.findAny();
+		return siftingRecipes.stream()
+				.filter(siftingRecipe -> siftingRecipe.matches(inv, world, waterlogged, speed, advanced))
+				.findAny();
 	}
 
 	public static boolean shouldIgnoreAutomation(Recipe<?> recipe) {

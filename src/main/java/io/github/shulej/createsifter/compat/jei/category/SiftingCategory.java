@@ -81,7 +81,7 @@ public class SiftingCategory extends CreateRecipeCategory<SiftingRecipe> {
 		if(recipe.isWaterlogged())
 			requirements.add(ModLang.translate("recipe.sifting.waterlogged").component());
 		if(recipe.hasSpeedRequirement())
-			requirements.add(CreateLang.translate("createsifter.recipe.sifting.minimumspeed",recipe.getSpeedRequirement()).component());
+			requirements.add(CreateLang.translate("createsifter.recipe.sifting.minimumspeed",Math.round(recipe.getSpeedRequirement())).component());
 		if(recipe.requiresAdvancedMesh())
 			requirements.add(ModLang.translate("recipe.sifting.brass_required").component());
 

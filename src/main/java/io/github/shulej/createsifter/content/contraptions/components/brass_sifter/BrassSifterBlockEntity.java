@@ -17,9 +17,6 @@ import java.util.List;
 public class BrassSifterBlockEntity extends SifterBlockEntity {
 	private FilteringBehaviour filtering;
 
-	protected int itemsProcessedPerCycle = BrassSifterConfig.BRASS_SIFTER_ITEMS_PER_CYCLE.get();
-	public static float DEFAULT_MINIMUM_SPEED = BrassSifterConfig.BRASS_SIFTER_MINIMUM_SPEED.get().floatValue();
-
 	public BrassSifterBlockEntity(BlockEntityType<? extends SifterBlockEntity> typeIn, BlockPos pos, BlockState state) {
 		super(typeIn, pos, state);
 	}
@@ -31,7 +28,7 @@ public class BrassSifterBlockEntity extends SifterBlockEntity {
 
 	@Override
 	protected int getItemsProcessedPerCycle() {
-		return itemsProcessedPerCycle;
+		return BrassSifterConfig.BRASS_SIFTER_ITEMS_PER_CYCLE.get();
 	}
 
 	@Override
@@ -51,14 +48,17 @@ public class BrassSifterBlockEntity extends SifterBlockEntity {
 	}
 
 	@Override
-	protected void tryToInsertOutputItem(ItemStackHandler outputInv, ItemStack stack, Transaction t) {
-		if(filtering.test(stack)) {
-			super.tryToInsertOutputItem(outputInv, stack, t);
+	protected ItemStack tryToInsertOutputItem(ItemStackHandler outputInv, ItemStack stack, Transaction t) {
+		// Outputs the filter rejects are intentionally discarded; anything the filter
+		// accepts but that no longer fits is returned and dropped by the base class.
+		if (filtering != null && !filtering.test(stack)) {
+			return ItemStack.EMPTY;
 		}
+		return super.tryToInsertOutputItem(outputInv, stack, t);
 	}
 
 	@Override
 	protected float getDefaultMinimumSpeed() {
-		return DEFAULT_MINIMUM_SPEED;
+		return BrassSifterConfig.BRASS_SIFTER_MINIMUM_SPEED.get().floatValue();
 	}
 }

@@ -24,6 +24,14 @@ Originally written by **oierbravo** and ported to Fabric by **Shulej**, this bui
 - English & Chinese localization
 - Works on client and server; shows recipes in **JEI** (15.20+)
 
+### Difficulty & Recipe Configuration (config UI)
+
+A config screen is available via **Mod Menu → Config** (no keybinding needed).
+
+- **Global difficulty preset** — ultra (chance x1.5 / time x0.5), high (original, x1.0 / x1.0), medium (x0.6 / x1.5), low (x0.35 / x2.0), or **custom** (editable chance & time steppers).
+- **Per-recipe overrides** — after entering a world, scroll the recipe list to open each recipe and set the drop chance (0–100%) and amount per success for every output. Changes are applied when items are rolled.
+- **Server-authoritative:** all values are stored in the server-side config (`createsifter-server.toml`), so on a dedicated server the host's settings win and sync to clients. In single-player the local world is the host.
+
 ### Requirements
 
 - Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
@@ -114,6 +122,14 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 - **20 条内置筛分配方**
 - 中英文双语本地化
 - 服务端与客户端均可用；支持 **JEI**（15.20+）配方显示
+
+### 难度与配方配置（配置界面）
+
+通过 **Mod Menu → Config** 打开配置界面（无需注册键位）。
+
+- **全局难度预设** —— 超高（产出×1.5 / 时间×0.5）、高（原版 ×1.0 / ×1.0）、中（×0.6 / ×1.5）、低（×0.35 / ×2.0），或**自定义**（可微调产出概率与处理时间的加减按钮）。
+- **逐配方覆盖** —— 进入存档后，滚动配方列表，点开每条配方即可修改每个产物的掉落概率（0–100%）与每次筛出数量，掉落时生效。
+- **服务端配置为准** —— 所有数值保存在服务端配置（`createsifter-server.toml`），专用服务器上以服主设置同步给客户端；单机则为本地存档/主机设置。
 
 ### 运行要求
 
