@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SMS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "create:sturdy_sheet"
+    },
+    "M": {
+      "item": "createsifter:sturdy_mesh"
+    }
+  },
+  "result": {
+    "item": "createsifter:advanced_sturdy_mesh",
+    "count": 1
+  }
+}

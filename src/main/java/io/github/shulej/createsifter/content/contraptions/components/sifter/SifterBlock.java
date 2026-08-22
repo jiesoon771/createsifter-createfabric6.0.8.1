@@ -16,6 +16,7 @@ import net.createmod.catnip.data.Iterate;
 
 import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemHandlerHelper;
+import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedBaseMesh;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.BaseMesh;
 import io.github.shulej.createsifter.register.ModBlockEntities;
 import io.github.shulej.createsifter.register.ModShapes;
@@ -55,7 +56,8 @@ public class SifterBlock extends KineticBlock implements IBE<SifterBlockEntity>,
 
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		return SifterInteractionHelper.useSifter(worldIn, pos, player, handIn, item -> item instanceof BaseMesh);
+		return SifterInteractionHelper.useSifter(worldIn, pos, player, handIn,
+				item -> item instanceof BaseMesh || item instanceof AdvancedBaseMesh);
 	}
 
 	@Override

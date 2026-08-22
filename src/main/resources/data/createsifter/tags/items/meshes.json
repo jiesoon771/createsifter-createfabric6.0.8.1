@@ -6,6 +6,8 @@
     "createsifter:brass_mesh",
     "createsifter:custom_mesh",
     "createsifter:advanced_brass_mesh",
-    "createsifter:advanced_custom_mesh"
+    "createsifter:advanced_custom_mesh",
+    "createsifter:sturdy_mesh",
+    "createsifter:advanced_sturdy_mesh"
   ]
 }

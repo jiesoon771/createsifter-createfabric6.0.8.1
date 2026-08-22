@@ -1,0 +1,26 @@
+{
+  "type": "createsifter:sifting",
+  "ingredients": [
+    {
+      "item": "createsifter:crushed_basalt"
+    },
+    {
+      "item": "createsifter:sturdy_mesh"
+    }
+  ],
+  "processingTime": 500,
+  "results": [
+    {
+      "chance": 0.02,
+      "item": "minecraft:ancient_debris"
+    },
+    {
+      "chance": 0.01,
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "chance": 0.1,
+      "item": "create:experience_nugget"
+    }
+  ]
+}

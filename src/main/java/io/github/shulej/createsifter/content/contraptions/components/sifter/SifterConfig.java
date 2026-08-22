@@ -55,11 +55,11 @@ public class SifterConfig {
 						"An empty list disables all overrides (use the config screen to edit).")
 				.defineList("recipeOverrides", List.of(), obj -> obj instanceof String);
 		ENABLE_NETHERITE_SIFT = SERVER_BUILDER
-				.comment("Master switch for the optional netherite sifting chain:",
-						"  sifting soul_soil with the advanced brass mesh produces",
-						"  ancient_debris, netherite_scrap and (very rarely) netherite_ingot.",
-						"  Off by default; turn it on to enable the netherite drop chain.")
-				.define("enableNetheriteSift", false);
+				.comment("Master switch for the netherite sifting chain:",
+						"  sifting crushed_basalt with the sturdy / advanced sturdy",
+						"  mesh produces ancient_debris and netherite_scrap.",
+						"  On by default; turn it off to disable the netherite drop chain.")
+				.define("enableNetheriteSift", true);
 	}
 
 	public static void registerCommonConfig(ForgeConfigSpec.Builder COMMON_BUILDER) {

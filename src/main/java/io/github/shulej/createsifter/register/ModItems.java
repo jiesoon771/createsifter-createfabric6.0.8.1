@@ -19,6 +19,8 @@ import io.github.shulej.createsifter.content.contraptions.components.meshes.Zinc
 import io.github.shulej.createsifter.content.contraptions.components.meshes.CustomMesh;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedBrassMesh;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedCustomMesh;
+import io.github.shulej.createsifter.content.contraptions.components.meshes.SturdyMesh;
+import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedSturdyMesh;
 
 public class ModItems {
 	static {
@@ -66,6 +68,20 @@ public class ModItems {
 
 	public static final ItemEntry<AdvancedCustomMesh> ADVANCED_CUSTOM_MESH =
 			CreateSifter.REGISTRATE.item("advanced_custom_mesh", AdvancedCustomMesh::new)
+					.properties(p -> p.stacksTo(1))
+					.model(AssetLookup.existingItemModel())
+					.tag(ModTags.ModItemTags.MESHES.tag)
+					.register();
+
+	public static final ItemEntry<SturdyMesh> STURDY_MESH =
+			CreateSifter.REGISTRATE.item("sturdy_mesh", SturdyMesh::new)
+					.properties(p -> p.stacksTo(1))
+					.model(AssetLookup.existingItemModel())
+					.tag(ModTags.ModItemTags.MESHES.tag)
+					.register();
+
+	public static final ItemEntry<AdvancedSturdyMesh> ADVANCED_STURDY_MESH =
+			CreateSifter.REGISTRATE.item("advanced_sturdy_mesh", AdvancedSturdyMesh::new)
 					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
