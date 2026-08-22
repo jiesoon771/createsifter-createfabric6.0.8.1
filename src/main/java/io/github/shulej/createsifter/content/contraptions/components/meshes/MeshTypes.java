@@ -20,7 +20,9 @@ public enum MeshTypes implements StringRepresentable {
 	BRASS(3, ModItems.BRASS_MESH),
 	CUSTOM(4,ModItems.CUSTOM_MESH),
 	ADVANCED_BRASS(5,ModItems.ADVANCED_BRASS_MESH),
-	ADVANCED_CUSTOMS(6,ModItems.ADVANCED_CUSTOM_MESH);
+	ADVANCED_CUSTOMS(6,ModItems.ADVANCED_CUSTOM_MESH),
+	STURDY(7,ModItems.STURDY_MESH),
+	ADVANCED_STURDY(8,ModItems.ADVANCED_STURDY_MESH);
 	private final int tier;
 	private final ItemEntry item;
 

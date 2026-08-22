@@ -65,6 +65,14 @@ public class ModBlocks {
 			.transform(customItemModel())
 			.register();
 
+	public static final BlockEntry<Block> CRUSHED_BASALT = CreateSifter.REGISTRATE.block("crushed_basalt", Block::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.mapColor(MapColor.COLOR_PURPLE))
+			.blockstate((c, p) -> p.simpleBlock(c.getEntry()))
+			.item()
+			.transform(customItemModel())
+			.register();
+
 	public static void register() {
 
 	}
