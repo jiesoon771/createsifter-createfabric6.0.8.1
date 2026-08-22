@@ -465,3 +465,4 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		return SifterConfig.SIFTER_MINIMUM_SPEED.get().floatValue();
 	}
 }
+

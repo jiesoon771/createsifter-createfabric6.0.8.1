@@ -13,3 +13,4 @@ public class CustomMesh extends BaseMesh {
 		this.mesh = MeshTypes.CUSTOM;
 	}
 }
+

@@ -134,3 +134,4 @@ public class SiftingRecipeSerializer implements RecipeSerializer<SiftingRecipe> 
 		return factory;
 	}
 }
+

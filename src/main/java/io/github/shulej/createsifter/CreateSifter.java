@@ -60,3 +60,4 @@ public class CreateSifter implements ModInitializer {
 		return new ResourceLocation(MODID, path);
 	}
 }
+

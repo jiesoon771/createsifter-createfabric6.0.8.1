@@ -306,3 +306,4 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 		return minimumSpeed;
 	}
 }
+

@@ -13,3 +13,4 @@ public class AdvancedBrassMesh extends AdvancedBaseMesh {
 		this.mesh = MeshTypes.ADVANCED_BRASS;
 	}
 }
+

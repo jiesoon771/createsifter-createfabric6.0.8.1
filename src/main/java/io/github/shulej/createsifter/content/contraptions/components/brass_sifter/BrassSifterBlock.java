@@ -176,3 +176,4 @@ public class BrassSifterBlock extends KineticBlock implements IBE<BrassSifterBlo
 		return super.getMinimumRequiredSpeedLevel();
 	}
 }
+

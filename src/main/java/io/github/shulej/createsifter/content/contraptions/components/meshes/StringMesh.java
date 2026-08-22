@@ -14,3 +14,4 @@ public class StringMesh extends BaseMesh {
 		this.mesh = MeshTypes.STRING;
 	}
 }
+

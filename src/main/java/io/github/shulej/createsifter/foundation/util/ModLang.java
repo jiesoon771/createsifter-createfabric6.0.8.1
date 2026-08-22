@@ -23,3 +23,4 @@ public class ModLang extends Lang {
 		return builder().translate(langKey, args);
 	}
 }
+

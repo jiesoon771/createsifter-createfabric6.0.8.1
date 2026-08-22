@@ -68,3 +68,4 @@ public class BrassSifterBlockEntity extends SifterBlockEntity {
 		return BrassSifterConfig.BRASS_SIFTER_MINIMUM_SPEED.get().floatValue();
 	}
 }
+

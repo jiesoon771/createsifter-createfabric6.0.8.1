@@ -86,3 +86,4 @@ public class BrassSifterRenderer extends KineticBlockEntityRenderer<BrassSifterB
 				.renderSingleBlock(blockState, ms,buffer,light,overlay);
 	}
 }
+

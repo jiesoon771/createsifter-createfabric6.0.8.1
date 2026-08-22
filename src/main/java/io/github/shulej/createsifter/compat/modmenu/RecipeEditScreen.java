@@ -238,3 +238,4 @@ public class RecipeEditScreen extends Screen {
 		this.minecraft.setScreen(parent);
 	}
 }
+

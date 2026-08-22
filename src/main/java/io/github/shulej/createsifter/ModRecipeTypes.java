@@ -128,3 +128,4 @@ public enum ModRecipeTypes implements IRecipeTypeInfo {
 		return recipe.getId().getPath().endsWith("_manual_only");
 	}
 }
+

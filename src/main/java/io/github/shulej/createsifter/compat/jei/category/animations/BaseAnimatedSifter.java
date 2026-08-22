@@ -91,3 +91,4 @@ public abstract class BaseAnimatedSifter<SIFTER extends KineticBlock> extends An
 	abstract PartialModel getCogModel();
 	abstract BlockEntry<SIFTER> getSifterBlock();
 }
+

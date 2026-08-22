@@ -258,3 +258,4 @@ public class CreateSifterJEI implements IModPlugin {
 				.forEach(consumer);
 	}
 }
+

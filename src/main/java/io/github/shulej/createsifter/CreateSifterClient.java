@@ -28,3 +28,4 @@ public class CreateSifterClient implements ClientModInitializer {
 		BuiltinItemRendererRegistry.INSTANCE.register(item, new MeshItemRenderer());
 	}
 }
+
