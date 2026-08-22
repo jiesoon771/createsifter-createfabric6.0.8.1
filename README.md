@@ -17,15 +17,12 @@ Considering the balance issues with this mod, I have added custom balance adjust
 ---
 
 #### Community adaptation — **not** an official release.
-#### 此为**社区适配版**，**非**官方发布。
 
 ---
 
 **Official version (Forge) — thanks to [oierbravo](https://www.curseforge.com/minecraft/mc-mods/create-sifting)!**
-**官方原版（Forge）— 感谢 [oierbravo](https://www.curseforge.com/minecraft/mc-mods/create-sifting)！**
 
 **Shulej's Fabric port — thanks to [Shulej](https://modrinth.com/mod/create-sifting-fabric)!**
-**Shulej 的 Fabric 移植版 — 感谢 [Shulej](https://modrinth.com/mod/create-sifting-fabric)！**
 
 ### Features
 
@@ -34,19 +31,6 @@ Considering the balance issues with this mod, I have added custom balance adjust
 - **20 built-in sifting recipes**
 - English & Chinese localization
 - Works on client and server; shows recipes in **JEI** (15.20+)
-
-**Localization / 新增语言：**
-
-| Language file | Status |
-| :--- | :--- |
-| zh_cn.json | **简体中文** — ✅ complete |
-| zh_tw.json | **繁體中文** — ✅ complete |
-| en_us.json | **English (US)** — ✅ baseline |
-| en_ud.json | **upside-down English** (ǝɯǝɯ) — ✅ complete |
-| fr_fr.json | **Français** — ⚠️ core terms only, config UI in English |
-| ja_jp.json | **日本語** — ⚠️ core terms only, config UI in English |
-| ko_kr.json | **한국어** — ⚠️ core terms only, config UI in English |
-| ru_ru.json | **Русский** — ⚠️ core terms only, config UI in English |
 
 ### Difficulty & Recipe Configuration (config UI)
 
@@ -147,13 +131,13 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 > tip:
 > If there's a bug, don't find me 😭😭😭 I just updated the mod to work with the latest Create version. I'm a total newbie – I can't fix mod bugs, sorry!!!
-**Download / 下载（jar）**
+**Download (jar):**
 
 - [GitHub Releases](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases)
 - [Modrinth](https://modrinth.com/mod/create-sifting-create-6-fabric)
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview)
 
-**Source code / 源码（LGPL-3.0）：** [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
+**Source code (LGPL-3.0):** [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
 ---
 
 ## 中文说明
@@ -166,8 +150,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 > 此为**社区适配版**，**非**官方发布。
 
-> 官方原版（Forge，作者 oierbravo）— https://www.curseforge.com/minecraft/mc-mods/create-sifting
-> Shulej 的 Fabric 移植版 — https://modrinth.com/mod/create-sifting-fabric
+> 官方原版（Forge）—— 感谢 [oierbravo](https://www.curseforge.com/minecraft/mc-mods/create-sifting)！
+> Shulej 的 Fabric 移植版 —— 感谢 [Shulej](https://modrinth.com/mod/create-sifting-fabric)！
 
 ### 功能特性
 
@@ -278,9 +262,9 @@ LGPL-3.0 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric �
 
 > tip / 提示：
 > 有BUG不要找我(´。＿。｀)，有BUG不要找我〒▽〒，有BUG不要找我≧ ﹏ ≦，有BUG不要找我口牙！我只是适配了最新版机械动力，本人小白(还社恐），模组有BUG我修不了啊 X﹏X 抱歉！！！
-**Download / 下载（jar）**
-- GitHub Releases：[GitHub Releases](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases)
-- [Modrinth](https://modrinth.com/mod/create-sifting-create-6-fabric)
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview)
+**下载（jar）：**
+- **GitHub Releases**：[GitHub Releases](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases)
+- **Modrinth**：[Modrinth](https://modrinth.com/mod/create-sifting-create-6-fabric)
+- **CurseForge**：[CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview)
 
-**Source / 源码（LGPL-3.0）：** [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
+**源码（LGPL-3.0）：** [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
