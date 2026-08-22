@@ -13,7 +13,8 @@ A simple, no-fuss sifter addon for **Create**, adapted to run on **Create 6.0.8.
 Originally written by **oierbravo** and ported to Fabric by **Shulej**, this build updates the Fabric port so it works with Create 6.0.8.1, which removed several APIs the older version relied on.
 
 > Community adaptation — **not** an official release.
-
+> Here is the official version link, thanks to oierbravo!
+https://www.curseforge.com/minecraft/mc-mods/create-sifting
 ### Features
 
 - **Kinetic Sifter** and **Brass Sifter** with the familiar behavior
@@ -133,7 +134,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 本项目最初由 **oierbravo** 撰写，由 **Shulej** 移植到 Fabric。本版本在 **Shulej** 的 Fabric 移植版基础上更新，使其兼容 Create 6.0.8.1——新版本移除了一些旧版依赖的 API。
 
 > 此为**社区适配版**，**非**官方发布。
-
+> 这是官方版本的链接，感谢oierbravo！
+https://www.curseforge.com/minecraft/mc-mods/create-sifting
 ### 功能特性
 
 - **动能筛选器**与**黄铜筛选器**，保留原有的熟悉手感
