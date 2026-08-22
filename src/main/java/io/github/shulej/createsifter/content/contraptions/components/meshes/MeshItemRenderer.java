@@ -92,3 +92,4 @@ public class MeshItemRenderer extends CustomRenderedItemModelRenderer {
 		ms.popPose();
 	}
 }
+

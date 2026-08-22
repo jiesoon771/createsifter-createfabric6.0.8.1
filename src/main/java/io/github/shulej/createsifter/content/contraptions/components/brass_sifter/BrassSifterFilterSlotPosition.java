@@ -26,3 +26,4 @@ public class BrassSifterFilterSlotPosition extends ValueBoxTransform.Sided {
 		return VecHelper.voxelSpace(8f, 13f, 16f);
 	}
 }
+

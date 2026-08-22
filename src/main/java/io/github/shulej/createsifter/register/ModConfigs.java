@@ -76,3 +76,4 @@ public class ModConfigs {
 		return serverModConfig != null && serverModConfig.getConfigData() != null;
 	}
 }
+

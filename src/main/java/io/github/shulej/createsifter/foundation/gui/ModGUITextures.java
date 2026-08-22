@@ -64,3 +64,4 @@ public enum ModGUITextures implements ScreenElement {
 		UIRenderHelper.drawColoredTexture(graphics, c, x, y, startX, startY, width, height);
 	}
 }
+

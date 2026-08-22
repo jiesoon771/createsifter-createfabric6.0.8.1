@@ -17,3 +17,4 @@ public class ModMenuIntegration implements ModMenuApi {
 		return SifterConfigScreen::new;
 	}
 }
+

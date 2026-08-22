@@ -81,3 +81,4 @@ public class SifterRenderer extends KineticBlockEntityRenderer<SifterBlockEntity
 				.renderSingleBlock(blockState, ms,buffer,light,overlay);
 	}
 }
+

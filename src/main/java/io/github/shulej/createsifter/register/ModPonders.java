@@ -41,3 +41,4 @@ public class ModPonders implements PonderPlugin {
 		HELPER.addTagToComponent(ModBlocks.BRASS_SIFTER_BLOCK, AllCreatePonderTags.KINETIC_APPLIANCES);
 	}
 }
+

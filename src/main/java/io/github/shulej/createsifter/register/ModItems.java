@@ -71,3 +71,4 @@ public class ModItems {
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();
 }
+

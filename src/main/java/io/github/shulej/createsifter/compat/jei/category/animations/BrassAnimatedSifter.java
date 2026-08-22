@@ -31,3 +31,4 @@ public class BrassAnimatedSifter extends BaseAnimatedSifter<BrassSifterBlock> {
 		return ModBlocks.BRASS_SIFTER_BLOCK;
 	}
 }
+

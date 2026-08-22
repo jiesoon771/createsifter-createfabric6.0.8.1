@@ -144,3 +144,4 @@ public class SifterBlock extends KineticBlock implements IBE<SifterBlockEntity>,
 		return super.getMinimumRequiredSpeedLevel();
 	}
 }
+

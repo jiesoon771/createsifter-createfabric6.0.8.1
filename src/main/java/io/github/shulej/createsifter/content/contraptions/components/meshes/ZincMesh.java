@@ -13,3 +13,4 @@ public class ZincMesh extends BaseMesh {
 		this.mesh = MeshTypes.ZINC;
 	}
 }
+

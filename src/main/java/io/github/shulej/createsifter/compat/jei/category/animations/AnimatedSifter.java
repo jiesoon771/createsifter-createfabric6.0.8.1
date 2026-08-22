@@ -31,3 +31,4 @@ public class AnimatedSifter extends BaseAnimatedSifter<SifterBlock> {
 		return ModBlocks.SIFTER_BLOCK;
 	}
 }
+

@@ -13,3 +13,4 @@ public class BrassMesh extends BaseMesh {
 		this.mesh = MeshTypes.BRASS;
 	}
 }
+

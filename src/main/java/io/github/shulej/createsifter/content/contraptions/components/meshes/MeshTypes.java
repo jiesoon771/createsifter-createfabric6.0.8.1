@@ -42,3 +42,4 @@ public enum MeshTypes implements StringRepresentable {
 		return (ItemLike) this.item.get();
 	}
 }
+

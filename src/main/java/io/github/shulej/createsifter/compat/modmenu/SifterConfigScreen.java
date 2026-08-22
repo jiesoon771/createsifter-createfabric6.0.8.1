@@ -307,3 +307,4 @@ public class SifterConfigScreen extends Screen {
 		this.minecraft.setScreen(parent);
 	}
 }
+
