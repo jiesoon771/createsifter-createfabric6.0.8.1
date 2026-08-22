@@ -42,14 +42,6 @@ public class ModBlocks {
 			.transform(customItemModel())
 			.register();
 
-	public static final BlockEntry<Block> CRUSHED_NETHERRACK = CreateSifter.REGISTRATE.block("crushed_netherrack", Block::new)
-			.initialProperties(SharedProperties::stone)
-			.properties(p -> p.mapColor(MapColor.NETHER))
-			.blockstate((c, p) -> p.simpleBlock(c.getEntry()))
-			.item()
-			.transform(customItemModel())
-			.register();
-
 	public static final BlockEntry<Block> CRUSHED_END_STONE = CreateSifter.REGISTRATE.block("crushed_end_stone", Block::new)
 			.initialProperties(SharedProperties::stone)
 			.properties(p -> p.mapColor(MapColor.SAND))

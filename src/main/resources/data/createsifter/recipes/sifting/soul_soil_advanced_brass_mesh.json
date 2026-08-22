@@ -1,0 +1,26 @@
+{
+  "type": "createsifter:sifting",
+  "ingredients": [
+    {
+      "item": "minecraft:soul_soil"
+    },
+    {
+      "item": "createsifter:advanced_brass_mesh"
+    }
+  ],
+  "processingTime": 500,
+  "results": [
+    {
+      "chance": 0.01,
+      "item": "minecraft:ancient_debris"
+    },
+    {
+      "chance": 0.025,
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "chance": 0.001,
+      "item": "minecraft:netherite_ingot"
+    }
+  ]
+}

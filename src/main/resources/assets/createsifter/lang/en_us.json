@@ -1,7 +1,6 @@
 {
   "block.createsifter.brass_sifter": "Brass Sifter",
   "block.createsifter.crushed_end_stone": "Crushed end stone",
-  "block.createsifter.crushed_netherrack": "Crushed Netherrack",
   "block.createsifter.dust": "Dust block",
   "block.createsifter.sifter": "Sifter",
   "create.createsifter.recipe.sifting.minimumspeed": "%1$s RPM",
@@ -18,8 +17,6 @@
   "item.createsifter.advanced_brass_mesh": "Advanced Brass Mesh",
   "item.createsifter.advanced_custom_mesh": "Advanced Custom Mesh",
   "item.createsifter.andesite_mesh": "Andesite Mesh",
-  "item.createsifter.basalt_pebble": "Basalt Pebble",
-  "item.createsifter.blackstone_pebble": "Blackstone Pebble",
   "item.createsifter.brass_mesh": "Brass Mesh",
   "item.createsifter.custom_mesh": "Custom Mesh",
   "item.createsifter.string_mesh": "String Mesh",

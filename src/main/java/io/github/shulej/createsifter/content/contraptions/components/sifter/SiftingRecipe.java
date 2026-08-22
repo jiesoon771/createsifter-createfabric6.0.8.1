@@ -17,7 +17,9 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -204,9 +206,13 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 	public List<ItemStack> rollResults(List<ProcessingOutput> rollableResults) {
 		float chanceMultiplier = Math.max(0f, Difficulty.effectiveChanceMultiplier());
 		RandomSource random = ROLL_RANDOM;
+		boolean netheriteEnabled = SifterConfig.ENABLE_NETHERITE_SIFT.get();
 		List<ItemStack> rolled = new ArrayList<>();
 		for (int i = 0; i < rollableResults.size(); i++) {
 			ProcessingOutput output = rollableResults.get(i);
+			// Netherite drops only roll when the master switch is on; otherwise they never drop.
+			if (!netheriteEnabled && isNetheriteFamily(output.getStack().getItem()))
+				continue;
 			float chance = Math.min(1f, output.getChance() * chanceMultiplier);
 			int baseCount = output.getStack().getCount();
 
@@ -225,6 +231,10 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 			}
 		}
 		return rolled;
+	}
+
+	private static boolean isNetheriteFamily(Item item) {
+		return item == Items.ANCIENT_DEBRIS || item == Items.NETHERITE_SCRAP || item == Items.NETHERITE_INGOT;
 	}
 
 	public List<ItemStack> rollResults() {

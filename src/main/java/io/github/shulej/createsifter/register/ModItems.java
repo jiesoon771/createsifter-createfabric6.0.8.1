@@ -4,8 +4,6 @@ import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
-import net.minecraft.world.item.Item;
-
 import io.github.shulej.createsifter.CreateSifter;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.BrassMesh;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.StringMesh;
@@ -59,15 +57,5 @@ public class ModItems {
 			CreateSifter.REGISTRATE.item("advanced_custom_mesh", AdvancedCustomMesh::new)
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
-					.register();
-
-	public static final ItemEntry<Item> BASALT_PEBBLE =
-			CreateSifter.REGISTRATE.item("basalt_pebble", Item::new)
-					.model(AssetLookup.existingItemModel())
-					.register();
-
-	public static final ItemEntry<Item> BLACKSTONE_PEBBLE =
-			CreateSifter.REGISTRATE.item("blackstone_pebble", Item::new)
-					.model(AssetLookup.existingItemModel())
 					.register();
 }

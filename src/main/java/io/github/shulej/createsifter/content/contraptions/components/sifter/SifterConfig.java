@@ -14,6 +14,8 @@ public class SifterConfig {
 	public static ForgeConfigSpec.DoubleValue CUSTOM_TIME_MULTIPLIER;
 	/** Per-recipe output overrides. Key = recipe id "|" output index. Value = "chance;count". */
 	public static ForgeConfigSpec.ConfigValue<List<? extends String>> RECIPE_OVERRIDES;
+	/** Master switch for the optional netherite sifting chain (soul_soil -> ancient debris / scrap / ingot). Off by default. */
+	public static ForgeConfigSpec.BooleanValue ENABLE_NETHERITE_SIFT;
 
 	// Common controls (mechanical block behaviour)
 	public static ForgeConfigSpec.DoubleValue SIFTER_STRESS_IMPACT;
@@ -45,6 +47,12 @@ public class SifterConfig {
 						"Example: createsifter:sifting/andesite_sift|0|75|3",
 						"An empty list disables all overrides (use the config screen to edit).")
 				.defineList("recipeOverrides", List.of(), obj -> obj instanceof String);
+		ENABLE_NETHERITE_SIFT = SERVER_BUILDER
+				.comment("Master switch for the optional netherite sifting chain:",
+						"  sifting soul_soil with the advanced brass mesh produces",
+						"  ancient_debris, netherite_scrap and (very rarely) netherite_ingot.",
+						"  Off by default; turn it on to enable the netherite drop chain.")
+				.define("enableNetheriteSift", false);
 	}
 
 	public static void registerCommonConfig(ForgeConfigSpec.Builder COMMON_BUILDER) {
