@@ -3,7 +3,7 @@
 适配 **Create 6.0.8.1** / **Minecraft 1.20.1**（Fabric）
 
 > 语言 / Language：**[English](#english)** · **[中文说明](#中文说明)**
-> 内置 简体中文 / 繁體中文 / English；其余语言支持情况见下方「本地化」。
+> 内置 简体中文 / 繁體中文 / English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
 
 ---
 
@@ -30,9 +30,9 @@ Considering the balance issues with this mod, I have added custom balance adjust
 ### Features
 
 - **Kinetic Sifter** and **Brass Sifter** with the familiar behavior
-- **7 meshes** (string, andesite, brass, zinc, custom, advanced, …)
-- **20 built-in sifting recipes**
-- English & Chinese localization
+- **9 meshes** (string, andesite, brass, zinc, custom, advanced, sturdy, …)
+- **20+ built-in sifting recipes**
+- **8 languages** fully localized (EN / CN / TW / FR / JA / KO / RU / UD), config UI included
 - Works on client and server; shows recipes in **JEI** (15.20+)
 
 ---
@@ -49,18 +49,18 @@ A config screen is available via **Mod Menu** [on Modrinth](https://modrinth.com
 
 ### Localization
 
-This update adds or improves the following language files:
+**All 8 built-in language files are fully translated** — including the config UI (items, blocks, difficulty presets, and the per-recipe override screen):
 
 | Language file | Status |
 | :--- | :--- |
-| `zh_cn.json` | **Simplified Chinese** — ✅ Full translation |
-| `zh_tw.json` | **Traditional Chinese** — ✅ Full translation |
-| `en_us.json` | **English (US)** — ✅ Complete baseline |
-| `en_ud.json` | Hey, read it backwards （ǝɯǝɯ）ǝʇǝldɯoƆ ✅ — **ɥsılƃuƎ uʍopǝpᴉsdn** |
-| `fr_fr.json` | **Français** — ⚠️ Core terms only, config UI in English |
-| `ja_jp.json` | **日本語** — ⚠️ Core terms only, config UI in English |
-| `ko_kr.json` | **한국어** — ⚠️ Core terms only, config UI in English |
-| `ru_ru.json` | **Русский** — ⚠️ Core terms only, config UI in English |
+| `zh_cn.json` | **简体中文** — ✅ 完整翻译 |
+| `zh_tw.json` | **繁體中文** — ✅ 完整翻譯 |
+| `en_us.json` | **English (US)** — ✅ Complete |
+| `en_ud.json` | **ǝɹǝɥʇ sı ɥsılƃuƎ uʍopǝpᴉsdn** — ✅ Complete |
+| `fr_fr.json` | **Français** — ✅ Traduction complète |
+| `ja_jp.json` | **日本語** — ✅ 完全な翻訳 |
+| `ko_kr.json` | **한국어** — ✅ 완전한 번역 |
+| `ru_ru.json` | **Русский** — ✅ Полный перевод |
 
 ---
 
@@ -177,9 +177,9 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 ### 功能特性
 
 - **动能筛选器**与**黄铜筛选器**，保留原有的熟悉手感
-- **7 种筛网**（丝线、安山岩、黄铜、锌、定制、高级……）
-- **20 条内置筛分配方**
-- 中英文双语本地化
+- **9 种筛网**（丝线、安山岩、黄铜、锌、定制、高级、坚固……）
+- **20+ 条内置筛分配方**
+- **8 种语言**完整本地化（简中/繁中/英/法/日/韩/俄/倒装英语），含配置界面
 - 服务端与客户端均可用；支持 **JEI**（15.20+）配方显示
 
 ---
@@ -198,18 +198,18 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 ### 新增语言支持
 
-本次更新新增或完善了以下语言文件：
+内置 **8 种语言文件全部完整翻译**——含配置界面（物品、方块、难度预设、逐配方覆盖界面）：
 
 | 语言文件 | 完成度 |
 | :--- | :--- |
 | `zh_cn.json` | **简体中文** — ✅ 完整翻译 |
 | `zh_tw.json` | **繁體中文** — ✅ 完整翻譯 |
-| `en_us.json` | **English (US)** — ✅ 完整（基线） |
-| `en_ud.json` | 反着看 **ɥsılƃuƎ uʍopǝpᴉsdn** — ✅ 完整（彩蛋） |
-| `fr_fr.json` | **Français** — ⚠️ 仅核心术语，配置界面为英文 |
-| `ja_jp.json` | **日本語** — ⚠️ コア用語のみ、設定画面は英語 |
-| `ko_kr.json` | **한국어** — ⚠️ 핵심 용어만, 설정 화면은 영어 |
-| `ru_ru.json` | **Русский** — ⚠️ Только основные термины, интерфейс конфигурации на английском |
+| `en_us.json` | **English (US)** — ✅ Complete |
+| `en_ud.json` | **ǝɹǝɥʇ sı ɥsılƃuƎ uʍopǝpᴉsdn** — ✅ Complete |
+| `fr_fr.json` | **Français** — ✅ Traduction complète |
+| `ja_jp.json` | **日本語** — ✅ 完全な翻訳 |
+| `ko_kr.json` | **한국어** — ✅ 완전한 번역 |
+| `ru_ru.json` | **Русский** — ✅ Полный перевод |
 
 ---
 
