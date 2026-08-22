@@ -1,53 +1,201 @@
-MIT License
+GNU LESSER GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
 
-Copyright 2022 oierbravo
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ This version of the GNU Lesser General Public License incorporates
+the terms and conditions of version 3 of the GNU General Public
+License, supplemented by the additional permissions listed below.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ 0. Additional Definitions.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ As used herein, "this License" refers to version 3 of the GNU Lesser
+General Public License, and the "GNU GPL" refers to version 3 of the GNU
+General Public License.
+
+ "The Library" refers to a covered work governed by this License,
+other than an Application or a Combined Work as defined below.
+
+ An "Application" is any work that makes use of an interface provided
+by the Library, but which is not otherwise based on the Library.
+Defining a subclass of a class defined by the Library is deemed a mode
+of using an interface provided by the Library.
+
+ A "Combined Work" is a work produced by combining or linking an
+Application with the Library. The particular version of the Library
+with which the Combined Work was made is also called the "Linked
+Version".
+
+ The "Minimal Corresponding Source" for a Combined Work means the
+Corresponding Source for the Combined Work, excluding any source code
+for portions of the Combined Work that, considered in isolation, are
+based on the Application, and not on the Linked Version.
+
+ The "Corresponding Application Code" for a Combined Work means the
+object code and/or source code for the Application, including any data
+and utility programs needed for reproducing the Combined Work from the
+Application, but excluding the System Libraries of the Combined Work.
+
+ 1. Exception to Section 3 of the GNU GPL.
+
+ You may convey a covered work under sections 3 and 4 of this License
+without being bound by section 3 of the GNU GPL.
+
+ 2. Conveying Modified Versions.
+
+ If you modify a copy of the Library, and, in your modifications, a
+facility refers to a function or data to be supplied by an Application
+that uses the facility (other than as an argument passed when the
+facility is invoked), then you may convey a copy of the modified
+version:
+
+ a) under this License, provided that you make a good faith effort to
+ ensure that, in the event an Application does not supply the
+ function or data, the facility still operates, and performs
+ whatever part of its purpose remains meaningful, or
+
+ b) under the GNU GPL, with none of the additional permissions of
+ this License applicable to that copy.
+
+ 3. Object Code Incorporating Material from Library Header Files.
+
+ The object code form of an Application may incorporate material from
+a header file that is part of the Library. You may convey such object
+code under terms of your choice, provided that, if the incorporated
+material is not limited to numerical parameters, data structure
+layouts and accessors, or small macros, inline functions and templates
+(ten or fewer lines in length), you do both of the following:
+
+ a) Give prominent notice with each copy of the object code that the
+ Library is used in it and that the Library and its use are
+ covered by this License.
+
+ b) Accompany the object code with a copy of the GNU GPL and this license
+ document.
+
+ 4. Combined Works.
+
+ You may convey a Combined Work under terms of your choice that,
+taken together, effectively do not restrict modification of the
+portions of the Library contained in the Combined Work and reverse
+engineering for debugging such modifications, if you also do each of
+the following:
+
+ a) Give prominent notice with each copy of the Combined Work that
+ the Library is used in it and that the Library and its use are
+ covered by this License.
+
+ b) Accompany the Combined Work with a copy of the GNU GPL and this license
+ document.
+
+ c) For a Combined Work that displays copyright notices during
+ execution, include the copyright notice for the Library among these
+ notices, as well as a reference directing the user to the copies of
+ the GNU GPL and this license document.
+
+ d) Do one of the following:
+
+ 0) Convey the Minimal Corresponding Source under the terms of this
+ License, and the Corresponding Application Code in a form suitable
+ for, and under terms that permit, the user to recombine or relink
+ the Application with a modified version of the Linked Version to
+ produce a modified Combined Work, in the manner specified by
+ section 6 of the GNU GPL for conveying Corresponding Source.
+
+ 1) Use a suitable shared library mechanism for linking with the
+ Library. A suitable mechanism is one that (a) uses at run time
+ a copy of the Library already present on the user's computer
+ system, and (b) will operate properly with a modified version
+ of the Library that is interface-compatible with the Linked
+ Version.
+
+ e) Provide Installation Information, but only if you would otherwise
+ be required to provide such information under section 6 of the
+ GNU GPL, and only to the extent that such information is
+ necessary to install and execute a modified version of the
+ Combined Work produced by recombining or relinking the
+ Application with a modified version of the Linked Version. (If
+ you use option 4d0, the Installation Information must accompany
+ the Minimal Corresponding Source and Corresponding Application
+ Code. If you use option 4d1, you must provide the Installation
+ Information in the manner specified by section 6 of the GNU GPL
+ for conveying Corresponding Source.)
+
+ 5. Combined Libraries.
+
+ You may place library facilities that are a work based on the
+Library side by side in a single library together with other library
+facilities that are not Applications and are not covered by this
+License, and convey such a combined library under terms of your
+choice, if you do both of the following:
+
+ a) Accompany the combined library with a copy of the same work based
+ on the Library, uncombined with any other library facilities,
+ conveyed under the terms of this License.
+
+ b) Give prominent notice with the combined library that part of it
+ is a work based on the Library, and explaining where to find the
+ accompanying uncombined form of the same work.
+
+ 6. Revised Versions of the GNU Lesser General Public License.
+
+ The Free Software Foundation may publish revised and/or new versions
+of the GNU Lesser General Public License from time to time. Such new
+versions will be similar in spirit to the present version, but may
+differ in detail to address new problems or concerns.
+
+ Each version is given a distinguishing version number. If the
+Library as you received it specifies that a certain numbered version
+of the GNU Lesser General Public License "or any later version"
+applies to it, you have the option of following the terms and
+conditions either of that published version or of any later version
+published by the Free Software Foundation. If the Library as you
+received it does not specify a version number of the GNU Lesser
+General Public License, you may choose any version of the GNU Lesser
+General Public License ever published by the Free Software Foundation.
+
+ If the Library as you received it specifies that a proxy can decide
+whether future versions of the GNU Lesser General Public License shall
+apply, that proxy's public statement of acceptance of any version is
+permanent authorization for you to choose that version for the
+Library.
 
 ---
 
 NOTE TO USERS — 致使用者（中英对照）
-
 本仓库是 Shulej 的 "Create Sifting (Fabric Port)" 针对 Create 6（6.0.8.1+，Minecraft 1.20.1）的社区适配更新版。
 This repository is a community adaptation of Shulej's "Create Sifting (Fabric Port)" to work with Create 6 (6.0.8.1+, Minecraft 1.20.1).
 
 上游版权 — Upstream copyright:
-- 本项目的前身源码由 oierbravo 以 MIT 许可发布，版权归其所有；Shulej 的 Fabric 移植版同样采用 MIT。
-- The original source was released by oierbravo under the MIT License; Shulej's Fabric port also uses MIT.
-- 上方即该 MIT 许可全文。任何再分发都必须连带保留上述版权与许可声明。
-- The MIT license text above is authoritative. Any redistribution must retain the copyright and license notice above.
+- 本项目的前身源码版权归 oierbravo 所有，其原始 Forge 版以 LGPL-3.0 许可发布。
+- The original source is copyrighted by oierbravo, who released the original Forge version under LGPL-3.0.
+- 上方即 LGPL-3.0 许可全文。为最充分对齐上游授权链，本适配版整体遵循 LGPL-3.0，任何再分发都必须连带保留上述版权与许可声明。
+- The LGPL-3.0 license text above is authoritative. To align most faithfully with the upstream licensing chain, this adaptation is licensed as a whole under LGPL-3.0; any redistribution must retain the copyright and license notice above.
 
 移植作者 / Porter: **jiesoon771**
-
 移植者的授权意愿 — The porter's intent (applies to the portion this port added or modified):
-- 对本移植新增或修改的代码部分，移植作者（jiesoon771）授予任何人永久、免费、不可撤销、可再许可的许可（to the extent permitted by law）：可自由使用、修改、复制、再分发及商用，且无需向移植者署名。
-- For the code added or modified by this port, the porter (jiesoon771) grants any person a perpetual, royalty-free, irrevocable, sublicensable license (to the fullest extent permitted by law) to use, copy, modify, publish, redistribute, and sell that portion, with or without attribution to the porter.
-- 请注意：即便您无需向移植者署名，只要文件中包含上游（oierbravo 或 Shulej）的代码，再分发时仍必须保留上方 MIT 的版权声明与许可文本——这一义务属于上游，不归移植者豁免。
-- Note: even where your copy need not credit the porter, so long as it contains upstream (oierbravo or Shulej) code, the MIT copyright notice and license text above must be preserved on redistribution — that obligation rests with the upstream authors and is beyond the porter's ability to waive.
+- 对本移植新增或修改的代码部分，移植作者（jiesoon771）依据 LGPL-3.0 授予:任何获得副本者均可按 LGPL-3.0 条款自由使用、修改、复制及再分发。
+- For the code added or modified by this port, the porter (jiesoon771) grants any person who receives a copy the rights under the LGPL-3.0 terms to use, copy, modify, publish, redistribute and sell that portion.
+- 请注意：只要文件中包含上游（oierbravo 或 Shulej）的代码，再分发时仍必须保留上方 Copyright 2022 oierbravo 的版权声明与 LGPL-3.0 许可全文——这一义务属于上游，不归移植者豁免。
+- Note: so long as a file contains upstream (oierbravo or Shulej) code, the copyright notice above (Copyright 2022 oierbravo) and the LGPL-3.0 license text must be preserved on redistribution — that obligation rests with the upstream authors and is beyond the porter's ability to waive.
 
 适配作者的声明 — The porter's declaration（中英对照）:
+本适配版是基于 Shulej 的 Fabric 移植版（create-sifting-fabric）的社区适配更新，其最早源头为 oierbravo 的 Forge 版（LGPL-3.0）。
+This port is a community adaptation based on Shulej's Fabric port (create-sifting-fabric), whose earliest source is oierbravo's Forge version (LGPL-3.0).
 
-本适配版是基于 Shulej 的 MIT 许可 Fabric 移植版（create-sifting-fabric）的社区适配更新。
-This port is a community adaptation based on Shulej's MIT-licensed Fabric port (create-sifting-fabric).
+- 上游代码（oierbravo 及 Shulej 的贡献）：遵循其原始源头 LGPL-3.0 的条款,相关版权与许可声明已随附本文件上方。
+- Upstream code (contributions by oierbravo and Shulej): remains under the LGPL-3.0 terms of its original source; the relevant copyright and license notices are included above.
 
-- 上游代码（oierbravo 及 Shulej 的贡献）：继续遵循其原有的 MIT 许可，相关版权与许可声明已随附本文件上方。
-- Upstream code (contributions by oierbravo and Shulej): remains under its original MIT license; the relevant copyright and license notices are included above.
+- 本适配版新增的代码（由 jiesoon771 撰写）：为最充分对齐上游授权链,同样以 LGPL-3.0 协议授予。
+- Code newly written by this port (by jiesoon771): to align most faithfully with the upstream licensing chain, it is likewise released under LGPL-3.0.
 
-- 本适配版新增的代码（由 jiesoon771 撰写）：为与上游许可保持一致，并尊重原项目的授权方式，本人同样以 MIT 协议授予。
-- Code newly written by this port (by jiesoon771): to remain consistent with the upstream license and out of respect for the original project's licensing, it is likewise released under the MIT License.
-
-- 注意：虽然本适配版整体以 MIT 协议发布，但鉴于其上游源头可能涉及 LGPL-3.0 的历史，任何再分发者应自行评估相关风险。本人作为适配作者，已尽最大努力保留所有上游声明。
-- Note: although this port is published as a whole under the MIT License, because its upstream history may touch LGPL-3.0, redistributors should evaluate the relevant risks themselves. As the porter, I have made my best effort to preserve all upstream notices.
+- 注意：本适配版整体遵循 LGPL-3.0。鉴于其最早源头（oierbravo 原版）即 LGPL-3.0,本改编不再沿用存在授权争议的 MIT 声明。
+- Note: this adaptation is licensed as a whole under LGPL-3.0. Because its earliest source (oierbravo's original) is LGPL-3.0, this adaptation no longer relies on the disputed MIT declaration.
 
 维护状态 — Maintenance:
 - 本仓库主要供他人使用、接续维护；移植作者不再主动更新。
 - Provided mainly for others to use and maintain; the porter is not actively updating it.
 - 软件按"现状"提供，作者不对其适用性、可用性或安全性作任何明示或默示担保，亦不对因使用它而产生的任何损失承担责任。
 - The software is provided "AS IS" without warranty of any kind, express or implied; the author assumes no liability for any loss arising from its use.
-
-Note: This Fabric port is based on Shulej's MIT-licensed repo. The original Forge version by oierbravo uses LGPL-3.0; this adaptation follows the direct upstream (Fabric port) license.
-备注：本 Fabric 移植版基于 Shulej 的 MIT 许可仓库；oierbravo 的原始 Forge 版采用 LGPL-3.0；本适配版遵循其直接上游（Fabric 移植版）的许可。

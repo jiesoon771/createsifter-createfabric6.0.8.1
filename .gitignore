@@ -37,3 +37,6 @@ libs/
 
 # j-space ledger
 .jspace/
+
+# local audit report (keep local, not published)
+CODE_AUDIT_REPORT_2026-08-22.md

@@ -3,7 +3,9 @@
 # Minecraft 1.20.1
 
 **喂！看这里！有中文，翻译关一下哈，不然很杂的( •̀ ω •́ )**
+
 > **English** · [中文说明](#中文说明)
+
 ---
 
 ## English
@@ -12,9 +14,13 @@ A simple, no-fuss sifter addon for **Create**, adapted to run on **Create 6.0.8.
 
 Originally written by **oierbravo** and ported to Fabric by **Shulej**, this build updates the Fabric port so it works with Create 6.0.8.1, which removed several APIs the older version relied on.
 
+Considering the balance issues with this mod, I have added custom balance adjustments, allowing players to tailor the mod's features to their own preferences.
+
 > Community adaptation — **not** an official release.
-> Here is the official version link, thanks to oierbravo!
-https://www.curseforge.com/minecraft/mc-mods/create-sifting
+
+> Official version (Forge) by **oierbravo** — https://www.curseforge.com/minecraft/mc-mods/create-sifting
+> Shulej's Fabric port — https://modrinth.com/mod/create-sifting-fabric
+
 ### Features
 
 - **Kinetic Sifter** and **Brass Sifter** with the familiar behavior
@@ -23,32 +29,26 @@ https://www.curseforge.com/minecraft/mc-mods/create-sifting
 - English & Chinese localization
 - Works on client and server; shows recipes in **JEI** (15.20+)
 
----
-
-### Additions over vanilla
-
-#### Added localization
-
-This update adds or improves the following language files:
+**Localization / 新增语言：**
 
 | Language file | Status |
 | :--- | :--- |
-| `zh_cn.json` | **Simplified Chinese** — ✅ Full translation |
-| `zh_tw.json` | **Traditional Chinese** — ✅ Full translation |
-| `en_us.json` | **English (US)** — ✅ Complete baseline |
-| `en_ud.json` |Hey, read it backwards （ǝɯǝɯ）ǝʇǝldɯoƆ ✅ — **ɥsılƃuƎ uʍopǝpᴉsdn** |
-| `fr_fr.json` | **Français** — ⚠️ Core terms only, config UI in English |
-| `ja_jp.json` | **日本語** — ⚠️ Core terms only, config UI in English |
-| `ko_kr.json` | **한국어** — ⚠️ Core terms only, config UI in English |
-| `ru_ru.json` | **Русский** — ⚠️ Core terms only, config UI in English |
+| zh_cn.json | **简体中文** — ✅ complete |
+| zh_tw.json | **繁體中文** — ✅ complete |
+| en_us.json | **English (US)** — ✅ baseline |
+| en_ud.json | **upside-down English** (ǝɯǝɯ) — ✅ complete |
+| fr_fr.json | **Français** — ⚠️ core terms only, config UI in English |
+| ja_jp.json | **日本語** — ⚠️ core terms only, config UI in English |
+| ko_kr.json | **한국어** — ⚠️ core terms only, config UI in English |
+| ru_ru.json | **Русский** — ⚠️ core terms only, config UI in English |
 
-## Convenient UI configuration for difficulty & balance
+### Difficulty & Recipe Configuration (config UI)
 
-Given that the balance of this mod has always been controversial, this update introduces a user‑friendly configuration interface (accessible via **Mod Menu → Config**, no keybinding needed).
+A config screen is available via **Mod Menu** (https://modrinth.com/mod/modmenu) **→ Config** (no keybinding needed).
 
-- **Difficulty presets** – Very High (output x1.5 / time x0.5), High (original x1.0 / x1.0), Medium (x0.6 / x1.5), Low (x0.35 / x2.0), or **Custom** (adjustable sliders for chance and time multipliers).
-- **Per‑recipe overrides** – After entering a world, scroll the recipe list and open each recipe to modify drop chance (0–100%) and amount per success for every output. Changes apply when items are rolled.
-- **Server‑authoritative** – All values are stored in the server‑side config (`createsifter-server.toml`). On a dedicated server, the host’s settings win and sync to clients. In single‑player, the local world is the host.
+- **Global difficulty preset** — ultra (chance x1.5 / time x0.5), high (original, x1.0 / x1.0), medium (x0.6 / x1.5), low (x0.35 / x2.0), or **custom** (editable chance & time steppers).
+- **Per-recipe overrides** — after entering a world, scroll the recipe list to open each recipe and set the drop chance (0–100%) and amount per success for every output. Changes are applied when items are rolled.
+- **Server-authoritative:** all values are stored in the server-side config (`createsifter-server.toml`), so on a dedicated server the host's settings win and sync to clients. In single-player the local world is the host.
 
 ### Requirements
 
@@ -64,24 +64,24 @@ Compiled for **Minecraft 1.20.1 · Create 6.0.8.1+ · Fabric**.
 
 #### Confirmed Compatible ✅ (tested)
 
-**Core requirements:** Create 6.0.8.1+, Fabric API 0.92.11+, MC 1.20.1, Java 17/21 (verified on both client and server).
+Core requirements: Create 6.0.8.1+, Fabric API 0.92.11+, MC 1.20.1, Java 17/21 (verified on both client and server).
 
-**Tested alongside an 84‑mod local modpack (and also verified in a larger 270+ modpack, all load‑time coexistence confirmed):**
+Tested alongside a 270+-mod modpack:
 
 - Optimization / rendering: Sodium 0.5.13, Sodium Extra, Iris 1.7.6, Indium, Lithium, C2ME, ModernFix, FerriteCore, Krypton, CreateBetterFps, EntityCulling, Dynamic FPS, MemoryLeakFix
 - Utility: JEI 15.20.0.134 (recipes display correctly), Mod Menu 7.2.2, Cloth Config, Controlling, AppleSkin, BetterF3
 - Content: The Twilight Forest, Create: Addition 1.3.4, Create Big Cannons 5.11.4
-- Other functional mods (load-time coexistence verified): Carry On, Waystones, Traveler's Backpack, FTB Ultimine, Inventory Profiles Next, Mouse Tweaks, Double Doors, Falling Leaves, Hardcore Revival, Simply Swords, Chat Heads, Eating Animation, NotEnoughAnimations, IMBlocker, Resolution Control+, LambDynamicLights, Modern UI, Zoomify, TaCZ Refabricated, I18nUpdateMod, AmbientSounds, Presence Footsteps, Sound Physics Remastered, LAN Server Properties, FastQuit, Voice Chat, JeCharacters, Open Parties and Claims, Do a Barrel Roll, Chunky, Continuity, Supplementaries, Amendments (+ Moonlight), Cull Less Leaves, Xaero's World Map, Terralith, YUNG's Better Dungeons / Mineshafts / Ocean Monuments, Lazydfu, GPUMemLeakFix, fast-ip-ping
+- Plus the 250+ other mods in the modpack (load-time coexistence verified)
 
 #### Theoretically Compatible (not individually tested; derived from official boundaries)
 
-**Create ecosystem addons (1.20.1 Fabric, latest versions meeting the Create 6.0.8.1 floor):**
+Create ecosystem addons (1.20.1 Fabric, latest versions meeting the Create 6.0.8.1 floor):
 
 Create: Steam 'n' Rails 1.7.2+ (needs ≥1.5.3), Copycats+ 3.0.8+ (needs >1.1.1), Create Deco 2.1.1, Slice & Dice 3.6.0 (needs >3.0.0), Enchantment Industry 2.5.2 (needs ≥1.2.16), Jetpack 4.4.2 (needs >4.1.1), Extended Cogwheels 2.1.1+ (needs >2.1.0), New Age, Ore Excavation, Power Loader (Fabric) 2.0.3, Diesel Generators [Fabric] 2.1.4, Interactive 1.2.1, Crystal Clear, Numismatics, Utilities, Contraption Terminals, Goggles 6.1.1, Trading Floor, Central Kitchen, Bells & Whistles, Interiors, Design n' Decor, Dreams & Desires, Copper & Zinc, Ultimine, Oxidized, Pattern Schematics, etc.
 
-**Common optimization / utility / library mods:** Embeddium, Starlight, Cull Less Leaves, GPUMemLeakFix, Xaero maps, JourneyMap, backpack/damage-display/voice/translation mods, Architectury, Kotlin for Fabric, YUNG's API, GeckoLib, Terralith, YUNG's series, Farmer's Delight series, Supplementaries (tested), etc.
+Common optimization / utility / library mods: Embeddium, Starlight, Cull Less Leaves, GPUMemLeakFix, Xaero maps, JourneyMap, backpack/damage-display/voice/translation mods, Architectury, Kotlin for Fabric, YUNG's API, GeckoLib, Terralith, YUNG's series, Farmer's Delight series, Supplementaries (tested), etc.
 
-**Recipe viewer note:** EMI/REI coexist without conflict, but this mod only implements a **JEI** plugin — sifting recipes **will not display** in EMI/REI (JEI 15.20+ is recommended).
+Recipe viewer note: EMI/REI coexist without conflict, but this mod only implements a **JEI** plugin — sifting recipes **will not display** in EMI/REI (JEI 15.20+ is recommended).
 
 #### Unknown Compatibility ⚠️ (untested; potential points of contact)
 
@@ -101,7 +101,7 @@ Create: Steam 'n' Rails 1.7.2+ (needs ≥1.5.3), Copycats+ 3.0.8+ (needs >1.1.1)
 | Sodium<0.5.0 / Iris≤1.2.5 / Sound Physics<1.4.5 | Officially broken by Create | Use the new version |
 | Original createsifter 0.1.1 | Modid conflict | Cannot be installed together |
 
-**Tip:** if your Create is 6.0.7–6.0.8, upgrade to **6.0.8.1** to use this mod.
+Tip: if your Create is 6.0.7–6.0.8, upgrade to 6.0.8.1 to use this mod.
 
 > Upgrade steps:
 > 1. From the `mods/` folder, delete the old `create-fabric-*.jar` and place the new (6.0.8.1) jar.
@@ -112,9 +112,9 @@ Create: Steam 'n' Rails 1.7.2+ (needs ≥1.5.3), Copycats+ 3.0.8+ (needs >1.1.1)
 
 ### License, attribution & warranty
 
-> Note: the direct upstream **oierbravo** uses **LGPL-3.0** (Forge version); the Fabric source repo this adaptation is based on (**Shulej**) is **MIT**. The difference between the two upstream licenses is acknowledged; all upstream notices have been retained.
+> Note: the direct upstream **oierbravo** uses **LGPL-3.0** (Forge version); the Fabric source repo this adaptation is based on (**Shulej**) claims **MIT**. To align most faithfully with the original licensing chain, this adaptation is published as a whole under **LGPL-3.0**. All upstream notices have been retained.
 
-MIT License — upstream © **oierbravo** (and **Shulej**'s Fabric port). The code added by this adaptation may be used freely; credit to the porter is appreciated but not required. If you redistribute it, please keep the upstream MIT notice (bundled in the jar as `LICENSE.txt_createsifter`).
+LGPL-3.0 — upstream © **oierbravo** (and **Shulej**'s Fabric port). The code added by this adaptation is licensed under LGPL-3.0 as well. If you redistribute it, please keep the upstream notice (bundled in the jar as `LICENSE.txt_createsifter`).
 
 This project is provided AS-IS, without warranty of any kind. It has been verified for basic functionality, but bugs may still exist. The author does not guarantee updates or active maintenance in the future; use at your own risk.
 
@@ -122,14 +122,9 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 > tip:
 > If there's a bug, don't find me 😭😭😭 I just updated the mod to work with the latest Create version. I'm a total newbie – I can't fix mod bugs, sorry!!!
->
-> This project is now open‑source on GitHub under the MIT license:Yes, that's the one.
-> 
->Download：
+> Source code is open source on GitHub under LGPL-3.0: https://github.com/jiesoon771/createsifter-createfabric6.0.8.1
+> Downloads (jar): https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases
 
-> https://modrinth.com/mod/create-sifting-create-6-fabric
-
-> https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview
 ---
 
 ## 中文说明
@@ -138,9 +133,13 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 本项目最初由 **oierbravo** 撰写，由 **Shulej** 移植到 Fabric。本版本在 **Shulej** 的 Fabric 移植版基础上更新，使其兼容 Create 6.0.8.1——新版本移除了一些旧版依赖的 API。
 
+考虑到该模组 **平衡性问题**，我加入了自定义平衡性调整，玩家可以根据自己的需求自定义这个模组的功能。
+
 > 此为**社区适配版**，**非**官方发布。
-> 这是官方版本的链接，感谢oierbravo！
-https://www.curseforge.com/minecraft/mc-mods/create-sifting
+
+> 官方原版（Forge，作者 oierbravo）— https://www.curseforge.com/minecraft/mc-mods/create-sifting
+> Shulej 的 Fabric 移植版 — https://modrinth.com/mod/create-sifting-fabric
+
 ### 功能特性
 
 - **动能筛选器**与**黄铜筛选器**，保留原有的熟悉手感
@@ -149,32 +148,13 @@ https://www.curseforge.com/minecraft/mc-mods/create-sifting
 - 中英文双语本地化
 - 服务端与客户端均可用；支持 **JEI**（15.20+）配方显示
 
----
+### 难度与配方配置（配置界面）
 
-### 对比原版模组的新增内容
+通过 **Mod Menu**（https://modrinth.com/mod/modmenu）**→ Config** 打开配置界面（无需注册键位）。
 
-#### 新增语言支持
-
-本次更新新增或完善了以下语言文件：
-
-| 语言文件 | 完成度 |
-| :--- | :--- |
-| `zh_cn.json` | **简体中文** — ✅ 完整翻译 |
-| `zh_tw.json` | **繁體中文** — ✅ 完整翻譯 |
-| `en_us.json` | **English (US)** — ✅ 完整（基线） |
-| `en_ud.json` |反着看 **ɥsılƃuƎ uʍopǝpᴉsdn**  — ✅ 完整（彩蛋） |
-| `fr_fr.json` | **Français** — ⚠️ 仅核心术语，配置界面为英文 |
-| `ja_jp.json` | **日本語** — ⚠️ コア用語のみ、設定画面は英語 |
-| `ko_kr.json` | **한국어** — ⚠️ 핵심 용어만, 설정 화면은 영어 |
-| `ru_ru.json** | **Русский** — ⚠️ Только основные термины, интерфейс конфигурации на английском |
-
-#### 便利的配置 UI（平衡性调整）
-
-考虑到模组平衡性一直有争议，本次改版加入了**图形化配置界面**（通过 **Mod Menu → Config** 打开，无需注册键位）。
-
-- **难度预设** – 超高（产出×1.5 / 时间×0.5）、高（原版 ×1.0 / ×1.0）、中（×0.6 / ×1.5）、低（×0.35 / ×2.0），或**自定义**（可微调产出概率与处理时间的加减滑块）。
-- **逐配方覆盖** – 进入存档后，滚动配方列表，点开每条配方即可修改每个产物的掉落概率（0–100%）与每次筛出数量，改动在物品掉落时生效。
-- **服务端配置为准** – 所有数值保存在服务端配置（`createsifter-server.toml`），专用服务器上以服主设置同步给客户端；单机则为本地存档/主机设置。
+- **全局难度预设** —— 超高（产出×1.5 / 时间×0.5）、高（原版 ×1.0 / ×1.0）、中（×0.6 / ×1.5）、低（×0.35 / ×2.0），或**自定义**（可微调产出概率与处理时间的加减按钮）。
+- **逐配方覆盖** —— 进入存档后，滚动配方列表，点开每条配方即可修改每个产物的掉落概率（0–100%）与每次筛出数量，掉落时生效。
+- **服务端配置为准** —— 所有数值保存在服务端配置（`createsifter-server.toml`），专用服务器上以服主设置同步给客户端；单机则为本地存档/主机设置。
 
 ### 运行要求
 
@@ -192,14 +172,12 @@ https://www.curseforge.com/minecraft/mc-mods/create-sifting
 
 **核心依赖：** Create 6.0.8.1+、Fabric API 0.92.11+、MC 1.20.1、Java 17/21（客户端与服务器均已实测）。
 
-**实测共存（84 模组的本地整合包，并在 270+ 模组的大规模整合包中也验证通过，加载共存全部通过）：**
+**实测共存（270+ 模组的整合包）：**
 
 - 优化/渲染：Sodium 0.5.13、Sodium Extra、Iris 1.7.6、Indium、Lithium、C2ME、ModernFix、FerriteCore、Krypton、CreateBetterFps、EntityCulling、Dynamic FPS、MemoryLeakFix
 - 功能/辅助：JEI 15.20.0.134（配方正常显示）、Mod Menu 7.2.2、Cloth Config、Controlling、AppleSkin、BetterF3
 - 生态/内容：暮色森林、Create: Addition 1.3.4、Create Big Cannons 5.11.4
-- 其他功能区模组（加载共存验证通过）：搬运 Carry On、传送石碑 Waystones、旅行者背包 Traveler's Backpack、连锁破坏 FTB Ultimine、一键整理 Inventory Profiles Next、鼠标手势 Mouse Tweaks、双开门 Double Doors、落叶 Falling Leaves、硬核复活 Hardcore Revival、简易刀剑 Simply Swords、聊天头像 Chat Heads、进食动画 Eating Animation、更多动画 NotEnoughAnimations、输入法修复 IMBlocker、分辨率控制 Resolution Control+、动态光源 LambDynamicLights、现代化 UI Modern UI、放大镜 Zoomify、枪械 TaCZ、自动汉化 I18nUpdateMod、自然音效 AmbientSounds、脚步声 Presence Footsteps、物理声效 Sound Physics Remastered、自定义局域网 LAN Server Properties、快速退出 FastQuit、语音聊天 Voice Chat、拼音搜索 JeCharacters、领地 Open Parties and Claims、翻滚飞行 Do a Barrel Roll、预生成区块 Chunky、连接纹理 Continuity、锦致装饰 Supplementaries/Amendments（+ Moonlight）、更好树叶 Cull Less Leaves、Xaero 世界地图、泰拉瑞斯亚 Terralith、YUNG 地牢/矿井/海底神殿系列、DFU 优化 Lazydfu、GPU 泄漏修复 GPUMemLeakFix、fast-ip-ping
-
-（库依赖如 Architectury / Kotlin for Fabric / Fabric API 等另行归类，不计入上述功能模组）
+- 以及整合包其余 250+ 模组（加载共存验证通过）
 
 #### 二、理论兼容 ✅（未逐一实测，基于官方兼容边界推导）
 
@@ -222,8 +200,8 @@ Create: Steam 'n' Rails 1.7.2+（需 ≥1.5.3）、Copycats+ 3.0.8+（需 >1.1.1
 
 | 项 | 类型 | 表现 |
 |---|---|---|
-| Create 0.5.1 及更早 | 依赖拒绝 | 加载器拒绝启动（非崩溃） |
-| Create 6.0.0 ~ 6.0.8 | 依赖拒绝 | 需 ≥6.0.8.1 |
+| Create 0.5.1 及更早 | 不支持 | 加载器拒绝启动（非崩溃） |
+| Create 6.0.0 ~ 6.0.8 | 不支持 | 需 ≥6.0.8.1 |
 | OptiFine / OptiFabric | Create 官方不兼容 | 全版本不兼容 |
 | 被 Create 淘汰的旧版附加（railways<1.5.3、copycats≤1.1.1、slice&dice≤3.0.0、jetpack≤4.1.1、enchantment-industry<1.2.16、bigcannons≤0.5.3、diesel≤2.1.3、power-loader≤1.4.2、extendedgears≤2.1.0、interactive<1.1.0、garnished≤1.6.3 等） | Create 官方淘汰 | 装最新版即可 |
 | Sodium<0.5.0 / Iris≤1.2.5 / Sound Physics<1.4.5 | Create 官方不兼容 | 用新版 |
@@ -232,29 +210,23 @@ Create: Steam 'n' Rails 1.7.2+（需 ≥1.5.3）、Copycats+ 3.0.8+（需 >1.1.1
 **提示：** 如果你的机械动力是 6.0.7~6.0.8，需要升级到 **6.0.8.1** 才能使用本模组。
 
 > 升级步骤：
-> 1. 从 `mods/` 删除旧版 `create-fabric-*.jar`，并放入新版（6.0.8.1）jar
-> 2. 删除 `mods` 里独立的 `flywheel`、`ponder`、`porting_lib_*`、`registrate-fabric` jar（如有）
-> 3. 残留旧版独立库是 Create 6 时代最常见的报错源头（旧 Flywheel/Ponder 与新 Create 冲突），检查其他 Create 附加模组是否满足新 Create 的下限（详见上面第四类，如 railways≥1.5.3、copycats>1.1.1 等）——不满足的同步升级
-> 4. 启动验证：进游戏 → 进世界 → 看日志无红字、附加模组功能正常
-> 5. 开启美好游戏时光~
+> 1、从 mods/ 删除旧版 create-fabric-*.jar，并放入新版（6.0.8.1）jar
+> 2、删除 mods 里独立的 flywheel、ponder、porting_lib_*、registrate-fabric jar（如有）
+> 3、残留旧版独立库是 Create 6 时代最常见的报错源头（旧 Flywheel/Ponder 与新 Create 冲突），检查其他 Create 附加模组是否满足新 Create 的下限（详见上面第四类，如 railways≥1.5.3、copycats>1.1.1 等）——不满足的同步升级
+> 4、启动验证：进游戏 → 进世界 → 看日志无红字、附加模组功能正常
+> 5、开启美好游戏时光~
 
 ### 许可、署名与免责
 
-> 注意：最上游 **oierbravo** 采用 **LGPL-3.0**（Forge 版）；本适配版基于的 Fabric 源码仓库（**Shulej**）为 **MIT**。两方协议差异已知悉，本适配版已保留全部上游声明。
+> 注意：最上游 **oierbravo** 采用 **LGPL-3.0**（Forge 版）；本适配版基于的 Fabric 源码仓库（**Shulej**）声称 **MIT**。为最充分对齐上游授权链，本适配版整体按 **LGPL-3.0** 发布。本适配版已保留全部上游声明。
 
-MIT 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric 移植版）。本适配版新增/修改的代码可自由使用；对移植者署名属自愿行为，非强制。若再分发，请保留上游 MIT 声明（随 jar 附带，见 `LICENSE.txt_createsifter`）。
+LGPL-3.0 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric 移植版）。本适配版新增/修改的代码同样以 LGPL-3.0 授权。若再分发，请保留上游声明（随 jar 附带，见 `LICENSE.txt_createsifter`）。
 
-本项目按“原样（AS-IS）”提供，不附带任何形式的担保。已验证基本功能可用，但仍可能存在缺陷。作者**不保证**未来会更新或长期维护；请**自行承担使用风险**。
+本项目按"原样（AS-IS）"提供，不附带任何形式的担保。已验证基本功能可用，但仍可能存在缺陷。作者**不保证**未来会更新或长期维护；请**自行承担使用风险**。
 
 感谢 **oierbravo**、**Shulej** 以及 **Create 开发团队！**
 
 > tip / 提示：
 > 有BUG不要找我(´。＿。｀)，有BUG不要找我〒▽〒，有BUG不要找我≧ ﹏ ≦，有BUG不要找我口牙！我只是适配了最新版机械动力，本人小白(还社恐），模组有BUG我修不了啊 X﹏X 抱歉！！！
->
-> 本项目源码已按 MIT 协议在 GitHub 开源：对，就是这个项目。
-> 
-> 下载：
-> 
-> https://modrinth.com/mod/create-sifting-create-6-fabric
-> 
-> https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview
+> 本项目源码已按 LGPL-3.0 协议在 GitHub 开源：https://github.com/jiesoon771/createsifter-createfabric6.0.8.1
+> 下载（jar）：https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases

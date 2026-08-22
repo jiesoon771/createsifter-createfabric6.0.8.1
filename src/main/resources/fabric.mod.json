@@ -8,7 +8,7 @@
     "Shulej",
     "jiesoon771"
   ],
-  "license": "MIT",
+  "license": "LGPL-3.0-only",
   "icon": "assets/createsifter/icon.png",
   "environment": "*",
   "entrypoints": {
