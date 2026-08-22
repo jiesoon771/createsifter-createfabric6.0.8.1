@@ -1,7 +1,6 @@
 {
   "block.createsifter.brass_sifter": "黃銅動力篩",
   "block.createsifter.crushed_end_stone": "粉碎終界石",
-  "block.createsifter.crushed_netherrack": "粉碎地獄岩",
   "block.createsifter.dust": "灰塵方塊",
   "block.createsifter.sifter": "動力篩",
   "create.createsifter.recipe.sifting.minimumspeed": "%1$s RPM",
@@ -18,8 +17,6 @@
   "item.createsifter.advanced_brass_mesh": "進階黃銅篩",
   "item.createsifter.advanced_custom_mesh": "進階自訂篩",
   "item.createsifter.andesite_mesh": "安山合金篩",
-  "item.createsifter.basalt_pebble": "玄武岩卵石",
-  "item.createsifter.blackstone_pebble": "黑石卵石",
   "item.createsifter.brass_mesh": "青銅篩",
   "item.createsifter.custom_mesh": "自訂篩",
   "item.createsifter.string_mesh": "線篩",

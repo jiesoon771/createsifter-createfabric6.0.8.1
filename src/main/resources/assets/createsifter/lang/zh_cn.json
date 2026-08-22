@@ -1,7 +1,6 @@
 {
   "block.createsifter.brass_sifter": "黄铜动力筛子",
   "block.createsifter.crushed_end_stone": "粉碎末地石",
-  "block.createsifter.crushed_netherrack": "粉碎下界岩",
   "block.createsifter.dust": "尘土方块",
   "block.createsifter.sifter": "动力筛子",
   "create.createsifter.recipe.sifting.minimumspeed": "%1$s RPM",
@@ -18,8 +17,6 @@
   "item.createsifter.advanced_brass_mesh": "高级黄铜筛网",
   "item.createsifter.advanced_custom_mesh": "高级自定义筛网",
   "item.createsifter.andesite_mesh": "安山筛网",
-  "item.createsifter.basalt_pebble": "玄武岩卵石",
-  "item.createsifter.blackstone_pebble": "黑石卵石",
   "item.createsifter.brass_mesh": "黄铜筛网",
   "item.createsifter.custom_mesh": "自定义筛网",
   "item.createsifter.string_mesh": "线筛网",
