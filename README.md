@@ -24,87 +24,6 @@ Originally written by **oierbravo** and ported to Fabric by **Shulej**, this bui
 - English & Chinese localization
 - Works on client and server; shows recipes in **JEI** (15.20+)
 
-### Difficulty & Recipe Configuration (config UI)
-
-A config screen is available via **Mod Menu → Config** (no keybinding needed).
-
-- **Global difficulty preset** — ultra (chance x1.5 / time x0.5), high (original, x1.0 / x1.0), medium (x0.6 / x1.5), low (x0.35 / x2.0), or **custom** (editable chance & time steppers).
-- **Per-recipe overrides** — after entering a world, scroll the recipe list to open each recipe and set the drop chance (0–100%) and amount per success for every output. Changes are applied when items are rolled.
-- **Server-authoritative:** all values are stored in the server-side config (`createsifter-server.toml`), so on a dedicated server the host's settings win and sync to clients. In single-player the local world is the host.
-
-### Requirements
-
-- Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
-- **Create Fabric ≥ 6.0.8.1+build.1744-mc1.20.1**
-- Java **17~21**
-
-**Server:** the server and client use the **same** JAR file. Configuration is server-side controlled. The client must also install createsifter, Create, and Fabric API, and all versions **must** match the server's.
-
-### Compatibility
-
-Compiled for **Minecraft 1.20.1 · Create 6.0.8.1+ · Fabric**.
-
-#### Confirmed Compatible ✅ (tested)
-
-Core requirements: Create 6.0.8.1+, Fabric API 0.92.11+, MC 1.20.1, Java 17/21 (verified on both client and server).
-
-Tested alongside a 270+-mod modpack:
-
-- Optimization / rendering: Sodium 0.5.13, Sodium Extra, Iris 1.7.6, Indium, Lithium, C2ME, ModernFix, FerriteCore, Krypton, CreateBetterFps, EntityCulling, Dynamic FPS, MemoryLeakFix
-- Utility: JEI 15.20.0.134 (recipes display correctly), Mod Menu 7.2.2, Cloth Config, Controlling, AppleSkin, BetterF3
-- Content: The Twilight Forest, Create: Addition 1.3.4, Create Big Cannons 5.11.4
-- Plus the 250+ other mods in the modpack (load-time coexistence verified)
-
-#### Theoretically Compatible (not individually tested; derived from official boundaries)
-
-Create ecosystem addons (1.20.1 Fabric, latest versions meeting the Create 6.0.8.1 floor):
-
-Create: Steam 'n' Rails 1.7.2+ (needs ≥1.5.3), Copycats+ 3.0.8+ (needs >1.1.1), Create Deco 2.1.1, Slice & Dice 3.6.0 (needs >3.0.0), Enchantment Industry 2.5.2 (needs ≥1.2.16), Jetpack 4.4.2 (needs >4.1.1), Extended Cogwheels 2.1.1+ (needs >2.1.0), New Age, Ore Excavation, Power Loader (Fabric) 2.0.3, Diesel Generators [Fabric] 2.1.4, Interactive 1.2.1, Crystal Clear, Numismatics, Utilities, Contraption Terminals, Goggles 6.1.1, Trading Floor, Central Kitchen, Bells & Whistles, Interiors, Design n' Decor, Dreams & Desires, Copper & Zinc, Ultimine, Oxidized, Pattern Schematics, etc.
-
-Common optimization / utility / library mods: Embeddium, Starlight, Cull Less Leaves, GPUMemLeakFix, Xaero maps, JourneyMap, backpack/damage-display/voice/translation mods, Architectury, Kotlin for Fabric, YUNG's API, GeckoLib, Terralith, YUNG's series, Farmer's Delight series, Supplementaries (tested), etc.
-
-Recipe viewer note: EMI/REI coexist without conflict, but this mod only implements a **JEI** plugin — sifting recipes **will not display** in EMI/REI (JEI 15.20+ is recommended).
-
-#### Unknown Compatibility ⚠️ (untested; potential points of contact)
-
-- Mods that deeply alter the recipe system (KubeJS recipe scripts, the CraftTweaker family): no integration here, theoretically coexist, but load behavior may be affected
-- Custom rendering pipelines (Canvas, etc.): compatibility with Create's Flywheel is decided by the Create side
-- Create addons with deep stress-network / block-entity integration (Interactive, TFMG, etc.)
-- Any other niche mods not listed
-
-#### Incompatible ❌ (theoretical / tested)
-
-| Item | Type | Behavior |
-|---|---|---|
-| Create 0.5.1 and earlier | Dependency refusal | Loader refuses to start (not a crash) |
-| Create 6.0.0 ~ 6.0.8 | Dependency refusal | Requires ≥6.0.8.1 |
-| OptiFine / OptiFabric | Officially broken by Create | Incompatible on all versions |
-| Old addons phased out by Create (railways<1.5.3, copycats≤1.1.1, slice&dice≤3.0.0, jetpack≤4.1.1, enchantment-industry<1.2.16, bigcannons≤0.5.3, diesel≤2.1.3, power-loader≤1.4.2, extendedgears≤2.1.0, interactive<1.1.0, garnished≤1.6.3, etc.) | Officially phased out by Create | Install the latest version |
-| Sodium<0.5.0 / Iris≤1.2.5 / Sound Physics<1.4.5 | Officially broken by Create | Use the new version |
-| Original createsifter 0.1.1 | Modid conflict | Cannot be installed together |
-
-Tip: if your Create is 6.0.7–6.0.8, upgrade to 6.0.8.1 to use this mod.
-
-> Upgrade steps:
-> 1. From the `mods/` folder, delete the old `create-fabric-*.jar` and place the new (6.0.8.1) jar.
-> 2. Delete any standalone flywheel, ponder, porting_lib_*, and registrate-fabric jars in `mods/`, if present.
-> 3. Leftover standalone libraries from the Create 6 era are the most common source of errors (old Flywheel/Ponder conflict with new Create). Check whether other Create add-ons meet the minimum version for the new Create (see Category 4 above, e.g. Railways ≥ 1.5.3, Copycats > 1.1.1) and upgrade them at the same time if needed.
-> 4. Verify at launch: enter the game, enter a world, check the log for no red errors, and confirm add-ons work.
-> 5. Enjoy your wonderful gaming time!
-
-### License, attribution & warranty
-
-> Note: the direct upstream **oierbravo** uses **LGPL-3.0** (Forge version); the Fabric source repo this adaptation is based on (**Shulej**) is **MIT**. The difference between the two upstream licenses is acknowledged; all upstream notices have been retained.
-
-MIT License — upstream © **oierbravo** (and **Shulej**'s Fabric port). The code added by this adaptation may be used freely; credit to the porter is appreciated but not required. If you redistribute it, please keep the upstream MIT notice (bundled in the jar as `LICENSE.txt_createsifter`).
-
-This project is provided AS-IS, without warranty of any kind. It has been verified for basic functionality, but bugs may still exist. The author does not guarantee updates or active maintenance in the future; use at your own risk.
-
-Thanks to **oierbravo**, **Shulej**, and the **Create team!**
-
-> tip:
-> If there's a bug, don't find me 😭😭😭 I just updated the mod to work with the latest Create version. I'm a total newbie – I can't fix mod bugs, sorry!!!
-
 ---
 
 ## 中文说明
@@ -123,7 +42,38 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 - 中英文双语本地化
 - 服务端与客户端均可用；支持 **JEI**（15.20+）配方显示
 
-### 难度与配方配置（配置界面）
+---
+
+## [NEW] 对比原版模组的新增内容
+
+本次更新在继承原版（oierbravo/Shulej）功能的基础上，额外增加了以下内容：
+
+### 🗣 多语言支持（新增 / 完善）
+
+| 语言文件 | 完成度 |
+| :--- | :--- |
+| `zh_cn.json` | ✅ 简体中文 — 完整翻译 |
+| `zh_tw.json` | ✅ 繁體中文 — 完整翻譯 |
+| `en_us.json` | ✅ English (US) — 完整（基线） |
+| `en_ud.json` | ✅ Upside‑Down English — 完整（彩蛋） |
+| `fr_fr.json` | ⚠️ 仅核心术语，配置界面为英文 |
+| `ja_jp.json` | ⚠️ コア用語のみ、設定画面は英語 |
+| `ko_kr.json` | ⚠️ 핵심 용어만, 설정 화면은 영어 |
+| `ru_ru.json` | ⚠️ Только основные термины, интерфейс конфигурации на английском |
+
+### ⚙️ 便利的配置 UI（平衡性调整）
+
+考虑到模组平衡性一直有争议，本次改版加入了**图形化配置界面**（通过 Mod Menu → Config 打开），让你可以直接调整：
+
+- **难度预设**：超高 / 高 / 中 / 低 / 自定义 —— 一键切换，产出概率和处理时间联动变化。
+- **细调参数**：自定义模式下，可独立调节产出概率倍率和加工时间倍率（步进滑块）。
+- **逐配方微调**：每一条筛分配方的每个产出物，均可单独修改掉落概率（0~100%）和单次产出数量，修改即时生效。
+
+所有配置改动**立即生效**，进入存档后也可随时调整。服务器端配置为准（`createsifter-server.toml`），客户端自动同步。
+
+---
+
+## 难度与配方配置（配置界面）
 
 通过 **Mod Menu → Config** 打开配置界面（无需注册键位）。
 
@@ -131,7 +81,9 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 - **逐配方覆盖** —— 进入存档后，滚动配方列表，点开每条配方即可修改每个产物的掉落概率（0–100%）与每次筛出数量，掉落时生效。
 - **服务端配置为准** —— 所有数值保存在服务端配置（`createsifter-server.toml`），专用服务器上以服主设置同步给客户端；单机则为本地存档/主机设置。
 
-### 运行要求
+---
+
+## 运行要求
 
 - Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
 - **Create Fabric ≥ 6.0.8.1+build.1744-mc1.20.1**
@@ -139,11 +91,13 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 **服务器要求：** 服务器与客户端使用**同一份** jar 文件，配置由服务器主导。客户端也要装 createsifter + 机械动力 + Fabric API，版本**必须**与服务器一致。
 
-### 兼容性
+---
+
+## 兼容性
 
 以下数据基于 **Minecraft 1.20.1 · Create 6.0.8.1+ · Fabric** 环境整理。
 
-#### 一、确认兼容 ✅（实测）
+### 一、确认兼容 ✅（实测）
 
 **核心依赖：** Create 6.0.8.1+、Fabric API 0.92.11+、MC 1.20.1、Java 17/21（客户端与服务器均已实测）。
 
@@ -154,7 +108,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 - 生态/内容：暮色森林、Create: Addition 1.3.4、Create Big Cannons 5.11.4
 - 以及整合包其余 250+ 模组（加载共存验证通过）
 
-#### 二、理论兼容 ✅（未逐一实测，基于官方兼容边界推导）
+### 二、理论兼容 ✅（未逐一实测，基于官方兼容边界推导）
 
 **Create 生态附属（1.20.1 Fabric，最新版本满足 Create 6.0.8.1 下限）：**
 
@@ -164,19 +118,19 @@ Create: Steam 'n' Rails 1.7.2+（需 ≥1.5.3）、Copycats+ 3.0.8+（需 >1.1.1
 
 **配方查看器：** EMI/REI 可共存不冲突，但本模组只实现 JEI 插件 → EMI/REI 中筛子配方**不显示**（建议使用 JEI 15.20+）。
 
-#### 三、兼容性未知 ⚠️（未测试，存在潜在触点）
+### 三、兼容性未知 ⚠️（未测试，存在潜在触点）
 
 - **深度修改配方系统的模组**：KubeJS 配方脚本、CraftTweaker 系——本模组无集成，理论共存，但加载行为可能被干预
 - **自定义渲染管线**：Canvas 等与 Create 的 Flywheel 兼容性由 Create 侧决定
 - **深度集成动力网络/方块实体的 Create 附加**：Interactive 具体交互、TFMG 等
 - 未列出的任何小众模组
 
-#### 四、不兼容 ❌（理论/实测）
+### 四、不兼容 ❌（理论/实测）
 
 | 项 | 类型 | 表现 |
 |---|---|---|
-| Create 0.5.1 及更早 | 不支持 | 加载器拒绝启动（非崩溃） |
-| Create 6.0.0 ~ 6.0.8 | 不支持 | 需 ≥6.0.8.1 |
+| Create 0.5.1 及更早 | 依赖拒绝 | 加载器拒绝启动（非崩溃） |
+| Create 6.0.0 ~ 6.0.8 | 依赖拒绝 | 需 ≥6.0.8.1 |
 | OptiFine / OptiFabric | Create 官方不兼容 | 全版本不兼容 |
 | 被 Create 淘汰的旧版附加（railways<1.5.3、copycats≤1.1.1、slice&dice≤3.0.0、jetpack≤4.1.1、enchantment-industry<1.2.16、bigcannons≤0.5.3、diesel≤2.1.3、power-loader≤1.4.2、extendedgears≤2.1.0、interactive<1.1.0、garnished≤1.6.3 等） | Create 官方淘汰 | 装最新版即可 |
 | Sodium<0.5.0 / Iris≤1.2.5 / Sound Physics<1.4.5 | Create 官方不兼容 | 用新版 |
@@ -191,7 +145,9 @@ Create: Steam 'n' Rails 1.7.2+（需 ≥1.5.3）、Copycats+ 3.0.8+（需 >1.1.1
 > 4、启动验证：进游戏 → 进世界 → 看日志无红字、附加模组功能正常
 > 5、开启美好游戏时光~
 
-### 许可、署名与免责
+---
+
+## 许可、署名与免责
 
 > 注意：最上游 **oierbravo** 采用 **LGPL-3.0**（Forge 版）；本适配版基于的 Fabric 源码仓库（**Shulej**）为 **MIT**。两方协议差异已知悉，本适配版已保留全部上游声明。
 
@@ -203,3 +159,5 @@ MIT 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric 移植
 
 > tip / 提示：
 > 有BUG不要找我(´。＿。｀)，有BUG不要找我〒▽〒，有BUG不要找我≧ ﹏ ≦，有BUG不要找我口牙！我只是适配了最新版机械动力，本人小白(还社恐），模组有BUG我修不了啊 X﹏X 抱歉！！！
+
+> [NEW] 本项目源码已按 MIT 协议在 GitHub 开源：[gitbub-createsifter-createfabric6.0.8.1](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
