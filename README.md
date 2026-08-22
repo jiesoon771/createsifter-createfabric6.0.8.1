@@ -34,7 +34,7 @@ Considering the balance issues with this mod, I have added custom balance adjust
 
 ### Difficulty & Recipe Configuration (config UI)
 
-A config screen is available via **Mod Menu** (https://modrinth.com/mod/modmenu) **→ Config** (no keybinding needed).
+A config screen is available via **Mod Menu** [on Modrinth](https://modrinth.com/mod/modmenu) **→ Config** (no keybinding needed).
 
 #### Added localization
 
@@ -163,7 +163,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 ---
 
-通过 **Mod Menu**（https://modrinth.com/mod/modmenu）**→ Config** 打开配置界面（无需注册键位）。
+通过 **Mod Menu**（[Modrinth](https://modrinth.com/mod/modmenu)）**→ Config** 打开配置界面（无需注册键位）。
 
 #### 新增语言支持
 
