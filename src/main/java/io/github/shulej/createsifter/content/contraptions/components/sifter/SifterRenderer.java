@@ -1,3 +1,10 @@
+/*
+ * Create Sifting (Fabric port for Minecraft 1.20.1)
+ * Copyright (c) 2022 oierbravo
+ *
+ * This source code is licensed under the MIT License.
+ * See LICENSE.txt for the full license text.
+ */
 package io.github.shulej.createsifter.content.contraptions.components.sifter;
 
 import dev.engine_room.flywheel.lib.transform.TransformStack;
@@ -74,3 +81,4 @@ public class SifterRenderer extends KineticBlockEntityRenderer<SifterBlockEntity
 				.renderSingleBlock(blockState, ms,buffer,light,overlay);
 	}
 }
+

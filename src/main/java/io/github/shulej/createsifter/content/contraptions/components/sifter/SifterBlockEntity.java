@@ -1,3 +1,10 @@
+/*
+ * Create Sifting (Fabric port for Minecraft 1.20.1)
+ * Copyright (c) 2022 oierbravo
+ *
+ * This source code is licensed under the MIT License.
+ * See LICENSE.txt for the full license text.
+ */
 package io.github.shulej.createsifter.content.contraptions.components.sifter;
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
@@ -458,3 +465,4 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		return SifterConfig.SIFTER_MINIMUM_SPEED.get().floatValue();
 	}
 }
+

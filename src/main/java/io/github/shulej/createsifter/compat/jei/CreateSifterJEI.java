@@ -1,3 +1,10 @@
+/*
+ * Create Sifting (Fabric port for Minecraft 1.20.1)
+ * Copyright (c) 2022 oierbravo
+ *
+ * This source code is licensed under the MIT License.
+ * See LICENSE.txt for the full license text.
+ */
 package io.github.shulej.createsifter.compat.jei;
 import com.simibubi.create.compat.jei.CreateJEI;
 import com.simibubi.create.compat.jei.DoubleItemIcon;
@@ -251,3 +258,4 @@ public class CreateSifterJEI implements IModPlugin {
 				.forEach(consumer);
 	}
 }
+

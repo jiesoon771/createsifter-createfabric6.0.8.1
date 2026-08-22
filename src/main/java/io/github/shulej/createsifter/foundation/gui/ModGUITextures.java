@@ -1,3 +1,10 @@
+/*
+ * Create Sifting (Fabric port for Minecraft 1.20.1)
+ * Copyright (c) 2022 oierbravo
+ *
+ * This source code is licensed under the MIT License.
+ * See LICENSE.txt for the full license text.
+ */
 package io.github.shulej.createsifter.foundation.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -57,3 +64,4 @@ public enum ModGUITextures implements ScreenElement {
 		UIRenderHelper.drawColoredTexture(graphics, c, x, y, startX, startY, width, height);
 	}
 }
+
