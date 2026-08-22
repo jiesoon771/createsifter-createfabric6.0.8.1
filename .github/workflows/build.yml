@@ -65,5 +65,6 @@ jobs:
             - 详见 README 的兼容性与平衡性配置说明
           files: |
             build/libs/*.jar
+            !build/libs/*-sources.jar
           draft: false
           prerelease: false
