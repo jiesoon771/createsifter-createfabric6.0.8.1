@@ -124,7 +124,9 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 > If there's a bug, don't find me 😭😭😭 I just updated the mod to work with the latest Create version. I'm a total newbie – I can't fix mod bugs, sorry!!!
 >
 > This project is now open‑source on GitHub under the MIT license:Yes, that's the one.
-
+Download：
+> https://modrinth.com/mod/create-sifting-create-6-fabric
+> https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview
 ---
 
 ## 中文说明
@@ -247,3 +249,6 @@ MIT 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric 移植
 > 有BUG不要找我(´。＿。｀)，有BUG不要找我〒▽〒，有BUG不要找我≧ ﹏ ≦，有BUG不要找我口牙！我只是适配了最新版机械动力，本人小白(还社恐），模组有BUG我修不了啊 X﹏X 抱歉！！！
 >
 > 本项目源码已按 MIT 协议在 GitHub 开源：对，就是这个项目。
+> 下载：
+> https://modrinth.com/mod/create-sifting-create-6-fabric
+> https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview
