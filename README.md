@@ -14,7 +14,12 @@ A simple, no-fuss sifter addon for **Create**, adapted to run on **Create 6.0.8.
 
 Originally written by **oierbravo** and ported to Fabric by **Shulej**, this build updates the Fabric port so it works with Create 6.0.8.1, which removed several APIs the older version relied on.
 
+Considering the balance issues with this mod, I have added custom balance adjustments, allowing players to tailor the mod's features to their own preferences.
+
 > Community adaptation — **not** an official release.
+
+> Official version (Forge) by **oierbravo** — https://www.curseforge.com/minecraft/mc-mods/create-sifting
+> Shulej's Fabric port — https://modrinth.com/mod/create-sifting-fabric
 
 ### Features
 
@@ -24,9 +29,22 @@ Originally written by **oierbravo** and ported to Fabric by **Shulej**, this bui
 - English & Chinese localization
 - Works on client and server; shows recipes in **JEI** (15.20+)
 
+**Localization / 新增语言：**
+
+| Language file | Status |
+| :--- | :--- |
+| zh_cn.json | **简体中文** — ✅ complete |
+| zh_tw.json | **繁體中文** — ✅ complete |
+| en_us.json | **English (US)** — ✅ baseline |
+| en_ud.json | **upside-down English** (ǝɯǝɯ) — ✅ complete |
+| fr_fr.json | **Français** — ⚠️ core terms only, config UI in English |
+| ja_jp.json | **日本語** — ⚠️ core terms only, config UI in English |
+| ko_kr.json | **한국어** — ⚠️ core terms only, config UI in English |
+| ru_ru.json | **Русский** — ⚠️ core terms only, config UI in English |
+
 ### Difficulty & Recipe Configuration (config UI)
 
-A config screen is available via **Mod Menu → Config** (no keybinding needed).
+A config screen is available via **Mod Menu** (https://modrinth.com/mod/modmenu) **→ Config** (no keybinding needed).
 
 - **Global difficulty preset** — ultra (chance x1.5 / time x0.5), high (original, x1.0 / x1.0), medium (x0.6 / x1.5), low (x0.35 / x2.0), or **custom** (editable chance & time steppers).
 - **Per-recipe overrides** — after entering a world, scroll the recipe list to open each recipe and set the drop chance (0–100%) and amount per success for every output. Changes are applied when items are rolled.
@@ -94,9 +112,9 @@ Tip: if your Create is 6.0.7–6.0.8, upgrade to 6.0.8.1 to use this mod.
 
 ### License, attribution & warranty
 
-> Note: the direct upstream **oierbravo** uses **LGPL-3.0** (Forge version); the Fabric source repo this adaptation is based on (**Shulej**) is **MIT**. The difference between the two upstream licenses is acknowledged; all upstream notices have been retained.
+> Note: the direct upstream **oierbravo** uses **LGPL-3.0** (Forge version); the Fabric source repo this adaptation is based on (**Shulej**) claims **MIT**. To align most faithfully with the original licensing chain, this adaptation is published as a whole under **LGPL-3.0**. All upstream notices have been retained.
 
-MIT License — upstream © **oierbravo** (and **Shulej**'s Fabric port). The code added by this adaptation may be used freely; credit to the porter is appreciated but not required. If you redistribute it, please keep the upstream MIT notice (bundled in the jar as `LICENSE.txt_createsifter`).
+LGPL-3.0 — upstream © **oierbravo** (and **Shulej**'s Fabric port). The code added by this adaptation is licensed under LGPL-3.0 as well. If you redistribute it, please keep the upstream notice (bundled in the jar as `LICENSE.txt_createsifter`).
 
 This project is provided AS-IS, without warranty of any kind. It has been verified for basic functionality, but bugs may still exist. The author does not guarantee updates or active maintenance in the future; use at your own risk.
 
@@ -104,6 +122,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 > tip:
 > If there's a bug, don't find me 😭😭😭 I just updated the mod to work with the latest Create version. I'm a total newbie – I can't fix mod bugs, sorry!!!
+> Source code is open source on GitHub under LGPL-3.0: https://github.com/jiesoon771/createsifter-createfabric6.0.8.1
+> Downloads (jar): https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases
 
 ---
 
@@ -113,7 +133,12 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 本项目最初由 **oierbravo** 撰写，由 **Shulej** 移植到 Fabric。本版本在 **Shulej** 的 Fabric 移植版基础上更新，使其兼容 Create 6.0.8.1——新版本移除了一些旧版依赖的 API。
 
+考虑到该模组 **平衡性问题**，我加入了自定义平衡性调整，玩家可以根据自己的需求自定义这个模组的功能。
+
 > 此为**社区适配版**，**非**官方发布。
+
+> 官方原版（Forge，作者 oierbravo）— https://www.curseforge.com/minecraft/mc-mods/create-sifting
+> Shulej 的 Fabric 移植版 — https://modrinth.com/mod/create-sifting-fabric
 
 ### 功能特性
 
@@ -125,7 +150,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 ### 难度与配方配置（配置界面）
 
-通过 **Mod Menu → Config** 打开配置界面（无需注册键位）。
+通过 **Mod Menu**（https://modrinth.com/mod/modmenu）**→ Config** 打开配置界面（无需注册键位）。
 
 - **全局难度预设** —— 超高（产出×1.5 / 时间×0.5）、高（原版 ×1.0 / ×1.0）、中（×0.6 / ×1.5）、低（×0.35 / ×2.0），或**自定义**（可微调产出概率与处理时间的加减按钮）。
 - **逐配方覆盖** —— 进入存档后，滚动配方列表，点开每条配方即可修改每个产物的掉落概率（0–100%）与每次筛出数量，掉落时生效。
@@ -193,9 +218,9 @@ Create: Steam 'n' Rails 1.7.2+（需 ≥1.5.3）、Copycats+ 3.0.8+（需 >1.1.1
 
 ### 许可、署名与免责
 
-> 注意：最上游 **oierbravo** 采用 **LGPL-3.0**（Forge 版）；本适配版基于的 Fabric 源码仓库（**Shulej**）为 **MIT**。两方协议差异已知悉，本适配版已保留全部上游声明。
+> 注意：最上游 **oierbravo** 采用 **LGPL-3.0**（Forge 版）；本适配版基于的 Fabric 源码仓库（**Shulej**）声称 **MIT**。为最充分对齐上游授权链，本适配版整体按 **LGPL-3.0** 发布。本适配版已保留全部上游声明。
 
-MIT 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric 移植版）。本适配版新增/修改的代码可自由使用；对移植者署名属自愿行为，非强制。若再分发，请保留上游 MIT 声明（随 jar 附带，见 `LICENSE.txt_createsifter`）。
+LGPL-3.0 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric 移植版）。本适配版新增/修改的代码同样以 LGPL-3.0 授权。若再分发，请保留上游声明（随 jar 附带，见 `LICENSE.txt_createsifter`）。
 
 本项目按"原样（AS-IS）"提供，不附带任何形式的担保。已验证基本功能可用，但仍可能存在缺陷。作者**不保证**未来会更新或长期维护；请**自行承担使用风险**。
 
@@ -203,3 +228,5 @@ MIT 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric 移植
 
 > tip / 提示：
 > 有BUG不要找我(´。＿。｀)，有BUG不要找我〒▽〒，有BUG不要找我≧ ﹏ ≦，有BUG不要找我口牙！我只是适配了最新版机械动力，本人小白(还社恐），模组有BUG我修不了啊 X﹏X 抱歉！！！
+> 本项目源码已按 LGPL-3.0 协议在 GitHub 开源：https://github.com/jiesoon771/createsifter-createfabric6.0.8.1
+> 下载（jar）：https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases

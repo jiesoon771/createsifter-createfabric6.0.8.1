@@ -2,7 +2,7 @@
 
 版本：**0.2.0+1.20.1**（Fabric / Minecraft 1.20.1）
 移植作者：**jiesoon771**
-基于：原版 [Shulej/createsifter](https://github.com/Shulej/createsifter) 0.1.1+1.20.1（MIT 协议），移植到 **Create Fabric 6.0.8.1+build.1744-mc1.20.1**
+基于：原版 [Shulej/createsifter](https://github.com/Shulej/createsifter) 0.1.1+1.20.1（最早源头为 oierbravo 的 LGPL-3.0 Forge 原版），移植到 **Create Fabric 6.0.8.1+build.1744-mc1.20.1**
 
 ---
 
@@ -10,7 +10,7 @@
 
 - 原版 0.1.1 是按 Create 0.5.1 的 API 编译的。Create 6.0 移除了它依赖的一大批类（`Lang`→`CreateLang`/catnip、`VecHelper`/`Pair` 迁入 catnip 库、`BlockStressDefaults`→`BlockStressValues`、齿轮渲染 Instance→Visual 系统、Ponder 独立成库等），直接加载必崩。
 - 作者在 GitHub Issue #4 承诺适配 Create 6+，但至今未发布；Modrinth 上也没有其他支持 Create 6 的筛子模组。
-- 因此基于开源源码（MIT）自行移植。核心内容与玩法（动力筛子/黄铜筛子、7 种筛网、手持筛滤、20 个内置配方）与原版一致。
+- 因此基于开源源码（最早源头为 LGPL-3.0）自行移植。核心内容与玩法（动力筛子/黄铜筛子、7 种筛网、手持筛滤、20 个内置配方）与原版一致。
 
 ## 二、主要改动（相对原版 0.1.1 源码）
 
@@ -81,7 +81,7 @@ createsifter/
 ├── build.gradle / gradle.properties / settings.gradle   ← 构建脚本
 ├── gradlew / gradlew.bat / gradle/wrapper/   ← Gradle wrapper
 ├── README.md                        ← 项目说明（中英对照）
-├── LICENSE.txt                      ← MIT 许可（含移植者附加说明）
+├── LICENSE.txt                      ← LGPL-3.0（含移植者附加说明）
 ├── .editorconfig
 ├── .gitignore
 └── 移植说明.md                      ← 本文档
@@ -91,6 +91,6 @@ createsifter/
 
 ## 八、许可与版权
 
-- 上游代码归 **oierbravo** 所有，Shulej 的 Fabric 移植版与其前身均以 **MIT 许可**发布；本仓库继续使用 MIT，完整声明见 `LICENSE.txt`。
+- 上游代码归 **oierbravo** 所有，其原始 Forge 版以 **LGPL-3.0** 发布；本仓库整体按 **LGPL-3.0** 授权，完整声明见 `LICENSE.txt`。
 - 本移植新增/修改部分可自由使用、修改、再分发，无需向移植者署名；仅需在再分发时保留 `LICENSE.txt` 中的上游版权声明。
 - 本版本按"现状"提供、不作担保，移植作者不再主动维护。详见 `LICENSE.txt` 与 `README.md`。
