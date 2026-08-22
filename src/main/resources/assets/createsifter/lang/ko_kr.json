@@ -41,5 +41,11 @@
   "createsifter.config.chance_col": "Chance %",
   "createsifter.config.count_col": "Count",
   "createsifter.config.output_col": "Output",
-  "createsifter.config.saved_on_close": "Saved to server config on close"
+  "createsifter.config.saved_on_close": "닫을 때 서버 설정에 저장됩니다 (Esc 또는 완료, 취소는 버립니다)",
+  "block.createsifter.brass_sifter": "황동 체",
+  "block.createsifter.crushed_end_stone": "으깬 엔드 스톤",
+  "block.createsifter.dust": "먼지 블록",
+  "createsifter.recipe.sifting.brass_required": "황동 체 필요",
+  "item.createsifter.advanced_brass_mesh": "고급 황동 그물망",
+  "item.createsifter.advanced_custom_mesh": "고급 커스텀 그물망"
 }

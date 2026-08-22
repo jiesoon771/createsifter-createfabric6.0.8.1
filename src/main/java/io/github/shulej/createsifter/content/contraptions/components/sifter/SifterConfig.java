@@ -64,7 +64,7 @@ public class SifterConfig {
 				.comment("Minimum required speed")
 				.defineInRange("minimumSpeed", 1, 0.0, 254);
 		SIFTER_OUTPUT_CAPACITY = COMMON_BUILDER
-				.comment("Output item capacity")
+				.comment("Output item capacity (applies to newly placed sifters)")
 				.defineInRange("outputCapacity", 16, 1, Integer.MAX_VALUE);
 		COMMON_BUILDER.pop();
 	}
@@ -91,27 +91,49 @@ public class SifterConfig {
 		return CUSTOM_TIME_MULTIPLIER.get().floatValue();
 	}
 
+	/** Max per-success amount of an override; never above a normal item stack size. */
+	public static final int MAX_OVERRIDE_COUNT = 64;
+
+	// Parsed override cache: rebuilt lazily when the config list reference changes
+	// (UI writes swap the whole list; external file edits reload it too).
+	private static volatile List<? extends String> overrideListSource;
+	private static volatile Map<String, int[]> overrideListParsed;
+	/** Bumped on every UI write so caches keyed on the override table can invalidate. */
+	private static volatile int overrideGeneration;
+
+	/** Monotonic version of the override table; changes whenever setOverride writes. */
+	public static int overrideGeneration() {
+		return overrideGeneration;
+	}
+
 	/**
 	 * Resolve an override for recipeId's output at outputIndex.
 	 * @return [chancePercent 0-100, count >= 1] or null if no override exists.
 	 */
 	public static int[] getOverride(String recipeId, int outputIndex) {
 		if (RECIPE_OVERRIDES == null) return null;
-		for (Object o : RECIPE_OVERRIDES.get()) {
-			if (!(o instanceof String)) continue;
-			String[] parts = ((String) o).split("\\|");
-			if (parts.length != 4) continue;
-			if (!parts[0].equals(recipeId)) continue;
-			if (parseInt(parts[1], -1) != outputIndex) continue;
-			int chance = clampInt(parseInt(parts[2], 100), 0, 100);
-			int count = clampInt(parseInt(parts[3], 1), 1, MAX_OVERRIDE_COUNT);
-			return new int[]{chance, count};
-		}
-		return null;
+		return overrides().get(recipeId + "|" + outputIndex);
 	}
 
-	/** Max per-success amount of an override; never above a normal item stack size. */
-	public static final int MAX_OVERRIDE_COUNT = 64;
+	private static Map<String, int[]> overrides() {
+		List<? extends String> current = RECIPE_OVERRIDES.get();
+		if (current != overrideListSource) {
+			Map<String, int[]> parsed = new HashMap<>();
+			for (Object o : current) {
+				if (!(o instanceof String)) continue;
+				String[] parts = ((String) o).split("\\|");
+				if (parts.length != 4) continue;
+				int idx = parseInt(parts[1], -1);
+				if (idx < 0) continue; // drop malformed entries
+				parsed.put(parts[0] + "|" + idx,
+						new int[]{clampInt(parseInt(parts[2], 100), 0, 100),
+								clampInt(parseInt(parts[3], 1), 1, MAX_OVERRIDE_COUNT)});
+			}
+			overrideListParsed = parsed;
+			overrideListSource = current;
+		}
+		return overrideListParsed;
+	}
 
 	/** Set (or remove, when null) an override and persist the change. */
 	public static void setOverride(String recipeId, int outputIndex, Integer chancePercent, Integer count) {
@@ -140,6 +162,8 @@ public class SifterConfig {
 		RECIPE_OVERRIDES.set(map.entrySet().stream()
 				.map(e -> e.getKey() + "|" + e.getValue()[0] + "|" + e.getValue()[1])
 				.toList());
+		overrideListSource = null; // force reparse on next read
+		overrideGeneration++;
 	}
 
 	private static int parseInt(String s, int fallback) {

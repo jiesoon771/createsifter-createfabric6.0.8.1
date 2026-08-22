@@ -33,5 +33,19 @@
   "createsifter.config.chance_col": "Chance %",
   "createsifter.config.count_col": "Count",
   "createsifter.config.output_col": "Output",
-  "createsifter.config.saved_on_close": "Saved to server config on close"
+  "createsifter.config.saved_on_close": "Сохраняется в серверный конфиг при закрытии (Esc или Готово; Отмена отменяет)",
+  "block.createsifter.brass_sifter": "Латунный просеиватель",
+  "block.createsifter.crushed_end_stone": "Дроблёный эндерняк",
+  "block.createsifter.dust": "Блок пыли",
+  "create.createsifter.recipe.sifting.minimumspeed": "%1$s об/мин",
+  "createsifter.ponder.sifter.header": "Просеивание блоков",
+  "createsifter.ponder.sifter.text_1": "Просеиватель обрабатывает блоки, просеивая их",
+  "createsifter.ponder.sifter.text_2": "Его можно приводить в движение сбоку с помощью зубчатых колёс",
+  "createsifter.ponder.sifter.text_3": "Бросайте или вставляйте предметы сверху",
+  "createsifter.ponder.sifter.text_4": "Через некоторое время результат можно забрать, нажав правую кнопку мыши",
+  "createsifter.ponder.sifter.text_5": "Выход также можно извлекать с помощью автоматизации",
+  "createsifter.recipe.sifting.brass_required": "Требуется латунный просеиватель",
+  "createsifter.recipe.sifting.waterlogged": "Затоплен",
+  "item.createsifter.advanced_brass_mesh": "Продвинутая латунная сетка",
+  "item.createsifter.advanced_custom_mesh": "Продвинутая пользовательская сетка"
 }

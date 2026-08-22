@@ -47,5 +47,5 @@
   "createsifter.config.chance_col": "機率 %",
   "createsifter.config.count_col": "數量",
   "createsifter.config.output_col": "產物",
-  "createsifter.config.saved_on_close": "關閉時儲存到伺服器設定"
+  "createsifter.config.saved_on_close": "關閉時儲存到伺服器設定（Esc 或 完成；取消則不儲存）"
 }

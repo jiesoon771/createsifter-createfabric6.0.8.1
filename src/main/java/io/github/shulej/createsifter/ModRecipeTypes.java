@@ -107,8 +107,9 @@ public enum ModRecipeTypes implements IRecipeTypeInfo {
 	 *                 (and vice versa), keeping search and cached-match checks consistent.
 	 */
 	public Optional<SiftingRecipe> find(Container inv, Level world, boolean waterlogged, float speed, boolean advanced) {
-		if (world.isClientSide)
-			return Optional.empty();
+		// Recipes are synced to clients, so this is safe on both sides: the client
+		// uses it to predict hand sifting (BaseMesh.use). Machine recipe selection
+		// stays server-driven (SifterBlockEntity.tick guards client ticks itself).
 		List<SiftingRecipe> siftingRecipes = world.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SIFTING.getType());
 		return siftingRecipes.stream()
 				.filter(siftingRecipe -> siftingRecipe.matches(inv, world, waterlogged, speed, advanced))

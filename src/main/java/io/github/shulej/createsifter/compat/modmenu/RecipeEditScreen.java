@@ -4,7 +4,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterConfig;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SiftingRecipe;
-import io.github.shulej.createsifter.register.ModConfigs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -67,7 +66,7 @@ public class RecipeEditScreen extends Screen {
 
 	private boolean serverConfigLocked() {
 		Minecraft mc = Minecraft.getInstance();
-		return mc.getCurrentServer() != null && !mc.hasSingleplayerServer();
+		return mc.level == null || (mc.getCurrentServer() != null && !mc.hasSingleplayerServer());
 	}
 
 	@Override
@@ -88,15 +87,18 @@ public class RecipeEditScreen extends Screen {
 		resetAll.active = !locked;
 		addRenderableWidget(resetAll);
 
-		// Done: bottom-left, commits staged edits.
-		addRenderableWidget(Button.builder(
+		// Done: bottom-left, commits staged edits. Disabled while read-only, where
+		// nothing can be written and Cancel is the only sensible exit.
+		Button done = Button.builder(
 				Component.translatable("createsifter.config.done"),
-				b -> { commit(); onClose(); }).bounds(bx, this.height - 26, 80, 18).build());
+				b -> this.onClose()).bounds(bx, this.height - 26, 80, 18).build();
+		done.active = !locked;
+		addRenderableWidget(done);
 
-		// Cancel: returns without writing anything.
+		// Cancel: returns without writing anything (unlike Done/Esc, which commit).
 		addRenderableWidget(Button.builder(
 				Component.translatable("createsifter.config.cancel"),
-				b -> onClose()).bounds(bx + 86, this.height - 26, 60, 18).build());
+				b -> this.minecraft.setScreen(parent)).bounds(bx + 86, this.height - 26, 60, 18).build());
 
 		rebuildRows();
 	}
@@ -148,22 +150,15 @@ public class RecipeEditScreen extends Screen {
 		}
 	}
 
-	/** Write every staged row into the config and persist, on the main thread. */
+	/** Write every staged row into the config and persist, on the server's thread. */
 	private void commit() {
 		if (serverConfigLocked()) return;
-		Minecraft mc = Minecraft.getInstance();
-		Runnable write = () -> {
+		ClientConfigWrites.execute(() -> {
 			for (int i = 0; i < rows.size(); i++) {
 				OutputRow row = rows.get(i);
 				SifterConfig.setOverride(recipe.getId().toString(), i, row.chancePercent, row.count);
 			}
-			ModConfigs.saveServer();
-		};
-		if (mc.hasSingleplayerServer() && mc.getSingleplayerServer() != null) {
-			mc.getSingleplayerServer().execute(write);
-		} else {
-			write.run();
-		}
+		});
 	}
 
 	@Override
@@ -230,6 +225,9 @@ public class RecipeEditScreen extends Screen {
 
 	@Override
 	public void onClose() {
+		// Esc and X close the same way as Done: staged edits are committed.
+		// Only the Cancel button (which calls setScreen directly) discards them.
+		commit();
 		this.minecraft.setScreen(parent);
 	}
 }

@@ -62,6 +62,18 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 	protected float minimumSpeed = getDefaultMinimumSpeed();
 	protected int itemsProcessedPerCycle = 1;
 
+	/** Ticks to wait before rescanning recipes after a failed search (see tick()). */
+	private int recipeSearchCooldown;
+	private ItemStack failedMatchInput = ItemStack.EMPTY;
+	private ItemStack failedMatchMesh = ItemStack.EMPTY;
+
+	// Negative recipe cache for the insertion path (hoppers / falling items).
+	private ItemStack noRecipeInput = ItemStack.EMPTY;
+	private ItemStack noRecipeMesh = ItemStack.EMPTY;
+	private boolean noRecipeWaterlogged;
+	private float noRecipeSpeed;
+	private long noRecipeCheckUntil;
+
 	public SifterBlockEntity(BlockEntityType<? extends SifterBlockEntity> typeIn, BlockPos pos, BlockState state) {
 		super(typeIn, pos, state);
 		inputInv = createInputInv();
@@ -107,6 +119,7 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		super.tick();
 
 		if (getSpeed() == 0) return;
+		if (isProcessingPaused()) return;
 		if (!isSpeedRequirementFulfilled()) return;
 
 		// Only idle when no output slot can take anything anymore; partial fits are
@@ -135,33 +148,45 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		}
 
 		// The server drives recipe selection and syncs Timer/TotalTime; the client
-		// must not fall back to the 100-tick placeholder loop and desync its progress.
+		// must not fall back to a placeholder loop and desync its progress.
 		if (level.isClientSide) return;
+
+		// When the last search found nothing, stay idle for a while instead of
+		// rescanning and re-syncing every few ticks. A different input or mesh
+		// bypasses the cooldown so freshly inserted items start immediately.
+		boolean sameFailure = recipeSearchCooldown > 0
+				&& ItemStack.isSameItemSameTags(inputInv.getStackInSlot(0), failedMatchInput)
+				&& ItemStack.isSameItemSameTags(meshInv.getStackInSlot(0), failedMatchMesh);
+		if (recipeSearchCooldown > 0 && sameFailure) {
+			recipeSearchCooldown--;
+			return;
+		}
+		recipeSearchCooldown = 0;
+
+		if (inputInv.getStackInSlot(0).isEmpty()) return;
 
 		ItemStackHandlerContainer inventoryIn = new ItemStackHandlerContainer(2);
 		inventoryIn.setStackInSlot(0, this.inputInv.getStackInSlot(0));
 		inventoryIn.setStackInSlot(1, this.meshInv.getStackInSlot(0));
 
-		if (inputInv.getStackInSlot(0).isEmpty()) return;
-
 		if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh())) {
 			Optional<SiftingRecipe> recipe = ModRecipeTypes.SIFTING.find(inventoryIn, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh());
 			if (!recipe.isPresent()) {
-				timer = 100;
-				totalTime = 100;
+				lastRecipe = null;
+				failedMatchInput = this.inputInv.getStackInSlot(0).copy();
+				failedMatchMesh = this.meshInv.getStackInSlot(0).copy();
+				recipeSearchCooldown = 100;
+				boolean changed = timer != 0 || totalTime != 0;
+				timer = 0;
+				totalTime = 0;
 				minimumSpeed = getDefaultMinimumSpeed();
-				sendData();
-			} else {
-				lastRecipe = recipe.get();
-				timer = lastRecipe.getProcessingDuration();
-				totalTime = lastRecipe.getProcessingDuration();
-				minimumSpeed = lastRecipe.getSpeedRequirement();
-				sendData();
+				if (changed) sendData();
+				return;
 			}
-			return;
+			lastRecipe = recipe.get();
 		}
 		timer = lastRecipe.getProcessingDuration();
-		totalTime = lastRecipe.getProcessingDuration();
+		totalTime = timer;
 		minimumSpeed = lastRecipe.getSpeedRequirement();
 
 		sendData();
@@ -184,6 +209,9 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 
 
 	private void process() {
+		if (inputInv.getStackInSlot(0).isEmpty())
+			return;
+
 		ItemStackHandlerContainer inventoryIn = new ItemStackHandlerContainer(2);
 		inventoryIn.setStackInSlot(0, this.inputInv.getStackInSlot(0));
 		inventoryIn.setStackInSlot(1, this.meshInv.getStackInSlot(0));
@@ -259,14 +287,20 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		return capability;
 	}
 
-	public void insertMesh(ItemStack meshStack, Player player) {
+	/**
+	 * Place one mesh into the mesh slot, consuming one from the held stack.
+	 * @return true when a mesh was actually placed (slot was empty).
+	 */
+	public boolean insertMesh(ItemStack meshStack, Player player) {
 		if (meshInv.getStackInSlot(0).isEmpty()) {
 			ItemStack meshToInsert = meshStack.copy();
 			meshToInsert.setCount(1);
 			meshStack.shrink(1);
 			meshInv.setStackInSlot(0, meshToInsert);
 			setChanged();
+			return true;
 		}
+		return false;
 	}
 
 	public boolean hasMesh(){
@@ -276,8 +310,8 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 	public void removeMesh(Player player) {
 		player.getInventory().placeItemBackInInventory(meshInv.getStackInSlot(0));
 		meshInv.setStackInSlot(0, ItemStack.EMPTY);
-		timer = 100;
-		totalTime = 100;
+		timer = 0;
+		totalTime = 0;
 		minimumSpeed = getDefaultMinimumSpeed();
 		sendData();
 	}
@@ -307,14 +341,37 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 	}
 
 	private boolean canProcess(ItemStack stack) {
+		ItemStack mesh = this.meshInv.getStackInSlot(0);
+		long now = level != null ? level.getGameTime() : 0;
+
+		// Negative cache: an un-siftable (input, mesh) combination is checked at
+		// most once per second so hopper/falling-item inserts don't rescan every tick.
+		if (now < noRecipeCheckUntil
+				&& ItemStack.isSameItemSameTags(stack, noRecipeInput)
+				&& ItemStack.isSameItemSameTags(mesh, noRecipeMesh)
+				&& noRecipeWaterlogged == isWaterLogged()
+				&& noRecipeSpeed == getAbsSpeed())
+			return false;
+
 		ItemStackHandlerContainer tester = new ItemStackHandlerContainer(2);
 		tester.setStackInSlot(0, stack);
-		tester.setStackInSlot(1, this.meshInv.getStackInSlot(0));
+		tester.setStackInSlot(1, mesh);
 
-		if (lastRecipe != null && lastRecipe.matches(tester, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh())) {
-			return true;
+		boolean matches = (lastRecipe != null && lastRecipe.matches(tester, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh()))
+				|| ModRecipeTypes.SIFTING.find(tester, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh()).isPresent();
+		if (!matches) {
+			noRecipeInput = stack.copy();
+			noRecipeMesh = mesh.copy();
+			noRecipeWaterlogged = isWaterLogged();
+			noRecipeSpeed = getAbsSpeed();
+			noRecipeCheckUntil = now + 20;
 		}
-		return ModRecipeTypes.SIFTING.find(tester, level, this.isWaterLogged(), getAbsSpeed(), hasAdvancedMesh()).isPresent();
+		return matches;
+	}
+
+	/** Pauses processing (e.g. a redstone lock) without stopping kinetics or behaviours. */
+	protected boolean isProcessingPaused() {
+		return false;
 	}
 
 	public boolean isWaterLogged() {

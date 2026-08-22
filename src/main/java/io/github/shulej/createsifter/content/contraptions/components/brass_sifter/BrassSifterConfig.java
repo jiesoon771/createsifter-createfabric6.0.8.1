@@ -20,7 +20,7 @@ public class BrassSifterConfig {
 				.comment("Minimum required speed")
 				.defineInRange("minimumSpeed", 16, 0.0, 254);
 		BRASS_SIFTER_OUTPUT_CAPACITY = COMMON_BUILDER
-				.comment("Output item capacity")
+				.comment("Output item capacity (applies to newly placed sifters)")
 				.defineInRange("outputCapacity", 64, 1, Integer.MAX_VALUE);
 		BRASS_SIFTER_ITEMS_PER_CYCLE = COMMON_BUILDER
 				.comment("Items processed per cycle")

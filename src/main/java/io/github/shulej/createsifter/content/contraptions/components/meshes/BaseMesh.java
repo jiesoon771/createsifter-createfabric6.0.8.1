@@ -125,12 +125,16 @@ public class BaseMesh extends Item implements CustomUseEffectsItem {
 		boolean waterlogged = blockUnderPlayer instanceof LiquidBlock;
 		if (tag.contains("Sifting")) {
 			ItemStack toSift = ItemStack.of(tag.getCompound("Sifting"));
-			List<ItemStack> sifted = SiftingRecipe.applyHandSift(worldIn, entityLiving.position(), toSift, stack, waterlogged);
 
+			// The client only drives the visuals; the server is the sole authority
+			// on the roll. Rolling here too would double-consume the RNG stream and
+			// produce items the client never gives to anyone.
 			if (worldIn.isClientSide) {
 				spawnParticles(entityLiving.getEyePosition(1).add(entityLiving.getLookAngle().scale(.5f)), toSift, worldIn);
 				return stack;
 			}
+
+			List<ItemStack> sifted = SiftingRecipe.applyHandSift(worldIn, entityLiving.position(), toSift, stack, waterlogged);
 
 			if (!sifted.isEmpty()) {
 				sifted.forEach(outputStack -> {

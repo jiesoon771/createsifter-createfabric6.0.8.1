@@ -26,11 +26,6 @@ public class SifterRenderer extends KineticBlockEntityRenderer<SifterBlockEntity
 	}
 
 	@Override
-	public boolean shouldRenderOffScreen(SifterBlockEntity be) {
-		return true;
-	}
-
-	@Override
 	protected void renderSafe(SifterBlockEntity blockEntity, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
 		ItemStack meshItemStack = blockEntity.meshInv.getStackInSlot(0);
 		double xPos = 0.0;

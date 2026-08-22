@@ -41,6 +41,9 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 	private boolean waterlogged;
 	private float minimumSpeed;
 	private boolean advanced;
+	/** Game time of the last attempt to re-resolve ingredients that were empty at load. */
+	private long lastEmptyResolveAttempt = Long.MIN_VALUE;
+	private boolean warnedEmptyIngredients;
 
 	public SiftingRecipe(SiftingRecipeBuilder.SiftingRecipeParams params) {
 		super(ModRecipeTypes.SIFTING, params); //change recipe type
@@ -61,6 +64,7 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 	public boolean matches(Container inv, Level worldIn, boolean waterlogged, float speed, boolean advancedMesh) {
 		if (inv.isEmpty())
 			return false;
+		resolveEmptyIngredients(worldIn);
 		if(isWaterlogged() != waterlogged)
 			return false;
 		if(hasSpeedRequirement() && speed < minimumSpeed)
@@ -113,6 +117,29 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 			}
 		}
 		this.advanced = isAdvancedMesh(meshStack);
+	}
+
+	/**
+	 * Ingredients whose tags resolved empty when the recipe loaded are retried once
+	 * in a while instead of staying dead forever (tags can arrive from datapacks
+	 * that load later). Once both sides resolve, the check stops being paid.
+	 */
+	private void resolveEmptyIngredients(Level world) {
+		if (siftableIngredient != Ingredient.EMPTY && meshIngredient != Ingredient.EMPTY)
+			return;
+		if (world == null)
+			return;
+		long now = world.getGameTime();
+		if (now - lastEmptyResolveAttempt < 100)
+			return;
+		lastEmptyResolveAttempt = now;
+		classifyIngredients();
+		if (!warnedEmptyIngredients
+				&& (siftableIngredient == Ingredient.EMPTY || meshIngredient == Ingredient.EMPTY)) {
+			warnedEmptyIngredients = true;
+			CreateSifter.LOGGER.warn("Sifting recipe {} has ingredients that resolve to no items and can never match",
+					id);
+		}
 	}
 
 	public Ingredient getSiftableIngredient(){

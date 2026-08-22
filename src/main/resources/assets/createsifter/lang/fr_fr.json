@@ -33,5 +33,19 @@
   "createsifter.config.chance_col": "Chance %",
   "createsifter.config.count_col": "Count",
   "createsifter.config.output_col": "Output",
-  "createsifter.config.saved_on_close": "Saved to server config on close"
+  "createsifter.config.saved_on_close": "Enregistré dans la configuration serveur à la fermeture (Échap ou Terminé ; Annuler abandonne)",
+  "block.createsifter.brass_sifter": "Tamis en laiton",
+  "block.createsifter.crushed_end_stone": "Pierre de l'End concassée",
+  "block.createsifter.dust": "Bloc de poussière",
+  "create.createsifter.recipe.sifting.minimumspeed": "%1$s tr/min",
+  "createsifter.ponder.sifter.header": "Tamiser des blocs",
+  "createsifter.ponder.sifter.text_1": "Le tamis traite les blocs en les tamisant",
+  "createsifter.ponder.sifter.text_2": "Il peut être alimenté sur le côté avec des roues dentées",
+  "createsifter.ponder.sifter.text_3": "Jetez ou insérez des objets par le dessus",
+  "createsifter.ponder.sifter.text_4": "Après un moment, le résultat s'obtient en cliquant avec le bouton droit",
+  "createsifter.ponder.sifter.text_5": "Les sorties peuvent aussi être extraites par automatisation",
+  "createsifter.recipe.sifting.brass_required": "Tamis en laiton requis",
+  "createsifter.recipe.sifting.waterlogged": "Immergé",
+  "item.createsifter.advanced_brass_mesh": "Maille avancée en laiton",
+  "item.createsifter.advanced_custom_mesh": "Maille avancée personnalisée"
 }
