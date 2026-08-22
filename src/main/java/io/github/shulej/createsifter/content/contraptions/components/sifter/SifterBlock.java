@@ -48,45 +48,7 @@ public class SifterBlock extends KineticBlock implements IBE<SifterBlockEntity>,
 
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		SifterBlockEntity sifterBlockEntity = (SifterBlockEntity) worldIn.getBlockEntity(pos);
-		ItemStack handInStack = player.getItemInHand(handIn);
-
-		if (worldIn.isClientSide)
-			return InteractionResult.SUCCESS;
-
-		if (handInStack.getItem() instanceof BaseMesh) {
-			sifterBlockEntity.insertMesh(handInStack, player);
-		}
-
-		if (!handInStack.isEmpty())
-			return InteractionResult.PASS;
-
-		withBlockEntityDo(worldIn, pos, sifter -> {
-			boolean emptyOutput = true;
-			if (handInStack.isEmpty() && sifterBlockEntity.hasMesh() && player.isShiftKeyDown()) {
-				sifterBlockEntity.removeMesh(player);
-			}
-
-			for (int slot = 0; slot < sifter.outputInv.getSlotCount(); slot++) {
-				ItemStack itemInSlot = sifter.outputInv.getStackInSlot(slot);
-				if (!itemInSlot.isEmpty())
-					emptyOutput = false;
-				player.getInventory().placeItemBackInInventory(itemInSlot);
-				sifter.outputInv.setStackInSlot(slot, ItemStack.EMPTY);
-			}
-
-			if (emptyOutput) {
-				for (int slot = 0; slot < sifter.inputInv.getSlotCount(); slot++) {
-					player.getInventory().placeItemBackInInventory(sifter.inputInv.getStackInSlot(slot));
-					sifter.inputInv.setStackInSlot(slot, ItemStack.EMPTY);
-				}
-			}
-
-			sifter.setChanged();
-			sifter.sendData();
-		});
-
-		return InteractionResult.SUCCESS;
+		return SifterInteractionHelper.useSifter(worldIn, pos, player, handIn, item -> item instanceof BaseMesh);
 	}
 
 	@Override

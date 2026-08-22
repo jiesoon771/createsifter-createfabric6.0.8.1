@@ -47,5 +47,5 @@
   "createsifter.config.chance_col": "Chance %",
   "createsifter.config.count_col": "Count",
   "createsifter.config.output_col": "Output",
-  "createsifter.config.saved_on_close": "Saved to server config on close"
+  "createsifter.config.saved_on_close": "Saved to server config when closing (Esc or Done; Cancel discards)"
 }

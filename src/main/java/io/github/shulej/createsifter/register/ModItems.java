@@ -12,8 +12,6 @@ import io.github.shulej.createsifter.content.contraptions.components.meshes.Zinc
 import io.github.shulej.createsifter.content.contraptions.components.meshes.CustomMesh;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedBrassMesh;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedCustomMesh;
-import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedCustomMesh;
-import io.github.shulej.createsifter.content.contraptions.components.meshes.MeshItemRenderer;
 
 public class ModItems {
 	static {
@@ -23,38 +21,45 @@ public class ModItems {
 
 	public static final ItemEntry<StringMesh> STRING_MESH =
 			CreateSifter.REGISTRATE.item("string_mesh", StringMesh::new)
+					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();
 	public static final ItemEntry<AndesiteMesh> ANDESITE_MESH =
 			CreateSifter.REGISTRATE.item("andesite_mesh", AndesiteMesh::new)
+					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();
 	public static final ItemEntry<ZincMesh> ZINC_MESH =
 			CreateSifter.REGISTRATE.item("zinc_mesh", ZincMesh::new)
+					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();
 	public static final ItemEntry<BrassMesh> BRASS_MESH =
 			CreateSifter.REGISTRATE.item("brass_mesh", BrassMesh::new)
+					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();
 	public static final ItemEntry<CustomMesh> CUSTOM_MESH =
 			CreateSifter.REGISTRATE.item("custom_mesh", CustomMesh::new)
+					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();
 
 	public static final ItemEntry<AdvancedBrassMesh> ADVANCED_BRASS_MESH =
 			CreateSifter.REGISTRATE.item("advanced_brass_mesh", AdvancedBrassMesh::new)
+					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();
 
 	public static final ItemEntry<AdvancedCustomMesh> ADVANCED_CUSTOM_MESH =
 			CreateSifter.REGISTRATE.item("advanced_custom_mesh", AdvancedCustomMesh::new)
+					.properties(p -> p.stacksTo(1))
 					.model(AssetLookup.existingItemModel())
 					.tag(ModTags.ModItemTags.MESHES.tag)
 					.register();

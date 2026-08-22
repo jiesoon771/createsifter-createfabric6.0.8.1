@@ -41,5 +41,11 @@
   "createsifter.config.chance_col": "Chance %",
   "createsifter.config.count_col": "Count",
   "createsifter.config.output_col": "Output",
-  "createsifter.config.saved_on_close": "Saved to server config on close"
+  "createsifter.config.saved_on_close": "閉じるときにサーバー設定へ保存します（Esc または 完了。キャンセルは破棄）",
+  "block.createsifter.brass_sifter": "真鍮のふるい分け機",
+  "block.createsifter.crushed_end_stone": "砕かれたエンドストーン",
+  "block.createsifter.dust": "粉のブロック",
+  "createsifter.recipe.sifting.brass_required": "真鍮のふるい分け機が必要",
+  "item.createsifter.advanced_brass_mesh": "上級の真鍮メッシュ",
+  "item.createsifter.advanced_custom_mesh": "上級カスタムメッシュ"
 }

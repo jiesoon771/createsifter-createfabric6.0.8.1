@@ -1,5 +1,4 @@
 package io.github.shulej.createsifter.compat.jei;
-import com.simibubi.create.compat.jei.BlueprintTransferHandler;
 import com.simibubi.create.compat.jei.CreateJEI;
 import com.simibubi.create.compat.jei.DoubleItemIcon;
 import com.simibubi.create.compat.jei.EmptyBackground;
@@ -19,14 +18,11 @@ import io.github.shulej.createsifter.content.contraptions.components.sifter.Sift
 import io.github.shulej.createsifter.register.ModBlocks;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
-import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -53,7 +49,6 @@ import java.util.function.Supplier;
 public class CreateSifterJEI implements IModPlugin {
 	private static final ResourceLocation ID = CreateSifter.asResource("jei_plugin");
 
-	public IIngredientManager ingredientManager;
 	private final List<CreateRecipeCategory<?>> modCategories = new ArrayList<>();
 
 	private void loadCategories() {
@@ -85,19 +80,12 @@ public class CreateSifterJEI implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		ingredientManager = registration.getIngredientManager();
-
 		modCategories.forEach(c -> c.registerRecipes(registration));
 	}
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		modCategories.forEach(c -> c.registerCatalysts(registration));
-	}
-
-	@Override
-	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(new BlueprintTransferHandler(), RecipeTypes.CRAFTING);
 	}
 
 	private class CategoryBuilder<T extends Recipe<?>> {

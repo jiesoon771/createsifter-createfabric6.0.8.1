@@ -40,19 +40,18 @@ public class BrassSifterBlockEntity extends SifterBlockEntity {
 	}
 
 	@Override
-	public void tick() {
-		if (getBlockState().getOptionalValue(BlockStateProperties.POWERED)
-				.orElse(false))
-			return;
-		super.tick();
+	protected boolean isProcessingPaused() {
+		// Redstone locks only pause sifting; kinetics and behaviours keep ticking.
+		return getBlockState().getOptionalValue(BlockStateProperties.POWERED)
+				.orElse(false);
 	}
 
 	@Override
 	protected ItemStack tryToInsertOutputItem(ItemStackHandler outputInv, ItemStack stack, Transaction t) {
-		// Outputs the filter rejects are intentionally discarded; anything the filter
-		// accepts but that no longer fits is returned and dropped by the base class.
+		// Outputs the filter rejects are handed back so the base class drops them
+		// in the world instead of silently voiding them.
 		if (filtering != null && !filtering.test(stack)) {
-			return ItemStack.EMPTY;
+			return stack;
 		}
 		return super.tryToInsertOutputItem(outputInv, stack, t);
 	}

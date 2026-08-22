@@ -1,23 +1,16 @@
 package io.github.shulej.createsifter.register;
 
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-
-import com.electronwill.nightconfig.core.io.WritingMode;
-
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import io.github.shulej.createsifter.CreateSifter;
 import io.github.shulej.createsifter.content.contraptions.components.brass_sifter.BrassSifterConfig;
-import io.github.shulej.createsifter.content.contraptions.components.sifter.Difficulty;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterConfig;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 
 public class ModConfigs {
 	public static ForgeConfigSpec SERVER;
 	public static ForgeConfigSpec COMMON;
-	private static CommentedFileConfig SERVER_CONFIG;
-	private static CommentedFileConfig COMMON_CONFIG;
+	private static ModConfig serverModConfig;
 
 	public static void register() {
 		registerServerConfigs();
@@ -38,48 +31,41 @@ public class ModConfigs {
 		BrassSifterConfig.registerCommonConfig(COMMON_BUILDER);
 		COMMON = COMMON_BUILDER.build();
 		ForgeConfigRegistry.INSTANCE.register(CreateSifter.MODID, ModConfig.Type.COMMON, COMMON);
-		COMMON_CONFIG = ModConfigs.loadConfig(COMMON, FabricLoader.getInstance().getConfigDir().resolve(CreateSifter.MODID + "-common.toml"));
 	}
 
 	private static void registerServerConfigs() {
 		ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
 		SifterConfig.registerServerConfig(SERVER_BUILDER);
 		SERVER = SERVER_BUILDER.build();
-		ForgeConfigRegistry.INSTANCE.register(CreateSifter.MODID, ModConfig.Type.SERVER, SERVER);
-		SERVER_CONFIG = ModConfigs.loadConfig(SERVER, FabricLoader.getInstance().getConfigDir().resolve(CreateSifter.MODID + "-server.toml"));
+		serverModConfig = ForgeConfigRegistry.INSTANCE.register(CreateSifter.MODID, ModConfig.Type.SERVER, SERVER);
 	}
 
-	/** Switch the difficulty preset at runtime and persist it to the server config file. */
-	public static void setDifficulty(Difficulty difficulty) {
-		SifterConfig.DIFFICULTY.set(difficulty);
-		saveServerConfig();
-	}
-
-	/** Replace the whole recipe override list at runtime and persist it. */
-	public static void setRecipeOverrides(java.util.List<? extends String> overrides) {
-		SifterConfig.RECIPE_OVERRIDES.set(overrides);
-		saveServerConfig();
-	}
-
-	private static void saveServerConfig() {
-		if (SERVER_CONFIG != null) {
-			SERVER_CONFIG.save();
+	/**
+	 * Persist any pending server-config changes to disk.
+	 *
+	 * The port (Forge Config API Port) owns the single config handle for our
+	 * server spec: it loads it on SERVER_STARTING and replaces the spec's backing
+	 * config with its own. Writing through that ModConfig keeps exactly one
+	 * handle per file - a previous manual loadConfig here created a second
+	 * auto-saving handle on the same file, which tore the file apart and made
+	 * the port recreate it from defaults (wiping every change).
+	 */
+	public static void saveServer() {
+		if (serverModConfig != null && serverModConfig.getConfigData() != null) {
+			try {
+				serverModConfig.save();
+			} catch (Throwable ignored) {
+			}
 		}
 	}
 
-	/** Persist any pending server-config changes to disk. */
-	public static void saveServer() {
-		saveServerConfig();
-	}
-
-	public static CommentedFileConfig loadConfig(ForgeConfigSpec spec, java.nio.file.Path path) {
-		final CommentedFileConfig configData = CommentedFileConfig.builder(path)
-				.sync()
-				.autosave()
-				.writingMode(WritingMode.REPLACE)
-				.build();
-		configData.load();
-		spec.setConfig(configData);
-		return configData;
+	/**
+	 * Whether the server config is currently attached to a file. This is only
+	 * true while a world with a local server is running (single-player or the
+	 * dedicated server itself); the title screen and remote servers have no
+	 * backing config, so values read as defaults and writes would fail.
+	 */
+	public static boolean serverConfigLoaded() {
+		return serverModConfig != null && serverModConfig.getConfigData() != null;
 	}
 }

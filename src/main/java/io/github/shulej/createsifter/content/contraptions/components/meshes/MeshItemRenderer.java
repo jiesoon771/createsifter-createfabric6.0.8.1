@@ -17,6 +17,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class MeshItemRenderer extends CustomRenderedItemModelRenderer {
 	@Override
@@ -44,7 +45,14 @@ public class MeshItemRenderer extends CustomRenderedItemModelRenderer {
 				ms.mulPose(Axis.YP.rotationDegrees(modifier * 40));
 			}
 
-			float time = (float) (!jeiMode ? player.getUseItemRemainingTicks() : (-AnimationTickHolder.getTicks()) % stack.getUseDuration()) - partialTicks + 1.0F;
+			// Player can be absent (JEI render, main-menu previews, ...); fall back
+			// to the jei-mode clock so the sifting pose stays animated regardless.
+			float time;
+			if (jeiMode || player == null) {
+				time = (float) (-AnimationTickHolder.getTicks()) % stack.getUseDuration() - partialTicks + 1.0F;
+			} else {
+				time = player.getUseItemRemainingTicks() - partialTicks + 1.0F;
+			}
 			if (time / (float) stack.getUseDuration() < 0.8F) {
 				float bobbing = -Mth.abs(Mth.cos(time / 4.0F * (float) Math.PI) * 0.1F);
 
@@ -55,16 +63,17 @@ public class MeshItemRenderer extends CustomRenderedItemModelRenderer {
 			}
 
 			ItemStack toSift = ItemStack.of(tag.getCompound("Sifting"));
-			itemRenderer.renderStatic(toSift, ItemDisplayContext.NONE, light, overlay, ms, buffer, player.level(), 0);
+			Level level = player != null ? player.level() : Minecraft.getInstance().level;
+			if (level != null)
+				itemRenderer.renderStatic(toSift, ItemDisplayContext.NONE, light, overlay, ms, buffer, level, 0);
 
 			ms.popPose();
 		}
 
-		if (firstPerson) {
+		if (firstPerson && player != null) {
 			int itemInUseCount = player.getUseItemRemainingTicks();
 			if (itemInUseCount > 0) {
 				int modifier = leftHand ? -1 : 1;
-				ms.translate(0, 0, 0);
 				ms.mulPose(Axis.ZP.rotationDegrees(modifier * 1));
 				ms.mulPose(Axis.XP.rotationDegrees(modifier * 1));
 				ms.mulPose(Axis.YP.rotationDegrees(modifier * 1));

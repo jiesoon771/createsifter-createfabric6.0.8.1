@@ -10,6 +10,7 @@ import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemHandlerHelper;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.AdvancedBaseMesh;
 import io.github.shulej.createsifter.content.contraptions.components.meshes.BaseMesh;
+import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterInteractionHelper;
 import io.github.shulej.createsifter.register.ModBlockEntities;
 import io.github.shulej.createsifter.register.ModShapes;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -76,44 +77,8 @@ public class BrassSifterBlock extends KineticBlock implements IBE<BrassSifterBlo
 
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		BrassSifterBlockEntity sifterBlockEntity = (BrassSifterBlockEntity) worldIn.getBlockEntity(pos);
-		ItemStack handInStack = player.getItemInHand(handIn);
-
-		if (worldIn.isClientSide)
-			return InteractionResult.SUCCESS;
-		if (handInStack.getItem() instanceof BaseMesh || handInStack.getItem() instanceof AdvancedBaseMesh) {
-			sifterBlockEntity.insertMesh(handInStack, player);
-		}
-
-		if (!handInStack.isEmpty())
-			return InteractionResult.PASS;
-
-		withBlockEntityDo(worldIn, pos, sifter -> {
-			boolean emptyOutput = true;
-			if (handInStack.isEmpty() && sifterBlockEntity.hasMesh() && player.isShiftKeyDown()) {
-				sifterBlockEntity.removeMesh(player);
-			}
-
-			for (int slot = 0; slot < sifter.outputInv.getSlotCount(); slot++) {
-				ItemStack stackInSlot = sifter.outputInv.getStackInSlot(slot);
-				if (!stackInSlot.isEmpty())
-					emptyOutput = false;
-				player.getInventory().placeItemBackInInventory(stackInSlot);
-				sifter.outputInv.setStackInSlot(slot, ItemStack.EMPTY);
-			}
-
-			if (emptyOutput) {
-				for (int slot = 0; slot < sifter.inputInv.getSlotCount(); slot++) {
-					player.getInventory().placeItemBackInInventory(sifter.inputInv.getStackInSlot(slot));
-					sifter.inputInv.setStackInSlot(slot, ItemStack.EMPTY);
-				}
-			}
-
-			sifter.setChanged();
-			sifter.sendData();
-		});
-
-		return InteractionResult.SUCCESS;
+		return SifterInteractionHelper.useSifter(worldIn, pos, player, handIn,
+				item -> item instanceof BaseMesh || item instanceof AdvancedBaseMesh);
 	}
 
 	@Override

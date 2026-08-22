@@ -4,7 +4,6 @@ import io.github.shulej.createsifter.ModRecipeTypes;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.Difficulty;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterConfig;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SiftingRecipe;
-import io.github.shulej.createsifter.register.ModConfigs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -14,7 +13,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Main config screen launched from the Mod Menu "Config" button.
@@ -36,6 +38,7 @@ public class SifterConfigScreen extends Screen {
 	private Difficulty selected;
 	private int scroll;
 	private final List<Button> editButtons = new ArrayList<>();
+	private final List<Button> headerButtons = new ArrayList<>();
 	private final List<SiftingRecipe> recipes = new ArrayList<>();
 	private boolean serverConfigLocked;
 	private Button doneButton;
@@ -43,6 +46,12 @@ public class SifterConfigScreen extends Screen {
 	private static final int LIST_X = 12;
 	private static final int LIST_Y_TOP = 78;
 	private static final int ROW_HEIGHT = 22;
+
+	// Per-frame work in render() is limited to what must change each frame:
+	// the per-recipe summaries are cached and rebuilt only when the override
+	// table changes (single-player edits go through RecipeEditScreen).
+	private int summaryGen = -1;
+	private final Map<SiftingRecipe, String> summaryCache = new HashMap<>();
 
 	public SifterConfigScreen(Screen parent) {
 		super(Component.translatable("createsifter.config.title"));
@@ -54,43 +63,52 @@ public class SifterConfigScreen extends Screen {
 	protected void init() {
 		this.clearWidgets();
 		Minecraft mc = Minecraft.getInstance();
-		// A single-player (integrated) server shares this JVM's config objects, so
-		// edits apply. Anything that runs a separate server process cannot be edited.
-		this.serverConfigLocked = mc.getCurrentServer() != null && !mc.hasSingleplayerServer();
+		// Edits only work while a local server runs in this JVM: the port attaches
+		// the server config file on SERVER_STARTING, so at the title screen (no
+		// level) and on remote servers there is no backing config to write to.
+		this.serverConfigLocked = mc.level == null || (mc.getCurrentServer() != null && !mc.hasSingleplayerServer());
 
 		collectRecipes();
+		buildHeader();
+		rebuildRecipeList();
+	}
+
+	private void buildHeader() {
+		for (Button b : headerButtons) removeWidget(b);
+		headerButtons.clear();
 
 		// --- Difficulty preset row (5 buttons) ---
 		Difficulty[] presets = new Difficulty[]{Difficulty.ULTRA, Difficulty.HIGH, Difficulty.MEDIUM, Difficulty.LOW, Difficulty.CUSTOM};
-		int presetW = 66;
 		int presetGap = 4;
+		int presetW = Math.min(66, Math.max(40, (this.width - 2 * LIST_X - 4 * presetGap) / presets.length));
 		int presetTotal = presets.length * presetW + (presets.length - 1) * presetGap;
 		int bx = this.width / 2 - presetTotal / 2;
 		int i = 0;
 		for (Difficulty d : presets) {
 			final Difficulty dd = d;
 			Button b = Button.builder(presetLabel(d), b2 -> choose(dd)).bounds(bx + i * (presetW + presetGap), 34, presetW, 20).build();
-			if (serverConfigLocked)
-				b.active = false;
+			b.active = !serverConfigLocked;
+			headerButtons.add(b);
 			addRenderableWidget(b);
 			i++;
 		}
 
-		// --- CUSTOM steppers ---
+		// --- CUSTOM steppers (chance steps by 5 percent, time by 0.1) ---
 		if (selected == Difficulty.CUSTOM && !serverConfigLocked) {
 			int cw = this.width / 2;
-			addRenderableWidget(Button.builder(Component.literal("<"), b -> stepChance(-0.05f)).bounds(cw - 150, 56, 18, 18).build());
-			addRenderableWidget(Button.builder(Component.literal(">"), b -> stepChance(+0.05f)).bounds(cw - 128, 56, 18, 18).build());
-			addRenderableWidget(Button.builder(Component.literal("<"), b -> stepTime(-0.05f)).bounds(cw + 96, 56, 18, 18).build());
-			addRenderableWidget(Button.builder(Component.literal(">"), b -> stepTime(+0.05f)).bounds(cw + 114, 56, 18, 18).build());
+			headerButtons.add(Button.builder(Component.literal("<"), b -> stepChance(-5)).bounds(cw - 150, 56, 18, 18).build());
+			headerButtons.add(Button.builder(Component.literal(">"), b -> stepChance(+5)).bounds(cw - 128, 56, 18, 18).build());
+			headerButtons.add(Button.builder(Component.literal("<"), b -> stepTime(-0.1)).bounds(cw + 96, 56, 18, 18).build());
+			headerButtons.add(Button.builder(Component.literal(">"), b -> stepTime(+0.1)).bounds(cw + 114, 56, 18, 18).build());
+			for (Button b : headerButtons.subList(headerButtons.size() - 4, headerButtons.size()))
+				addRenderableWidget(b);
 		}
 
 		// --- Done button (fixed at bottom) ---
 		doneButton = Button.builder(CommonComponents.GUI_DONE, b -> this.onClose())
 				.bounds(this.width / 2 - 80, this.height - 28, 160, 20).build();
+		headerButtons.add(doneButton);
 		addRenderableWidget(doneButton);
-
-		rebuildRecipeList();
 	}
 
 	private void collectRecipes() {
@@ -112,6 +130,14 @@ public class SifterConfigScreen extends Screen {
 	}
 
 	private String recipeSummary(SiftingRecipe r) {
+		int gen = SifterConfig.overrideGeneration();
+		if (gen != summaryGen) {
+			summaryCache.clear();
+			summaryGen = gen;
+		}
+		String cached = summaryCache.get(r);
+		if (cached != null)
+			return cached;
 		StringBuilder sb = new StringBuilder();
 		List<com.simibubi.create.content.processing.recipe.ProcessingOutput> outs = r.getRollableResults();
 		for (int i = 0; i < outs.size(); i++) {
@@ -122,7 +148,9 @@ public class SifterConfigScreen extends Screen {
 			int count = ov != null ? ov[1] : o.getStack().getCount();
 			sb.append(o.getStack().getHoverName().getString()).append(" ").append(chance).append("% x").append(count);
 		}
-		return sb.toString();
+		String summary = sb.toString();
+		summaryCache.put(r, summary);
+		return summary;
 	}
 
 	private void rebuildRecipeList() {
@@ -160,24 +188,25 @@ public class SifterConfigScreen extends Screen {
 
 	private void choose(Difficulty d) {
 		if (serverConfigLocked) return;
-		ModConfigs.setDifficulty(d);
+		ClientConfigWrites.execute(() -> SifterConfig.DIFFICULTY.set(d));
 		this.selected = d;
-		// Rebuild to show/hide CUSTOM steppers and refresh the preset buttons.
-		init();
+		// Only the preset row and CUSTOM steppers depend on the selection; the
+		// recipe list is unaffected, so rebuild just the header.
+		buildHeader();
 	}
 
-	private void stepChance(float delta) {
+	private void stepChance(int deltaPercent) {
 		if (serverConfigLocked) return;
-		double v = SifterConfig.customChanceMultiplier() + delta;
-		SifterConfig.CUSTOM_CHANCE_MULTIPLIER.set(Math.max(0.05, Math.min(1.0, v)));
-		ModConfigs.saveServer();
+		int v = Math.round(SifterConfig.customChanceMultiplier() * 100) + deltaPercent;
+		final double clamped = Math.max(5, Math.min(100, v)) / 100.0;
+		ClientConfigWrites.execute(() -> SifterConfig.CUSTOM_CHANCE_MULTIPLIER.set(clamped));
 	}
 
-	private void stepTime(float delta) {
+	private void stepTime(double delta) {
 		if (serverConfigLocked) return;
 		double v = SifterConfig.customTimeMultiplier() + delta;
-		SifterConfig.CUSTOM_TIME_MULTIPLIER.set(Math.max(0.1, Math.min(10.0, v)));
-		ModConfigs.saveServer();
+		final double clamped = Math.max(0.1, Math.min(10.0, Math.round(v * 10) / 10.0));
+		ClientConfigWrites.execute(() -> SifterConfig.CUSTOM_TIME_MULTIPLIER.set(clamped));
 	}
 
 	@Override
@@ -194,17 +223,22 @@ public class SifterConfigScreen extends Screen {
 		this.renderBackground(graphics);
 		graphics.drawCenteredString(this.font, Component.translatable("createsifter.config.title"), this.width / 2, 12, 0xFFFFFF);
 
-		// Preset description, with the server-wins note appended on the same line.
-		String note = serverConfigLocked
-				? Component.translatable("createsifter.config.readonly_multiplayer").getString()
-				: Component.translatable("createsifter.config.server_wins").getString();
+		// Preset description, with the lock reason appended on the same line.
+		String note;
+		if (serverConfigLocked) {
+			note = this.minecraft.level == null
+					? Component.translatable("createsifter.config.enter_world").getString()
+					: Component.translatable("createsifter.config.readonly_multiplayer").getString();
+		} else {
+			note = Component.translatable("createsifter.config.server_wins").getString();
+		}
 		graphics.drawCenteredString(this.font, describe(selected) + "  ·  " + note, this.width / 2, 22, serverConfigLocked ? 0xFF5555 : 0xAAAAAA);
 
 		// CUSTOM current values
 		if (selected == Difficulty.CUSTOM) {
 			int cw = this.width / 2;
-			graphics.drawString(this.font, Component.translatable("createsifter.config.chance") + " " + pct(SifterConfig.customChanceMultiplier()), cw - 168, 58, 0x55FFFF);
-			graphics.drawString(this.font, Component.translatable("createsifter.config.time") + " " + f(SifterConfig.customTimeMultiplier()) + "x", cw + 94, 58, 0x55FF55);
+			graphics.drawString(this.font, Component.translatable("createsifter.config.chance").getString() + " " + pct(SifterConfig.customChanceMultiplier()), cw - 168, 58, 0x55FFFF);
+			graphics.drawString(this.font, Component.translatable("createsifter.config.time").getString() + " " + f(SifterConfig.customTimeMultiplier()) + "x", cw + 94, 58, 0x55FF55);
 		}
 
 		// Recipe list header + rows
@@ -257,8 +291,8 @@ public class SifterConfigScreen extends Screen {
 		return Math.round(v * 100) + "%";
 	}
 
-	private static String f(float v) {
-		return String.format("%,.2f", v).replace(',', '.');
+	private static String f(double v) {
+		return String.format(Locale.ROOT, "%.2f", v);
 	}
 
 	@Override
