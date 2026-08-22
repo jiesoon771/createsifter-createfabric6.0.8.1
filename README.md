@@ -14,10 +14,18 @@ Originally written by **oierbravo** and ported to Fabric by **Shulej**, this bui
 
 Considering the balance issues with this mod, I have added custom balance adjustments, allowing players to tailor the mod's features to their own preferences.
 
-> Community adaptation — **not** an official release.
+---
 
-> Official version (Forge) by **oierbravo** — https://www.curseforge.com/minecraft/mc-mods/create-sifting
-> Shulej's Fabric port — https://modrinth.com/mod/create-sifting-fabric
+#### Community adaptation — **not** an official release.
+#### 此为**社区适配版**，**非**官方发布。
+
+---
+
+**Official version (Forge) — thanks to [oierbravo](https://www.curseforge.com/minecraft/mc-mods/create-sifting)!**
+**官方原版（Forge）— 感谢 [oierbravo](https://www.curseforge.com/minecraft/mc-mods/create-sifting)！**
+
+**Shulej's Fabric port — thanks to [Shulej](https://modrinth.com/mod/create-sifting-fabric)!**
+**Shulej 的 Fabric 移植版 — 感谢 [Shulej](https://modrinth.com/mod/create-sifting-fabric)！**
 
 ### Features
 
@@ -139,12 +147,13 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 > tip:
 > If there's a bug, don't find me 😭😭😭 I just updated the mod to work with the latest Create version. I'm a total newbie – I can't fix mod bugs, sorry!!!
-> Source code is open source on GitHub under LGPL-3.0: https://github.com/jiesoon771/createsifter-createfabric6.0.8.1
-> Downloads (jar): https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases
+**Download / 下载（jar）**
 
-> https://modrinth.com/mod/create-sifting-create-6-fabric
+- [GitHub Releases](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases)
+- [Modrinth](https://modrinth.com/mod/create-sifting-create-6-fabric)
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview)
 
-> https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview
+**Source code / 源码（LGPL-3.0）：** [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
 ---
 
 ## 中文说明
@@ -269,5 +278,9 @@ LGPL-3.0 协议——上游版权归 **oierbravo**（及 **Shulej** 的 Fabric �
 
 > tip / 提示：
 > 有BUG不要找我(´。＿。｀)，有BUG不要找我〒▽〒，有BUG不要找我≧ ﹏ ≦，有BUG不要找我口牙！我只是适配了最新版机械动力，本人小白(还社恐），模组有BUG我修不了啊 X﹏X 抱歉！！！
-> 本项目源码已按 LGPL-3.0 协议在 GitHub 开源：https://github.com/jiesoon771/createsifter-createfabric6.0.8.1
-> 下载（jar）：https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases
+**Download / 下载（jar）**
+- GitHub Releases：[GitHub Releases](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases)
+- [Modrinth](https://modrinth.com/mod/create-sifting-create-6-fabric)
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview)
+
+**Source / 源码（LGPL-3.0）：** [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
