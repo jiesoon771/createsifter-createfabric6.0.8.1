@@ -35,7 +35,7 @@ This update adds or improves the following language files:
 | `zh_cn.json` | **Simplified Chinese** — ✅ Full translation |
 | `zh_tw.json` | **Traditional Chinese** — ✅ Full translation |
 | `en_us.json` | **English (US)** — ✅ Complete baseline |
-| `en_ud.json` | **Upside‑Down English** — ✅ Complete (meme) |
+| `en_ud.json` | （ǝɯǝɯ）ǝʇǝldɯoƆ ✅ — **ɥsılƃuƎ uʍopǝpᴉsdn** |
 | `fr_fr.json` | **Français** — ⚠️ Core terms only, config UI in English |
 | `ja_jp.json` | **日本語** — ⚠️ Core terms only, config UI in English |
 | `ko_kr.json` | **한국어** — ⚠️ Core terms only, config UI in English |
@@ -163,7 +163,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 | `zh_cn.json` | **简体中文** — ✅ 完整翻译 |
 | `zh_tw.json` | **繁體中文** — ✅ 完整翻譯 |
 | `en_us.json` | **English (US)** — ✅ 完整（基线） |
-| `en_ud.json` | **Upside‑Down English** — ✅ 完整（彩蛋） |
+| `en_ud.json` | **ɥsılƃuƎ uʍopǝpᴉsdn**  — ✅ 完整（彩蛋） |
 | `fr_fr.json` | **Français** — ⚠️ 仅核心术语，配置界面为英文 |
 | `ja_jp.json` | **日本語** — ⚠️ コア用語のみ、設定画面は英語 |
 | `ko_kr.json` | **한국어** — ⚠️ 핵심 용어만, 설정 화면은 영어 |
