@@ -1,3 +1,10 @@
+/*
+ * Create Sifting (Fabric port for Minecraft 1.20.1)
+ * Copyright (c) 2022 oierbravo
+ *
+ * This source code is licensed under the MIT License.
+ * See LICENSE.txt for the full license text.
+ */
 package io.github.shulej.createsifter.content.contraptions.components.brass_sifter;
 
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -61,3 +68,4 @@ public class BrassSifterBlockEntity extends SifterBlockEntity {
 		return BrassSifterConfig.BRASS_SIFTER_MINIMUM_SPEED.get().floatValue();
 	}
 }
+

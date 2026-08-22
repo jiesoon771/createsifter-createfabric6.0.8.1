@@ -1,3 +1,10 @@
+/*
+ * Create Sifting (Fabric port for Minecraft 1.20.1)
+ * Copyright (c) 2022 oierbravo
+ *
+ * This source code is licensed under the MIT License.
+ * See LICENSE.txt for the full license text.
+ */
 package io.github.shulej.createsifter.compat.jei.category.animations;
 
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
@@ -84,3 +91,4 @@ public abstract class BaseAnimatedSifter<SIFTER extends KineticBlock> extends An
 	abstract PartialModel getCogModel();
 	abstract BlockEntry<SIFTER> getSifterBlock();
 }
+
