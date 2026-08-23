@@ -6,10 +6,9 @@ plugins {
 base.archivesName = archives_base_name
 group = project.maven_group
 
-// Formats the mod version to include the Minecraft version and build number (if present)
-// example: 1.0.0+1.18.2-build.100
-String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-version = "$mod_version+$minecraft_version" + (buildNumber != null ? "-build.$buildNumber" : "")
+// Mod version. Named directly after the jar (e.g. V1 -> createsifter-V1.jar)
+// so releases carry an unambiguous, stable file name.
+version = mod_version
 
 repositories {
 	maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
