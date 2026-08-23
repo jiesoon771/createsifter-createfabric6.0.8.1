@@ -52,6 +52,11 @@ jobs:
           name: Artifacts
           path: build/libs/
 
+      - name: Drop sources jar
+        # softprops/action-gh-release ignores negated glob patterns, so delete the
+        # sources jar here and upload only the runnable mod jar.
+        run: rm -f build/libs/*-sources.jar
+
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -65,6 +70,5 @@ jobs:
             - 详见 README 的兼容性与平衡性配置说明
           files: |
             build/libs/*.jar
-            !build/libs/*-sources.jar
           draft: false
           prerelease: false
