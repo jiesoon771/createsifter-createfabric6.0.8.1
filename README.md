@@ -31,7 +31,7 @@ Considering the balance issues with this mod, I have added custom balance adjust
 
 - **Kinetic Sifter** and **Brass Sifter** with the familiar behavior
 - **9 meshes** (string, andesite, brass, zinc, custom, advanced, sturdy, …)
-- **20+ built-in sifting recipes**
+- **13 built-in sifting recipes**
 - **8 languages** fully localized (EN / CN / TW / FR / JA / KO / RU / UD), config UI included
 - Works on client and server; shows recipes in **JEI** (15.20+)
 
@@ -178,7 +178,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create team!**
 
 - **动能筛选器**与**黄铜筛选器**，保留原有的熟悉手感
 - **9 种筛网**（丝线、安山岩、黄铜、锌、定制、高级、坚固……）
-- **20+ 条内置筛分配方**
+- **13 条内置筛分配方**
 - **8 种语言**完整本地化（简中/繁中/英/法/日/韩/俄/倒装英语），含配置界面
 - 服务端与客户端均可用；支持 **JEI**（15.20+）配方显示
 
