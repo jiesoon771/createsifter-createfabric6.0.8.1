@@ -16,12 +16,16 @@ Originally written by **oierbravo** (Forge), ported to Fabric by **Shulej**; thi
 
 Given this mod's long-running balance debate, this build adds **custom balance adjustments** — difficulty presets plus per-recipe overrides — so every player can tune drop chances and processing times to taste.
 
+---
+
 ### About this port
 
 > Community adaptation — **not** an official release.
 
 **Official version (Forge) — thanks to [oierbravo](https://www.curseforge.com/minecraft/mc-mods/create-sifting)!**
 **Shulej's Fabric port — thanks to [Shulej](https://modrinth.com/mod/create-sifting-fabric)!**
+
+---
 
 ### Features
 
@@ -31,6 +35,8 @@ Given this mod's long-running balance debate, this build adds **custom balance a
 - **8 languages fully localized** (EN / CN / TW / FR / JA / KO / RU / UD), config UI included;
 - Works on both client and server; recipes shown in **JEI** (15.20+);
 - **Netherite sifting on 1.20.1** (sturdy / advanced sturdy meshes + crushed basalt).
+
+---
 
 ### Blocks (defaults — all configurable)
 
@@ -42,12 +48,16 @@ Given this mod's long-running balance debate, this build adds **custom balance a
 | Crushed End Stone | No built-in recipe; for pack devs via datapack |
 | Dust | No built-in recipe; for pack devs via datapack |
 
+---
+
 ### Meshes (9)
 
 String, Andesite, Zinc, Brass, Custom, Sturdy, Advanced Brass, Advanced Sturdy, Advanced Custom.
 
 - **Custom** and **Advanced Custom** have no built-in recipes (datapack for pack devs).
 - A sifter holding an advanced mesh only runs advanced-mesh recipes. The advanced meshes are **not** limited to the brass sifter — the plain sifter accepts them too (unlike the official Forge version).
+
+---
 
 ### Mechanics & usage
 
@@ -64,6 +74,8 @@ String, Andesite, Zinc, Brass, Custom, Sturdy, Advanced Brass, Advanced Sturdy, 
 - Stops processing on a redstone signal
 
 **Waterlogged sifting** — some recipes require the sifter to be waterlogged: place the sifter in water, or hand-sift while standing in a liquid.
+
+---
 
 ### Recipes
 
@@ -92,6 +104,8 @@ String, Andesite, Zinc, Brass, Custom, Sturdy, Advanced Brass, Advanced Sturdy, 
 - Sturdy mesh: ancient debris 2%, netherite scrap 1%, experience nugget 10%
 - Advanced sturdy mesh: ancient debris 5%, netherite scrap 2%, experience nugget 10%
 
+---
+
 ### Configuration
 
 Graphical config screen via **Mod Menu → Config** (no keybind needed). Settings are stored server-side in `createsifter-server.toml`; on dedicated servers the host's settings sync to clients.
@@ -106,6 +120,8 @@ Graphical config screen via **Mod Menu → Config** (no keybind needed). Setting
 **Per-recipe overrides** — open any recipe in the config list to change each output's chance (0–100%) and count; changes apply immediately on drop.
 
 **Other mechanical defaults** (configurable): stress impact 4 / 8su · minimum speed 1 / 16 RPM · output capacity 16 / 64 slots · items per cycle (brass) 8.
+
+---
 
 ### Localization
 
@@ -122,6 +138,8 @@ All 8 built-in language files are fully translated — including the config UI (
 | `ko_kr.json` | 한국어 — 완전한 번역 |
 | `ru_ru.json` | Русский — Полный перевод |
 
+---
+
 ### Requirements
 
 - Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
@@ -129,6 +147,8 @@ All 8 built-in language files are fully translated — including the config UI (
 - Java **17–21**
 
 Server and client must use the same jar; clients also need this mod, Create and Fabric API.
+
+---
 
 ### Compatibility
 
@@ -162,11 +182,15 @@ Compiled for **Minecraft 1.20.1 · Create 6.0.8.1+ · Fabric**.
 4. Verify at launch: enter the game and a world, confirm no red errors in the log and add-ons work.
 5. Enjoy your wonderful gaming time.
 
+---
+
 ### License & credits
 
 **LGPL-3.0**. Upstream © **oierbravo** (Forge original, LGPL-3.0) and **Shulej** (Fabric port); additions and modifications in this adaptation are likewise LGPL-3.0. Not an official release; provided **AS-IS without warranty** — no guarantee of future updates or long-term maintenance.
 
 Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
+
+---
 
 ### Download & build
 
@@ -184,6 +208,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 本模组是 Create Sifting 的**非官方 Fabric 维护分支**：原版由 **oierbravo** 开发（Forge），**Shulej** 移植到 Fabric，本适配版在 Shulej 移植版基础上更新，使其兼容 **Create 6.0.8.1**（该版本移除了旧移植版依赖的部分 API）。
 
+---
+
 ### 关于本移植
 
 > 此为**社区适配版**，**非**官方发布。
@@ -196,6 +222,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 - 新增**图形化配置界面**（Mod Menu），针对该模组**平衡性长期存在的争议**提供**自定义平衡调整**：难度预设 + 逐配方覆盖，可自定义各配方的产出概率与处理时间；
 - 从官方新版本**移植部分内容至 1.20.1**：耐固筛网、高级耐固筛网、粉碎玄武岩及下界合金相关筛选配方——官方原版 1.20.1 并无这些内容，下界合金配方直至 1.21 版本才加入。
 
+---
+
 ### 功能特性
 
 - **两种动能筛子**（动力筛子 + 黄铜动力筛子），保留熟悉的机械动力操作手感；
@@ -204,6 +232,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 - **8 种语言完整本地化**（简中 / 繁中 / 英 / 法 / 日 / 韩 / 俄 / 倒装英语），含配置界面；
 - 客户端与服务端均可用，支持 **JEI**（15.20+）配方显示；
 - 额外支持 **1.20.1 的下界合金筛选**（耐固 / 高级耐固筛网 + 粉碎玄武岩）。
+
+---
 
 ### 添加的内容
 
@@ -239,6 +269,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 内置 **13 条筛选配方**、**9 条合成配方**（2 条筛子 + 7 条筛网）与 **2 条玄武岩处理配方**（粉碎、磨粉）。完整配方可在游戏内通过 **JEI**（15.20+）查看。
 
+---
+
 ### 机制与使用
 
 #### 动力输入
@@ -270,6 +302,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 #### 含水筛选
 
 部分配方（如泥土）要求「含水」状态。将筛子放置在水源中（自动变为含水方块），或手持筛网时站在液体中，即视为含水。含水状态与配方不符时不会触发加工。
+
+---
 
 ### 筛选配方
 
@@ -317,6 +351,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 | 耐固筛网 | 远古残骸 2% · 下界合金碎片 1% · 经验颗粒 10% |
 | 高级耐固筛网 | 远古残骸 5% · 下界合金碎片 2% · 经验颗粒 10% |
 
+---
+
 ### 配置
 
 通过 **Mod Menu → Config** 打开图形化配置界面（无需注册键位）。所有设置保存在服务端配置文件 `createsifter-server.toml`，专用服务器以服主设置为准并同步至客户端；单机则为本地存档/主机设置。
@@ -347,6 +383,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 - 每周期处理数（itemsPerCycle，黄铜）：8；
 - 渲染开关（客户端）：是否渲染被筛方块、是否渲染移动中的筛网。
 
+---
+
 ### 本地化
 
 内置 8 种语言文件**全部完整翻译**（含配置界面：物品、方块、难度预设、逐配方覆盖界面）：
@@ -362,6 +400,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 | `ko_kr.json` | 한국어 — 완전한 번역 |
 | `ru_ru.json` | Русский — Полный перевод |
 
+---
+
 ### 运行要求
 
 - Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
@@ -369,6 +409,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 - Java **17~21**
 
 **服务器要求**：服务器与客户端使用同一份 jar 文件，配置由服务器主导。客户端同样需安装本模组、机械动力与 Fabric API，版本必须与服务器一致。
+
+---
 
 ### 兼容性
 
@@ -415,6 +457,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 4. 启动验证：进入游戏并进入存档，确认日志无红色报错、各附加功能正常；
 5. 尽情享受游戏。
 
+---
+
 ### 许可与致谢
 
 > 最上游 **oierbravo** 采用 **LGPL-3.0**（Forge 版）；本适配版所基于的 Fabric 源码仓库（**Shulej**）声称 MIT。为最充分对齐上游授权链，**本适配版已开源，整体按 LGPL-3.0 发布**，并保留全部上游声明（随 jar 附带，见 `LICENSE.txt_createsifter`）。源码见 [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)。
@@ -422,6 +466,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 本项目按「原样（AS-IS）」提供，不附带任何形式的担保。已验证基本功能可用，但仍可能存在缺陷；作者不保证未来更新或长期维护，请自行承担使用风险。
 
 感谢 **oierbravo**、**Shulej** 以及 **Create 开发团队**。
+
+---
 
 ### 下载与构建
 
