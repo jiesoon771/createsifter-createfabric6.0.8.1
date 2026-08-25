@@ -1,12 +1,55 @@
 # Create Sifting — Create Fabric 6.0.8.1
 
 - 适配 **Create Fabric 6.0.8.1** / **Minecraft 1.20.1**（Fabric）— Supports **Create Fabric 6.0.8.1** / **Minecraft 1.20.1** (Fabric)
-- 版本 **0.2.0+1.20.1** · 协议 **LGPL-3.0** — Version **0.2.0+1.20.1** · License **LGPL-3.0**
+- 版本 **V1.0.1** · 协议 **LGPL-3.0** — Version **V1.0.1** · License **LGPL-3.0**
 
-> [English](#english) · [中文文档](#中文文档)
-> 内置 简体中文 / 繁體中文 / English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
+> 模组内置 简体中文 / 繁體中文 / English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
+
+## Table of Contents / 目录
+
+### [English](#english) · [中文文档](#中文文档)
+
+> 嘿，你是不是在找[兼容性说明](#兼容性)？
+> Hey, are you looking for [compatibility notes](#compatibility)?
+
+### 中文
+- [简介](#简介)
+- [关于本移植](#关于本移植)
+- [功能特性](#功能特性)
+- [添加的内容](#添加的内容)
+- [机制与使用](#机制与使用)
+- [筛选配方](#筛选配方)
+- [配置](#配置)
+- [本地化](#本地化)
+- [运行要求](#运行要求)
+- [兼容性](#兼容性)
+  - [确认兼容（实测）](#确认兼容实测)
+  - [理论兼容（基于官方兼容边界推导）](#理论兼容基于官方兼容边界推导)
+  - [兼容性未知](#兼容性未知)
+  - [不兼容](#不兼容)
+- [许可与致谢](#许可与致谢)
+- [下载与构建](#下载与构建)
 
 ---
+
+### English
+- [About this port](#about-this-port)
+- [Features](#features)
+- [Blocks (defaults all configurable)](#blocks-defaults-all-configurable)
+- [Meshes (9)](#meshes-9)
+- [Mechanics & usage](#mechanics--usage)
+- [Recipes](#recipes)
+- [Configuration](#configuration)
+- [Localization](#localization)
+- [Requirements](#requirements)
+- [Compatibility](#compatibility)
+  - [Confirmed compatible (tested)](#compatibility)
+  - [Theoretically compatible](#compatibility)
+  - [Unknown compatibility](#compatibility)
+  - [Not compatible](#compatibility)
+- [License & credits](#license--credits)
+- [Download & build](#download--build)
+
 
 ## English
 
@@ -38,7 +81,7 @@ Given this mod's long-running balance debate, this build adds **custom balance a
 
 ---
 
-### Blocks (defaults — all configurable)
+### Blocks (defaults all configurable)
 
 | Block | Description |
 | :--- | :--- |
@@ -142,7 +185,7 @@ All 8 built-in language files are fully translated — including the config UI (
 
 ### Requirements
 
-- Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
+- Minecraft **1.20.1** · Fabric Loader **0.17.2+** · Fabric API **≥ 0.92.11+1.20.1**
 - **Create Fabric ≥ 6.0.8.1+build.1744-mc1.20.1** (bundles Registrate / Ponder / Flywheel / Porting Lib)
 - Java **17–21**
 
@@ -404,7 +447,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 ### 运行要求
 
-- Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
+- Minecraft **1.20.1** · Fabric Loader **0.17.2+** · Fabric API **≥ 0.92.11+1.20.1**
 - **Create Fabric ≥ 6.0.8.1+build.1744-mc1.20.1**（嵌套自带 Registrate / Ponder / Flywheel / Porting Lib）
 - Java **17~21**
 
@@ -479,4 +522,4 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 **源码（已开源，LGPL-3.0）**：[GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
 
-**从源码构建**：JDK 17+；将 `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 及其嵌套 jar 按 `libs/` 布局放置后，执行 `gradlew.bat build`，产物生成于 `build/libs/createsifter-0.2.0+1.20.1.jar`。详见 `Porting-Notes-移植说明.md`。
+**从源码构建**：JDK 17+；将 `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 及其嵌套 jar 按 `libs/` 布局放置后，执行 `gradlew.bat build`，产物生成于 `build/libs/createsifter-V1.0.1.jar`。详见 `Porting-Notes-移植说明.md`。

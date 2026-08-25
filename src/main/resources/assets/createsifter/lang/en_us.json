@@ -1,7 +1,7 @@
 {
   "block.createsifter.brass_sifter": "Brass Sifter",
-  "block.createsifter.crushed_end_stone": "Crushed end stone",
-  "block.createsifter.dust": "Dust block",
+  "block.createsifter.crushed_end_stone": "Crushed End Stone",
+  "block.createsifter.dust": "Dust Block",
   "block.createsifter.sifter": "Sifter",
   "create.createsifter.recipe.sifting.minimumspeed": "%1$s RPM",
   "create.recipe.sifting": "Sifting recipe",

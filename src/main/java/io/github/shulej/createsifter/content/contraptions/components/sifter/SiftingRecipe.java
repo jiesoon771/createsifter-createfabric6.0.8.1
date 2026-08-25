@@ -49,7 +49,7 @@ public class SiftingRecipe extends AbstractCrushingRecipe {
 	private float minimumSpeed;
 	private boolean advanced;
 	/** Game time of the last attempt to re-resolve ingredients that were empty at load. */
-	private long lastEmptyResolveAttempt = Long.MIN_VALUE;
+	private long lastEmptyResolveAttempt = 0;
 	private boolean warnedEmptyIngredients;
 
 	public SiftingRecipe(SiftingRecipeBuilder.SiftingRecipeParams params) {
