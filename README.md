@@ -13,7 +13,7 @@
 > Hey, are you looking for [compatibility notes](#compatibility)?
 
 ### 中文
-[简介](#简介)
+- [简介](#简介)
 - [关于本移植](#关于本移植)
 - [功能特性](#功能特性)
 - [添加的内容](#添加的内容)
