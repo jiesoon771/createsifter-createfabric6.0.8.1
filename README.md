@@ -12,44 +12,26 @@
 > 嘿，你是不是在找[兼容性说明](#兼容性)？
 > Hey, are you looking for [compatibility notes](#compatibility)?
 
-### 中文
-- [简介](#简介)
-- [关于本移植](#关于本移植)
-- [功能特性](#功能特性)
-- [添加的内容](#添加的内容)
-- [机制与使用](#机制与使用)
-- [筛选配方](#筛选配方)
-- [配置](#配置)
-- [本地化](#本地化)
-- [运行要求](#运行要求)
-- [兼容性](#兼容性)
-  - [确认兼容（实测）](#确认兼容实测)
-  - [理论兼容（基于官方兼容边界推导）](#理论兼容基于官方兼容边界推导)
-  - [兼容性未知](#兼容性未知)
-  - [不兼容](#不兼容)
-- [许可与致谢](#许可与致谢)
-- [下载与构建](#下载与构建)
+| English | 中文 |
+|---|---|
+| [About this port](#about-this-port) | [简介](#简介) |
+| [Features](#features) | [关于本移植](#关于本移植) |
+| [Blocks (defaults all configurable)](#blocks-defaults-all-configurable) | [功能特性](#功能特性) |
+| [Meshes (9)](#meshes-9) | [添加的内容](#添加的内容) |
+| [Mechanics & usage](#mechanics--usage) | [机制与使用](#机制与使用) |
+| [Recipes](#recipes) | [筛选配方](#筛选配方) |
+| [Configuration](#configuration) | [配置](#配置) |
+| [Localization](#localization) | [本地化](#本地化) |
+| [Requirements](#requirements) | [运行要求](#运行要求) |
+| [Compatibility](#compatibility) | [兼容性](#兼容性) |
+| [Confirmed compatible (tested)](#compatibility) | [确认兼容（实测）](#确认兼容实测) |
+| [Theoretically compatible](#compatibility) | [理论兼容（基于官方兼容边界推导）](#理论兼容基于官方兼容边界推导) |
+| [Unknown compatibility](#compatibility) | [兼容性未知](#兼容性未知) |
+| [Not compatible](#compatibility) | [不兼容](#不兼容) |
+| [License & credits](#license--credits) | [许可与致谢](#许可与致谢) |
+| [Download & build](#download--build) | [下载与构建](#下载与构建) |
 
 ---
-
-### English
-- [About this port](#about-this-port)
-- [Features](#features)
-- [Blocks (defaults all configurable)](#blocks-defaults-all-configurable)
-- [Meshes (9)](#meshes-9)
-- [Mechanics & usage](#mechanics--usage)
-- [Recipes](#recipes)
-- [Configuration](#configuration)
-- [Localization](#localization)
-- [Requirements](#requirements)
-- [Compatibility](#compatibility)
-  - [Confirmed compatible (tested)](#compatibility)
-  - [Theoretically compatible](#compatibility)
-  - [Unknown compatibility](#compatibility)
-  - [Not compatible](#compatibility)
-- [License & credits](#license--credits)
-- [Download & build](#download--build)
-
 
 ## English
 
