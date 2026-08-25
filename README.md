@@ -3,10 +3,70 @@
 - 适配 **Create Fabric 6.0.8.1** / **Minecraft 1.20.1**（Fabric）— Supports **Create Fabric 6.0.8.1** / **Minecraft 1.20.1** (Fabric)
 - 版本 **V1.0.1** · 协议 **LGPL-3.0** — Version **V1.0.1** · License **LGPL-3.0**
 
-> [English](#english) · [中文文档](#中文文档)
-> 内置 简体中文 / 繁體中文 / English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
+> 模组内置 简体中文 / 繁體中文 / English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
+
+## Table of Contents / 目录
+
+### [English](#english) · [中文文档](#中文文档)
+
+> 嘿，你是不是在找[兼容性说明](#兼容性)？
+> Hey, are you looking for [compatibility notes](#compatibility)?
+
+### 中文
+[简介](#简介)
+- [关于本移植](#关于本移植)
+- [功能特性](#功能特性)
+- [添加的内容](#添加的内容)
+  - [方块](#方块)
+  - [筛网（物品）](#筛网物品)
+  - [配方总览](#配方总览)
+- [机制与使用](#机制与使用)
+  - [动力输入](#动力输入)
+  - [基本操作](#基本操作)
+  - [黄铜动力筛子](#黄铜动力筛子)
+  - [手持筛滤](#手持筛滤)
+  - [含水筛选](#含水筛选)
+- [筛选配方](#筛选配方)
+  - [沙砾（Gravel）](#沙砾gravel)
+  - [沙子（Sand）](#沙子sand)
+  - [灵魂沙（Soul Sand）](#灵魂沙soul-sand)
+  - [泥土（Dirt，需含水）](#泥土dirt需含水)
+  - [粉碎玄武岩（Crushed Basalt，本适配版新增下界合金链）](#粉碎玄武岩crushed-basalt本适配版新增下界合金链)
+- [配置](#配置)
+  - [难度预设](#难度预设)
+  - [逐配方覆盖](#逐配方覆盖)
+  - [下界合金开关](#下界合金开关)
+  - [其他机械参数](#其他机械参数)
+- [本地化](#本地化)
+- [运行要求](#运行要求)
+- [兼容性](#兼容性)
+  - [确认兼容（实测）](#确认兼容实测)
+  - [理论兼容（基于官方兼容边界推导）](#理论兼容基于官方兼容边界推导)
+  - [兼容性未知](#兼容性未知)
+  - [不兼容](#不兼容)
+- [许可与致谢](#许可与致谢)
+- [下载与构建](#下载与构建)
 
 ---
+
+### English
+- [About this port](#about-this-port)
+- [Features](#features)
+- [Blocks (defaults all configurable)](#blocks-defaults-all-configurable)
+- [Meshes (9)](#meshes-9)
+- [Mechanics & usage](#mechanics--usage)
+- [Recipes](#recipes)
+- [Configuration](#configuration)
+- [Localization](#localization)
+- [Requirements](#requirements)
+- [Compatibility](#compatibility)
+  - [Confirmed compatible (tested)](#compatibility)
+  - [Theoretically compatible](#compatibility)
+  - [Unknown compatibility](#compatibility)
+  - [Not compatible](#compatibility)
+- [License & credits](#license--credits)
+- [Download & build](#download--build)
+
 
 ## English
 
@@ -38,7 +98,7 @@ Given this mod's long-running balance debate, this build adds **custom balance a
 
 ---
 
-### Blocks (defaults — all configurable)
+### Blocks (defaults all configurable)
 
 | Block | Description |
 | :--- | :--- |
