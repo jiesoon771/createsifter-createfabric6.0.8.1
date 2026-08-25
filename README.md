@@ -419,7 +419,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 | :--- | :--- |
 | `zh_cn.json` | 简体中文 — 完整翻译 |
 | `zh_tw.json` | 繁體中文 — 完整翻譯 |
-| `zh_hk.json` | 繁體中文 — Full |
+| `zh_hk.json` | 繁體中文 — 完整翻譯 |
 | `en_us.json` | English (US) — Complete |
 | `en_ud.json` | ǝɹǝɥʇ sı ɥsılƃuƎ uʍopǝpᴉsdn — Complete |
 | `fr_fr.json` | Français — Traduction complète |
