@@ -1,6 +1,6 @@
 # 机械动力：筛子（Create Sifting）—— Create 6.0.8.1 移植版
 
-版本：**0.2.0+1.20.1**（Fabric / Minecraft 1.20.1）
+版本：**V1.0.1**（Fabric / Minecraft 1.20.1）
 移植作者：**jiesoon771**
 基于：原版 [Shulej/createsifter](https://github.com/Shulej/createsifter) 0.1.1+1.20.1（最早源头为 oierbravo 的 LGPL-3.0 Forge 原版），移植到 **Create Fabric 6.0.8.1+build.1744-mc1.20.1**
 
@@ -10,7 +10,7 @@
 
 - 原版 0.1.1 是按 Create 0.5.1 的 API 编译的。Create 6.0 移除了它依赖的一大批类（`Lang`→`CreateLang`/catnip、`VecHelper`/`Pair` 迁入 catnip 库、`BlockStressDefaults`→`BlockStressValues`、齿轮渲染 Instance→Visual 系统、Ponder 独立成库等），直接加载必崩。
 - 作者在 GitHub Issue #4 承诺适配 Create 6+，但至今未发布；Modrinth 上也没有其他支持 Create 6 的筛子模组。
-- 因此基于开源源码（最早源头为 LGPL-3.0）自行移植。核心内容与玩法（动力筛子/黄铜筛子、7 种筛网、手持筛滤、20 个内置配方）与原版一致。
+- 因此基于开源源码（最早源头为 LGPL-3.0）自行移植。核心内容与玩法（动力筛子/黄铜筛子、6 种基础筛网 + 3 种高级筛网、手持筛滤、24 个内置配方）与原版一致。
 
 ## 二、主要改动（相对原版 0.1.1 源码）
 
@@ -24,9 +24,9 @@
 | Ponder | 注册机制改为独立 Ponder 库的 `PonderPlugin`（客户端初始化时 `PonderIndex.addPlugin`）；场景改用 1.0.91 API（`world()`/`overlay()`/`util.select()` 等方法形式；移除已删除的 `setKineticSpeed`/`createItemOnBelt`） |
 | JEI 兼容 | 保留，升级到 JEI 15.49 编译（运行时与 JEI 15.20+ 兼容，已实测 15.20.0.134） |
 | KubeJS / CraftTweaker 兼容 | 已移除（依赖解析失败且不被使用；原版兼容代码同样只适配 Create 0.5.1） |
-| 数据生成 | 移除 `fabric-datagen` 入口与数据生成类；20 个配方以静态 JSON 内置（已实测服务端全部加载） |
+| 数据生成 | 移除 `fabric-datagen` 入口与数据生成类；24 个配方以静态 JSON 内置（已实测服务端全部加载） |
 | 配置 | 原样保留（ForgeConfigSpec + forgeconfigapiport，由 Create 6.0.8.1 嵌套提供） |
-| 语言文件 | `zh_cn.json` / `zh_tw.json` 补全到 22 键（对齐英文） |
+| 语言文件 | 8 种语言（en_us / en_ud / zh_cn / zh_tw / ja_jp / ko_kr / fr_fr / ru_ru）全部补全到 52 键（对齐英文），占位符与键集合一致 |
 | 字节码 | 以 `--release 17` 编译（Java 17 字节码），`fabric.mod.json` 声明 `java >=17`；Java 17 / 21 均已实测可运行 |
 
 ## 三、Create 版本兼容性
@@ -40,10 +40,10 @@
 
 ## 四、安装（直接使用）
 
-1. 成品 jar：仓库不直接提供 jar，可从 Modrinth 页下载发布版，或自行构建（见第五节，`gradlew.bat build` 后产出 `build/libs/createsifter-0.2.0+1.20.1.jar`）。
-2. 复制到实例的 `mods/` 目录（例如 `versions\1.20.1-Fabric_0.19.3g\mods\`），**替换掉旧的 `createsifter-0.1.1+1.20.1.jar`（先删除旧文件）**。
+1. 成品 jar：仓库不直接提供 jar，可从 Modrinth 页下载发布版，或自行构建（见第五节，`gradlew.bat build` 后产出 `build/libs/createsifter-V1.0.1.jar`）。
+2. 复制到实例的 `mods/` 目录，**替换掉旧的 `createsifter-0.1.1+1.20.1.jar`（先删除旧文件）**。
 3. 环境要求：
-   - Minecraft 1.20.1（Fabric Loader 0.16.5+，实测 0.19.3）
+   - Minecraft 1.20.1（Fabric Loader **0.17.2+**）
    - Fabric API ≥ 0.92.11+1.20.1
    - **Create Fabric ≥ 6.0.8.1+build.1744-mc1.20.1**（嵌套自带 Registrate/Ponder/Flywheel/Porting Lib）
    - Java **17 或更高**（17 与 21 均已实测）
@@ -57,19 +57,19 @@
    - 直接把实例 mods 里的 `[机械动力] create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 复制为 `libs/create-fabric-6.0.8.1.jar`；
    - 解压该 jar，把其中 `META-INF/jars/*.jar`（22 个）以及它们各自再嵌套的 `META-INF/jars/*.jar`（二级，约 5 个 2.3.13 模块）一起放进 `libs/nested/`。构建脚本会用到：
      - `libs/create-fabric-6.0.8.1.jar`
-     - `libs/nested/` 下的：Ponder、Registrate、Flywheel、base、transfer、porting_lib_core/fluids/utility/data/common、forgeconfigapiport 等（照抄本仓库原始 libs 布局即可；本交付包未包含这些大体积依赖）。
+     - `libs/nested/` 下的：Ponder、Registrate、Flywheel、base、transfer、porting_lib_core/fluids/utility/data/common、forgeconfigapiport 等（本仓库 `libs/` 已附带完整依赖布局，可直接引用）。
 2. 命令行执行：
    ```
    gradlew.bat build
    ```
-   成品输出在 `build/libs/createsifter-0.2.0+1.20.1.jar`。
+   成品输出在 `build/libs/createsifter-V1.0.1.jar`。
 
 ## 六、已做的验证
 
 - 客户端真实启动（标题界面）：CS 精简实例（Java 21）与 270 模组整合包（Java 17 / Java 21，含 Sodium、Iris、JEI 15.20.0.134、Create 6.0.8.1）均正常进入游戏界面。
-- 专用服务器真实启动：世界加载成功，日志 `Loaded 23 recipes`，全部筛子配方解析通过。
+- 专用服务器真实启动：世界加载成功，日志加载全部筛子配方解析通过。
 - 配置生成正确：`sifter.stressImpact=4.0`、`brass_sifter.stressImpact=8.0` 等。
-- 已知（原版即存在、与本移植无关）：`dust` / `crushed_end_stone` 两个废弃物品的 loot table 在加载时各报一条解析错误——原版 0.1.1 jar 同样存在，方块/物品未注册，无实际影响。
+- `dust` / `crushed_end_stone` / `crushed_basalt` 的 loot table 与 `mineable/pickaxe` 标签已补齐，挖掘可正常掉落。
 
 ## 七、文件结构
 
@@ -84,10 +84,10 @@ createsifter/
 ├── LICENSE.txt                      ← LGPL-3.0（含移植者附加说明）
 ├── .editorconfig
 ├── .gitignore
-└── 移植说明.md                      ← 本文档
+└── Porting-Notes-移植说明.md      ← 本文档
 ```
 
-> 注意：成品 jar（`createsifter-0.2.0+1.20.1.jar`）是**构建产物**，不会入库；执行 `gradlew.bat build` 后生成于 `build/libs/` 下。原版 0.1.1 备份也不随仓库提供。
+> 注意：成品 jar（`createsifter-V1.0.1.jar`）是**构建产物**，不会入库；执行 `gradlew.bat build` 后生成于 `build/libs/` 下。原版 0.1.1 备份也不随仓库提供。
 
 ## 八、许可与版权
 

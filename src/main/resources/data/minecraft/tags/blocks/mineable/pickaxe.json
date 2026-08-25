@@ -1,6 +1,9 @@
 {
   "values": [
     "createsifter:sifter",
-    "createsifter:brass_sifter"
+    "createsifter:brass_sifter",
+    "createsifter:crushed_end_stone",
+    "createsifter:crushed_basalt",
+    "createsifter:dust"
   ]
 }

@@ -1,7 +1,7 @@
 # Create Sifting — Create Fabric 6.0.8.1
 
 - 适配 **Create Fabric 6.0.8.1** / **Minecraft 1.20.1**（Fabric）— Supports **Create Fabric 6.0.8.1** / **Minecraft 1.20.1** (Fabric)
-- 版本 **0.2.0+1.20.1** · 协议 **LGPL-3.0** — Version **0.2.0+1.20.1** · License **LGPL-3.0**
+- 版本 **V1.0.1** · 协议 **LGPL-3.0** — Version **V1.0.1** · License **LGPL-3.0**
 
 > [English](#english) · [中文文档](#中文文档)
 > 内置 简体中文 / 繁體中文 / English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
@@ -142,7 +142,7 @@ All 8 built-in language files are fully translated — including the config UI (
 
 ### Requirements
 
-- Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
+- Minecraft **1.20.1** · Fabric Loader **0.17.2+** · Fabric API **≥ 0.92.11+1.20.1**
 - **Create Fabric ≥ 6.0.8.1+build.1744-mc1.20.1** (bundles Registrate / Ponder / Flywheel / Porting Lib)
 - Java **17–21**
 
@@ -404,7 +404,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 ### 运行要求
 
-- Minecraft **1.20.1** · Fabric Loader **0.16.5+** · Fabric API **≥ 0.92.11+1.20.1**
+- Minecraft **1.20.1** · Fabric Loader **0.17.2+** · Fabric API **≥ 0.92.11+1.20.1**
 - **Create Fabric ≥ 6.0.8.1+build.1744-mc1.20.1**（嵌套自带 Registrate / Ponder / Flywheel / Porting Lib）
 - Java **17~21**
 
@@ -479,4 +479,4 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 **源码（已开源，LGPL-3.0）**：[GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
 
-**从源码构建**：JDK 17+；将 `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 及其嵌套 jar 按 `libs/` 布局放置后，执行 `gradlew.bat build`，产物生成于 `build/libs/createsifter-0.2.0+1.20.1.jar`。详见 `Porting-Notes-移植说明.md`。
+**从源码构建**：JDK 17+；将 `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 及其嵌套 jar 按 `libs/` 布局放置后，执行 `gradlew.bat build`，产物生成于 `build/libs/createsifter-V1.0.1.jar`。详见 `Porting-Notes-移植说明.md`。

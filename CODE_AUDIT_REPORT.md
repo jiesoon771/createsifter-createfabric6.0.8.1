@@ -1,5 +1,18 @@
 # Create Sifter (1.20 Fabric 移植) 代码审计报告
 
+> ## ⚠️ 本报告已过时 · SUPERSEDED
+>
+> 本报告基于 **2026-08-21** 旧代码基线（分支 `1.20`，HEAD `92d3514`），其后代码已大量重写。
+> 经 2026-08-25 复核，**原报告的 4 个"严重"问题（C1 空配料越界、C2 override 解析异常、C3 产物静默销毁、C4 渲染除零）及 H4（`advanced_custom_mesh` 误注册）均已修复**，不再成立：
+>
+> - **C1** → `SiftingRecipe` 已加 `getItems().length == 0` 空配料保护（当前代码见 `SiftingRecipe.java` 构造函数适量边界）。
+> - **C2** → `SifterConfig` 的 `parseInt(parts[1], -1)` 已适配畸形条目，不再抛 `NumberFormatException`。
+> - **C3** → `SifterBlockEntity.process()` 已改为事务插槽 + 收集溢出物并落回地面（`tryToInsertOutputItem` 返回未插入部分），产物不再静默丢失。
+> - **C4** → 渲染进度已加 `total <= 0` 保护与 clamp，不再产生 Infinity/NaN 矩阵。
+> - **H4** → `ModItems.ADVANCED_CUSTOM_MESH` 已改为 `AdvancedCustomMesh::new`。
+>
+> 本文件仅作历史留存，**请以当前 `src/main` 源码与最新版本（V1.0.1）为准**，勿据此判断当前模组存在崩溃/丢件缺陷。
+
 - **审计日期**: 2026-08-21
 - **审计范围**: `src/main/java` 全部源码 + `src/main/resources` 数据/资源（重点是当前工作区未提交的改动：难度系统、Mod Menu 配置界面、 crushed_netherrack 配方链）
 - **代码基线**: 分支 `1.20`，HEAD `92d3514` + 工作区未提交修改

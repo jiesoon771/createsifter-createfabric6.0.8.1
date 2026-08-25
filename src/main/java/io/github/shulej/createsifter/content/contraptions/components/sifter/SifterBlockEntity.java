@@ -321,6 +321,7 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 		totalTime = 0;
 		minimumSpeed = getDefaultMinimumSpeed();
 		sendData();
+		setChanged();
 	}
 
 	@Override
