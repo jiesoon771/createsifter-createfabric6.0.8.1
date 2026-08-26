@@ -3,7 +3,7 @@
 - 适配 **Create Fabric 6.0.8.1** / **Minecraft 1.20.1**（Fabric）— Supports **Create Fabric 6.0.8.1** / **Minecraft 1.20.1** (Fabric)
 - 版本 **V1.0.1** · 协议 **LGPL-3.0** — Version **V1.0.1** · License **LGPL-3.0**
 
-> 模组内置 简体中文 / 繁體中文 / English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
+> 模组内置 简体中文 / 繁體中文 / 文言（华夏）/ English / Français / 日本語 / 한국어 / Русский / Upside-down English —— 全部完整翻译（含配置界面）。
 
 ## Table of Contents / 目录
 
@@ -255,7 +255,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 - **两种动能筛子**（动力筛子 + 黄铜动力筛子），保留熟悉的机械动力操作手感；
 - **9 种筛网**（丝线、安山岩、锌、黄铜、自定义、耐固、高级黄铜、高级耐固、高级自定义）；
 - **13 条内置筛分配方**、**9 条合成配方**与 **2 条玄武岩处理配方**；
-- **8 种语言完整本地化**（简中 / 繁中 / 英 / 法 / 日 / 韩 / 俄 / 倒装英语），含配置界面；
+- **9 种语言完整本地化**（简中 / 繁中 / 文言（华夏）/ 英 / 法 / 日 / 韩 / 俄 / 倒装英语），含配置界面；
 - 客户端与服务端均可用，支持 **JEI**（15.20+）配方显示；
 - 额外支持 **1.20.1 的下界合金筛选**（耐固 / 高级耐固筛网 + 粉碎玄武岩）。
 
@@ -413,13 +413,14 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 ### 本地化
 
-内置 8 种语言文件**全部完整翻译**（含配置界面：物品、方块、难度预设、逐配方覆盖界面）：
+内置 9 种语言文件**全部完整翻译**（含配置界面：物品、方块、难度预设、逐配方覆盖界面）：
 
 | 语言文件 | 完成度 |
 | :--- | :--- |
 | `zh_cn.json` | 简体中文 — 完整翻译 |
 | `zh_tw.json` | 繁體中文 — 完整翻譯 |
 | `zh_hk.json` | 繁體中文 — 完整翻譯 |
+| `lzh.json` | 文言（华夏）— 備譯 |
 | `en_us.json` | English (US) — Complete |
 | `en_ud.json` | ǝɹǝɥʇ sı ɥsılƃuƎ uʍopǝpᴉsdn — Complete |
 | `fr_fr.json` | Français — Traduction complète |
@@ -506,4 +507,4 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 **源码（已开源，LGPL-3.0）**：[GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
 
-**从源码构建**：JDK 17+；将 `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 及其嵌套 jar 按 `libs/` 布局放置后，执行 `gradlew.bat build`，产物生成于 `build/libs/createsifter-V1.0.1.jar`。详见 `Porting-Notes-移植说明.md`。
+**从源码构建**：JDK 17+；将 `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 及其嵌套 jar 按 `libs/` 布局放置后，执行 `gradlew.bat build`，产物生成于 `build/libs/createsifter-V1.0.3.jar`。详见 `Porting-Notes-移植说明.md`。
