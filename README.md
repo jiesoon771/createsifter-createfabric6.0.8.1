@@ -157,6 +157,7 @@ All 8 built-in language files are fully translated — including the config UI (
 | `zh_cn.json` | **简体中文** — Full |
 | `zh_tw.json` | **繁體中文** — Full |
 | `zh_hk.json` | **繁體中文** — Full |
+| `lzh.json` | 文言（华夏）— 備譯 |
 | `en_us.json` | English (US) — Complete |
 | `en_ud.json` | ǝɹǝɥʇ sı ɥsılƃuƎ uʍopǝpᴉsdn — Complete |
 | `fr_fr.json` | Français — Traduction complète |
