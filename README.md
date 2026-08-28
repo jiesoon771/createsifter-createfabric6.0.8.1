@@ -223,7 +223,7 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 - Download: [GitHub Releases](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1/releases) · [Modrinth](https://modrinth.com/mod/create-sifting-create-6-fabric) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-sifting-create-fabric-6-0-8-1/preview)
 - Source (LGPL-3.0): [GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
-- Build from source: JDK 17+; place `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` and its nested jars in `libs/`, then run `gradlew.bat build` → `build/libs/createsifter-0.2.0+1.20.1.jar`. See `Porting-Notes-移植说明.md`.
+- Build from source: JDK 17+; place create-fabric-6.0.8.1+build.1744-mc1.20.1.jar and its nested jars in libs/, then run gradlew.bat build → build/libs/createsifter-0.2.0+1.20.1.jar. See Porting-Notes-移植说明.md.
 
 ---
 
@@ -508,4 +508,4 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 
 **源码（已开源，LGPL-3.0）**：[GitHub](https://github.com/jiesoon771/createsifter-createfabric6.0.8.1)
 
-**从源码构建**：JDK 17+；将 `create-fabric-6.0.8.1+build.1744-mc1.20.1.jar` 及其嵌套 jar 按 `libs/` 布局放置后，执行 `gradlew.bat build`，产物生成于 `build/libs/createsifter-V1.0.3.jar`。详见 `Porting-Notes-移植说明.md`。
+**从源码构建**：JDK 17+；将 create-fabric-6.0.8.1+build.1744-mc1.20.1.jar 及其嵌套 jar 按 libs/ 布局放置后，执行 gradlew.bat build，产物生成于 build/libs/createsifter-V1.0.3.jar。详见 Porting-Notes-移植说明.md。
