@@ -150,7 +150,7 @@ Graphical config screen via **Mod Menu → Config** (no keybind needed). Setting
 
 ### Localization
 
-All 8 built-in language files are fully translated — including the config UI (items, blocks, difficulty presets, and the per-recipe override screen):
+All 9 built-in languages are fully translated — including the config UI (items, blocks, difficulty presets, and the per-recipe override screen):
 
 | Language file | Status |
 | :--- | :--- |
