@@ -59,7 +59,8 @@ Given this mod's long-running balance debate, this build adds **custom balance a
 - **13 built-in sifting recipes**, plus 9 crafting recipes and 2 basalt processing recipes;
 - **8 languages fully localized** (EN / CN / TW / FR / JA / KO / RU / UD), config UI included;
 - Works on both client and server; recipes shown in **JEI** (15.20+);
-- **Netherite sifting on 1.20.1** (sturdy / advanced sturdy meshes + crushed basalt).
+- **Netherite sifting on 1.20.1** (sturdy / advanced sturdy meshes + crushed basalt);
+- **In-game recipe editor** (new in v1.1.0): rewrite any sifting recipe from the config screen — per-output chance & count, add or remove outputs, delete or create recipes, Reset All; edits need cheats/op and sync to all online players in real time, with a permanent recipe lock available for server owners.
 
 ---
 
@@ -143,6 +144,8 @@ Graphical config screen via **Mod Menu → Config** (no keybind needed). Setting
 - Custom: freely adjustable
 
 **Per-recipe overrides** — open any recipe in the config list to change each output's chance (0–100%) and count; changes apply immediately on drop.
+
+**In-game recipe editor** (new in v1.1.0) — beyond tuning numbers: remove single outputs, delete entire recipes, create brand-new recipes (block siftable + mesh + drops, with duplicate detection), or restore everything with Reset All. Recipe edits require cheats/op, sync to all connected players in real time (hand sifting and JEI stay consistent with the server), and an optional recipe lock makes the editor permanently read-only until re-enabled in the config file. A session Cancel button discards every change made since the screen was opened.
 
 **Other mechanical defaults** (configurable): stress impact 4 / 8su · minimum speed 1 / 16 RPM · output capacity 16 / 64 slots · items per cycle (brass) 8.
 
@@ -258,7 +261,8 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 - **13 条内置筛分配方**、**9 条合成配方**与 **2 条玄武岩处理配方**；
 - **9 种语言完整本地化**（简中 / 繁中 / 文言（华夏）/ 英 / 法 / 日 / 韩 / 俄 / 倒装英语），含配置界面；
 - 客户端与服务端均可用，支持 **JEI**（15.20+）配方显示；
-- 额外支持 **1.20.1 的下界合金筛选**（耐固 / 高级耐固筛网 + 粉碎玄武岩）。
+- 额外支持 **1.20.1 的下界合金筛选**（耐固 / 高级耐固筛网 + 粉碎玄武岩）；
+- **游戏内配方编辑器**（v1.1.0 新增）：在配置界面直接改写任意筛分配方——逐产物调概率与数量、增删产物、删除或新建配方、一键重置全部；编辑需作弊/OP 权限，改动实时同步全体在线玩家，并为服主提供永久的配方编辑锁。
 
 ---
 
@@ -397,6 +401,10 @@ Thanks to **oierbravo**, **Shulej**, and the **Create** development team.
 #### 逐配方覆盖
 
 进入存档后，在配置界面的配方列表中点击任意配方，可单独修改每个产物的掉落概率（0–100%）与单次筛出数量，改动在物品掉落时即时生效。
+
+#### 游戏内配方编辑器（v1.1.0 新增）
+
+在逐配方覆盖之上更进一步：可删除单个产物或整条配方、新建配方（方块型筛分物 + 筛网 + 掉落列表，保存前自动查重）、一键重置全部配方。编辑需要作弊 / OP 权限，改动实时同步给所有在线玩家（手筛与 JEI 与服务器保持一致）；另提供配方编辑锁，开启后编辑器永久只读，仅在配置文件中手动解除。配置界面支持会话级取消，退出即还原本次全部改动。
 
 #### 下界合金开关
 

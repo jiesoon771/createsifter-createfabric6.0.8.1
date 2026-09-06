@@ -38,3 +38,7 @@ run/
 
 # local audit report (keep local, not published)
 CODE_AUDIT_REPORT_2026-08-22.md
+
+# local test artifacts
+smoke/
+libs/nested/
