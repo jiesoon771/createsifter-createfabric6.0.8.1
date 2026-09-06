@@ -296,13 +296,15 @@ public class SifterBlockEntity extends KineticBlockEntity implements SidedStorag
 
 	/**
 	 * Place one mesh into the mesh slot, consuming one from the held stack.
+	 * Creative players keep their mesh (consumption is skipped).
 	 * @return true when a mesh was actually placed (slot was empty).
 	 */
 	public boolean insertMesh(ItemStack meshStack, Player player) {
 		if (meshInv.getStackInSlot(0).isEmpty()) {
 			ItemStack meshToInsert = meshStack.copy();
 			meshToInsert.setCount(1);
-			meshStack.shrink(1);
+			if (player == null || !player.getAbilities().instabuild)
+				meshStack.shrink(1);
 			meshInv.setStackInSlot(0, meshToInsert);
 			setChanged();
 			return true;

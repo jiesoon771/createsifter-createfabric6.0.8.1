@@ -7,54 +7,39 @@
  */
 package io.github.shulej.createsifter.compat.modmenu;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SifterConfig;
 import io.github.shulej.createsifter.content.contraptions.components.sifter.SiftingRecipe;
-import net.minecraft.client.Minecraft;
+import io.github.shulej.createsifter.foundation.data.recipe.CustomRecipeStore;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Per-recipe editor. For each output of a sifting recipe the player can change
- * the drop chance (0-100%) and the amount per success. Changes are staged in
- * memory and written to the server-side override table when the screen closes
- * (single-player only; on a remote server the screen is read-only).
+ * the drop chance (0-100%) and the amount per success, delete single outputs
+ * (red X), append new outputs through an item input row, or delete the whole
+ * recipe (with confirmation). Every change is staged in memory and written to
+ * the config table when the screen closes (single-player only).
  *
- * 单条配方的编辑界面：可逐条修改每个产物的掉落概率（0-100%）与每次数量。
- * 改动先暂存在内存中，关闭界面时统一提交到服务端配置表中并保存。
+ * 单条配方的编辑界面：逐条修改产物概率/数量、红叉删除单个产物、输入行追加新产物、
+ * 或（确认后）删除整个配方。改动暂存内存，关闭界面时统一提交到配置。
  */
-public class RecipeEditScreen extends Screen {
+public class RecipeEditScreen extends SifterRecipeEditorScreen {
 
-	private final Screen parent;
 	private final SiftingRecipe recipe;
-	private final List<OutputRow> rows = new ArrayList<>();
-	private final List<Button> rowButtons = new ArrayList<>();
-	private int scroll;
-
-	private static final int ROW_H = 24;
-
-	/** One row per output; overrides are staged here and only committed on close. */
-	private static final class OutputRow {
-		final ProcessingOutput output;
-		int chancePercent;
-		int count;
-		OutputRow(ProcessingOutput output, int chancePercent, int count) {
-			this.output = output;
-			this.chancePercent = chancePercent;
-			this.count = count;
-		}
-	}
 
 	public RecipeEditScreen(Screen parent, SiftingRecipe recipe) {
-		super(Component.translatable("createsifter.config.recipe_title"));
-		this.parent = parent;
+		super(Component.translatable("createsifter.config.recipe_title"), parent);
 		this.recipe = recipe;
 		List<ProcessingOutput> outputs = recipe.getRollableResults();
 		for (int i = 0; i < outputs.size(); i++) {
@@ -66,168 +51,142 @@ public class RecipeEditScreen extends Screen {
 		}
 	}
 
-	/** Left edge of the centered edit block; wide enough to hold steppers/value/icon. */
-	private int blockX() {
-		return Math.max(14, (this.width - 460) / 2);
-	}
-
-	private boolean serverConfigLocked() {
-		Minecraft mc = Minecraft.getInstance();
-		return mc.level == null || (mc.getCurrentServer() != null && !mc.hasSingleplayerServer());
+	/**
+	 * Editing any recipe — built-in or player-created — needs cheat/op
+	 * permission; players without it can only change the difficulty.
+	 */
+	@Override
+	protected boolean canEdit() {
+		return super.canEdit() && canCheat();
 	}
 
 	@Override
-	protected void init() {
-		this.clearWidgets();
-		int bx = blockX();
-		boolean locked = serverConfigLocked();
+	protected int rowsTop() {
+		return 40;
+	}
 
-		// Reset-all: anchored to the top-right so it never overlaps the centered block.
+	@Override
+	protected int rowsBottom() {
+		return this.height - 30;
+	}
+
+	@Override
+	protected void buildExtras() {
+		boolean locked = !canEdit();
+
+		// Reset-all: anchored top-right; its left edge is the alignment anchor for
+		// every row's Reset button and its right edge for every row's red X.
 		Button resetAll = Button.builder(
 				Component.translatable("createsifter.config.reset_all"),
 				b -> {
 					for (OutputRow row : rows) {
+						if (row.output == null) continue;
 						row.chancePercent = Math.round(row.output.getChance() * 100);
 						row.count = row.output.getStack().getCount();
 					}
-				}).bounds(this.width - 138, 10, 128, 20).build();
+				}).bounds(this.width - 138, 10, 124, 20).build();
 		resetAll.active = !locked;
 		addRenderableWidget(resetAll);
 
-		// Done: bottom-left, commits staged edits. Disabled while read-only, where
-		// nothing can be written and Cancel is the only sensible exit.
+		// Done: bottom-left, commits staged edits.
 		Button done = Button.builder(
 				Component.translatable("createsifter.config.done"),
-				b -> this.onClose()).bounds(bx, this.height - 26, 80, 18).build();
+				b -> this.onClose()).bounds(blockX(), this.height - 26, 80, 18).build();
 		done.active = !locked;
 		addRenderableWidget(done);
 
 		// Cancel: returns without writing anything (unlike Done/Esc, which commit).
-		addRenderableWidget(Button.builder(
+		Button cancel = Button.builder(
 				Component.translatable("createsifter.config.cancel"),
-				b -> this.minecraft.setScreen(parent)).bounds(bx + 86, this.height - 26, 60, 18).build());
+				b -> this.minecraft.setScreen(parent)).bounds(blockX() + 86, this.height - 26, 60, 18).build();
+		cancel.active = !locked;
+		addRenderableWidget(cancel);
 
-		rebuildRows();
+		// Delete this recipe: red text, same width and alignment as "reset all",
+		// sitting on the same row as Done/Cancel.
+		Button delete = new ColoredButton(this.width - 138, this.height - 26, 124, 18,
+				Component.translatable("createsifter.config.delete_recipe"),
+				b -> confirmDelete(), 0xFF5555);
+		delete.active = !locked;
+		addRenderableWidget(delete);
 	}
 
-	private void clearRows() {
-		for (Button b : rowButtons) removeWidget(b);
-		rowButtons.clear();
+	private void confirmDelete() {
+		if (!canEdit()) return;
+		this.minecraft.setScreen(new ConfirmScreen(
+				ok -> {
+					if (ok) {
+						ClientConfigWrites.execute(() -> {
+							String id = recipe.getId().toString();
+							SifterConfig.setDeleted(id, true);
+							SifterConfig.removeCustomRecipe(id);
+							SifterConfig.clearOverrides(id);
+						});
+						this.minecraft.setScreen(parent);
+					} else {
+						this.minecraft.setScreen(this);
+					}
+				},
+				Component.translatable("createsifter.config.delete_recipe_confirm"),
+				Component.translatable("createsifter.config.delete_recipe_warn"),
+				CommonComponents.GUI_YES, CommonComponents.GUI_NO));
 	}
 
-	private void rebuildRows() {
-		clearRows();
-		int bx = blockX();
-		boolean locked = serverConfigLocked();
-		int outputCount = rows.size();
-		int top = 40;
-		int maxRows = Math.max(1, (this.height - top - 30) / ROW_H);
-		int first = Math.min(scroll, Math.max(0, outputCount - maxRows));
-		this.scroll = first;
-		for (int row = 0; row < maxRows; row++) {
-			int idx = first + row;
-			if (idx >= outputCount) break;
-			final int idxi = idx;
-			int y = top + row * ROW_H;
-			// Chance steppers
-			rowButtons.add(Button.builder(Component.literal("<"), b -> adjust(idxi, 0, -5)).bounds(bx, y, 20, 18).build());
-			rowButtons.add(Button.builder(Component.literal(">"), b -> adjust(idxi, 0, +5)).bounds(bx + 22, y, 20, 18).build());
-			// Count steppers
-			rowButtons.add(Button.builder(Component.literal("-"), b -> adjust(idxi, 1, -1)).bounds(bx + 66, y, 20, 18).build());
-			rowButtons.add(Button.builder(Component.literal("+"), b -> adjust(idxi, 1, +1)).bounds(bx + 88, y, 20, 18).build());
-			// Reset single output (right-aligned, clear of the scrollbar)
-			rowButtons.add(Button.builder(Component.translatable("createsifter.config.reset"),
-					b -> {
-						OutputRow r = rows.get(idxi);
-						r.chancePercent = Math.round(r.output.getChance() * 100);
-						r.count = r.output.getStack().getCount();
-					}).bounds(this.width - 132, y, 106, 18).build());
-			for (Button b : rowButtons.subList(rowButtons.size() - 5, rowButtons.size()))
-				b.active = !locked;
-		}
-		for (Button b : rowButtons) addRenderableWidget(b);
-	}
-
-	private void adjust(int outputIndex, int field, int delta) {
-		OutputRow row = rows.get(outputIndex);
-		if (field == 0) {
-			row.chancePercent = Math.max(0, Math.min(100, row.chancePercent + delta));
-		} else {
-			row.count = Math.max(1, Math.min(SifterConfig.MAX_OVERRIDE_COUNT, row.count + delta));
-		}
-	}
-
-	/** Write every staged row into the config and persist, on the server's thread. */
-	private void commit() {
-		if (serverConfigLocked()) return;
+	/**
+	 * Write the edited recipe as a full JSON replacement (plus clearing stale
+	 * per-index overrides). Invalid pending rows are dropped here, so a product
+	 * whose item never resolved simply disappears.
+	 */
+	@Override
+	protected void commit() {
+		if (!canEdit()) return;
+		validRows();
 		ClientConfigWrites.execute(() -> {
-			for (int i = 0; i < rows.size(); i++) {
-				OutputRow row = rows.get(i);
-				SifterConfig.setOverride(recipe.getId().toString(), i, row.chancePercent, row.count);
+			String id = recipe.getId().toString();
+			if (rows.isEmpty()) {
+				// All outputs were deleted or never resolved. A player-created
+				// recipe is dropped entirely; a built-in recipe reverts to its
+				// defaults instead of being replaced by an empty one (which the
+				// cleanup on the parent screen would otherwise see as invalid and
+				// resurrect the untouched original).
+				if (id.startsWith(CustomRecipeStore.CUSTOM_PREFIX))
+					SifterConfig.removeCustomRecipe(id);
+				SifterConfig.clearOverrides(id);
+				return;
 			}
+			JsonObject json = CustomRecipeStore.toJson(recipe);
+			JsonArray results = new JsonArray();
+			for (OutputRow r : rows)
+				// Serialise the live UI values, not the recipe's original outputs:
+				// chance/count are edited in the row and must be written back.
+				results.add(makeProcessingOutput(r.output.getStack(), r.chancePercent, r.count).serialize());
+			json.add("results", results);
+			SifterConfig.putCustomRecipe(id, json);
+			SifterConfig.clearOverrides(id);
 		});
 	}
 
 	@Override
-	public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-		int outputCount = rows.size();
-		int maxRows = Math.max(1, (this.height - 40 - 30) / ROW_H);
-		int maxScroll = Math.max(0, outputCount - maxRows);
-		int before = this.scroll;
-		this.scroll = (int) Math.max(0, Math.min(maxScroll, this.scroll - delta));
-		if (this.scroll != before) rebuildRows();
-		return super.mouseScrolled(mouseX, mouseY, delta);
-	}
-
-	@Override
-	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-		this.renderBackground(graphics);
-		graphics.drawCenteredString(this.font, Component.translatable("createsifter.config.recipe_title")
-				.append(" : " + recipe.getId().getPath()), this.width / 2, 8, 0xFFFFFF);
-
-		int bx = blockX();
-		int outputCount = rows.size();
-		int top = 40;
-		int maxRows = Math.max(1, (this.height - top - 30) / ROW_H);
-		int listBottom = this.height - 30;
-
-		// Column headings aligned with the value columns below.
-		graphics.drawString(this.font, Component.translatable("createsifter.config.chance_col"), bx + 44, 22, 0xFFFF55);
-		graphics.drawString(this.font, Component.translatable("createsifter.config.count_col"), bx + 112, 22, 0xFFFF55);
-		graphics.drawString(this.font, Component.translatable("createsifter.config.output_col"), bx + 150, 22, 0xFFFF55);
-
-		graphics.enableScissor(bx, top, this.width - bx, listBottom);
-		for (int row = 0; row < maxRows; row++) {
-			int idx = this.scroll + row;
-			if (idx >= outputCount) break;
-			OutputRow out = rows.get(idx);
-			int y = top + row * ROW_H;
-			if ((row & 1) == 0)
-				graphics.fill(bx, y, this.width - bx, y + ROW_H - 2, 0x11000000);
-			graphics.drawString(this.font, out.chancePercent + "%", bx + 44, y + 3, 0x55FFFF);
-			graphics.drawString(this.font, "x" + out.count, bx + 112, y + 3, 0x55FF55);
-			// Output icon + name.
-			graphics.renderItem(out.output.getStack(), bx + 150, y);
-			String name = out.output.getStack().getHoverName().getString();
-			int nameX = bx + 172;
-			int maxW = (this.width - 132) - nameX;
-			if (this.font.width(name) > maxW)
-				name = this.font.plainSubstrByWidth(name, maxW - this.font.width("…")) + "…";
-			graphics.drawString(this.font, name, nameX, y + 3, 0xFFFFFF);
-		}
-		graphics.disableScissor();
-		// Scrollbar
-		if (outputCount > maxRows) {
-			int barH = Math.max(10, (listBottom - top) * maxRows / outputCount);
-			int barY = top + (int) ((listBottom - top - barH) * (double) this.scroll / Math.max(1, outputCount - maxRows));
-			graphics.fill(this.width - 14, barY, this.width - 12, barY + barH, 0xFFAAAAAA);
-		}
-
-		if (serverConfigLocked())
-			graphics.drawCenteredString(this.font, Component.translatable("createsifter.config.readonly_multiplayer"), this.width / 2, this.height - 14, 0xFF5555);
-		else
-			graphics.drawCenteredString(this.font, Component.translatable("createsifter.config.saved_on_close"), this.width / 2, this.height - 14, 0x888888);
-		super.render(graphics, mouseX, mouseY, partialTick);
+	protected void renderTitle(GuiGraphics graphics) {
+		ItemStack siftable = recipe.getSiftableItemStack();
+		boolean hasSiftable = !siftable.isEmpty();
+		String recipeOf = hasSiftable
+				? Component.translatable("createsifter.config.recipe_of", siftable.getHoverName().getString()).getString()
+				: recipe.getId().getPath();
+		String titleStr = Component.translatable("createsifter.config.recipe_title")
+				.append(Component.literal(": " + recipeOf)).getString();
+		int gap = 3;
+		int iconW = hasSiftable ? gap + 16 : 0;
+		int labelW = this.font.width(titleStr);
+		int titleX = Math.max(4, this.width / 2 - (labelW + iconW) / 2);
+		// Keep clear of the "reset all" button in the top-right corner, and of the
+		// item icon after the label, so a long recipe name never slides underneath.
+		int maxW = (this.width - 138 - 8) - titleX - iconW - 4;
+		if (labelW > maxW && maxW > 8)
+			titleStr = this.font.plainSubstrByWidth(titleStr, maxW - this.font.width("…")) + "…";
+		graphics.drawString(this.font, titleStr, titleX, 8, 0xFFFFFF);
+		if (hasSiftable)
+			graphics.renderItem(siftable, titleX + this.font.width(titleStr) + gap, 5);
 	}
 
 	@Override
@@ -238,4 +197,3 @@ public class RecipeEditScreen extends Screen {
 		this.minecraft.setScreen(parent);
 	}
 }
-
